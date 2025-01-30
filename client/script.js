@@ -16,7 +16,7 @@ let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.l
 Prend une question comme argument.
 Crée un PNJ pour chaque réponse de la question, l'ajoute au tableau des PNJs puis l'affiche.
 Ne retourne ne rien.
-Notes : Pour l'instant, affiche des cubes.
+Notes : Pour l'instant, affiche des cubes. Affiche les PNJs de droite à gauche.
 
 */
 
@@ -28,7 +28,7 @@ let renderPNJsForQuestion = function(question){
         let PNJ = PNJsForQuestion[i];
         let position = offset - (i*2);
         aScene.innerHTML +=
-            "<a-box id='pnj-" + PNJ.id + "' position='" + position + " 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>"
+            "<a-box id='pnj' data-id='" + PNJ.id + "' position='" + position + " 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>"
         ;
         data.pnjs.push(PNJ);
     }
@@ -48,9 +48,9 @@ Vide aussi le tableau des PNJs.
 
 let removeAllPNJs = function(){
     let aScene = document.querySelector("a-scene");
-    for (let PNJ of data.pnjs){
-        let pnjModel = document.getElementById("pnj-" + PNJ.id);
-        aScene.removeChild(pnjModel);
+    let PNJs = document.querySelectorAll("#pnj");
+    for (let PNJ of PNJs){
+        aScene.removeChild(PNJ);
     }
     data.pnjs = [];
 }
@@ -66,8 +66,13 @@ Retire aussi le PNJ du tableau des PNJs.
 
 let removePNJ = function(id){
     let aScene = document.querySelector("a-scene");
-    let pnjModel = document.getElementById("pnj-" + id);
-    aScene.removeChild(pnjModel);
-    let index = data.pnjs.findIndex(pnj => pnj.id === id);
-    data.pnjs.splice(index, 1);
+    let PNJs = document.querySelectorAll("#pnj");
+    for (let PNJ of PNJs){
+        if (PNJ.dataset.id == id){
+            aScene.removeChild(PNJ);
+            let index = data.pnjs.findIndex(pnj => pnj.id === id);
+            data.pnjs.splice(index, 1);
+            break;
+        }
+    }
 }
