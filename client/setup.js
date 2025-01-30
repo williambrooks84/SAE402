@@ -32,14 +32,14 @@ reponse:{
 
 let reponses = [];
 reponses.push(createReponse("Yes, it is", true));
-reponses.push(createReponse("No, it isn't", false));
+reponses.push(createReponse("No, it isn&apos;t", false)); // &apos; = '
 let question = createQuestion(1, "Is the sky blue ?", reponses, 1);
 data.questions.push(question);
 
 reponses = [];
 reponses.push(createReponse("The sky is blue", true));
 reponses.push(createReponse("It is red", false));
-reponses.push(createReponse("It's green", false));
+reponses.push(createReponse("It&apos;s green", false)); // &apos; = '
 question = createQuestion(2, "What color is the sky ?", reponses, 2);
 data.questions.push(question);
 

@@ -10,6 +10,7 @@ import { createPNJsForQuestion } from "./index.js";
 
 // test
 let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
+console.log(questionEnCours);
 
 /* renderPNJsForQuestion
 
@@ -23,19 +24,52 @@ Notes : Pour l'instant, affiche des cubes. Affiche les PNJs de droite à gauche.
 let renderPNJsForQuestion = function(question){ 
     let PNJsForQuestion = createPNJsForQuestion(question);
     let aScene = document.querySelector("a-scene");
-    let offset = (PNJsForQuestion.length - 1);
+    let distance = 4; // Distance between the boxes
+
+    // Calculate the center position based on the number of PNJs
+    let centerPosition = -(PNJsForQuestion.length - 1) * distance / 2;
+
     for (let i = 0; i < PNJsForQuestion.length; i++) {
         let PNJ = PNJsForQuestion[i];
-        let position = offset - (i*2);
-        aScene.innerHTML +=
-            "<a-box id='pnj' data-id='" + PNJ.id + "' position='" + position + " 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>"
-        ;
+
+        // Calculate the position of each PNJ relative to the center
+        let position = centerPosition + (i * distance);
+
+        // Add the a-box and a-text elements for each PNJ to the scene
+        aScene.innerHTML += 
+            `<a-box id='pnj-${PNJ.id}' data-id='${PNJ.id}' position='${position} 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>
+            <a-text value='${PNJ.reponse.texte}' position='${position} -1.5 -6' color='black' width='6' align='center'></a-text>`;
+
+        // Optionally store the PNJ in the data.pnjs array
         data.pnjs.push(PNJ);
     }
 }
 
 // test
 renderPNJsForQuestion(questionEnCours);
+
+/* renderQuestion
+
+Prend une question comme argument.
+Affiche la question en haut de la page.
+
+*/
+
+let renderQuestion = function(question){
+    let aScene = document.querySelector("a-scene");
+    let questionEntity = document.createElement("a-entity");
+    let position = '0 5 -6';
+    questionEntity.setAttribute("text", {
+        value: question.texte,
+        align: "center",
+        color: "black",
+        width: 32 // Change the text size here
+    });
+    questionEntity.setAttribute("position", position);
+    aScene.appendChild(questionEntity);
+}
+
+renderQuestion(questionEnCours);
 
 /* removeAllPNJs
 
@@ -68,6 +102,7 @@ let removePNJ = function(id){
     let aScene = document.querySelector("a-scene");
     let PNJs = document.querySelectorAll("#pnj");
     for (let PNJ of PNJs){
+        //console.log(PNJ);
         if (PNJ.dataset.id == id){
             aScene.removeChild(PNJ);
             let index = data.pnjs.findIndex(pnj => pnj.id === id);
