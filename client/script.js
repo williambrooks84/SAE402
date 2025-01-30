@@ -28,7 +28,7 @@ let renderPNJsForQuestion = function(question){
         let PNJ = PNJsForQuestion[i];
         let position = offset - (i*2);
         aScene.innerHTML +=
-            "<a-box id='pnj' data-id='" + PNJ.id + "' position='" + position + " 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>"
+            "<a-box id='pnj' data-id='" + PNJ.id + "' position='" + position + " 0 -6' rotation='0 45 0' color='#4CC3D9' opacity='1' transparent='true'></a-box>"
         ;
         data.pnjs.push(PNJ);
     }
@@ -70,11 +70,55 @@ let removePNJ = function(id){
     for (let PNJ of PNJs){
         if (PNJ.dataset.id == id){
             aScene.removeChild(PNJ);
-            let index = data.pnjs.findIndex(pnj => pnj.id === id);
-            data.pnjs.splice(index, 1);
+            data.pnjs = data.pnjs.filter(pnj => pnj.id != id);
             break;
         }
     }
+}
+
+/* getPNJByID
+
+Prend une ID de PNJ comme argument.
+Retourne le PNJ correspondant.
+
+*/
+
+let getPNJByID = function(id){
+    id = parseInt(id);
+    return data.pnjs.find(pnj => pnj.id === id);
+}
+
+/* createUFO
+
+Prend une position X comme argument.
+Crée un objet UFO avec un vaisseau et un rayon de lumière.
+Ne retourne rien.
+
+*/
+
+let createUFO = function(posX){
+    let spaceship = "<a-cylinder id='ufo' position='" + posX +  " 26 -6' rotation='0 0 0' radius='2' height='0.5' color='#4CC3D9'></a-cylinder>";
+    let beam = "<a-cylinder id='beam' position='" + posX +  " 13 -6' rotation='0 0 0' radius='0.5' height='26' color='#4CC3D9' transparent='true' opacity='0.5'></a-cylinder>";
+    console.log(spaceship, beam);
+    let aScene = document.querySelector("a-scene");
+    aScene.innerHTML += spaceship;
+    aScene.innerHTML += beam;
+}
+
+/* removeUFO
+
+Ne prend aucun argument.
+Retire l'objet UFO de la scène.
+Ne retourne rien.
+
+*/
+
+let removeUFO = function(){
+    let aScene = document.querySelector("a-scene");
+    let UFO = document.querySelector("#ufo");
+    let beam = document.querySelector("#beam");
+    aScene.removeChild(UFO);
+    aScene.removeChild(beam);
 }
 
 //Dynamic text
@@ -108,22 +152,35 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 if (!PNJ.clicked) {
 
+                    if (getPNJByID(PNJ.dataset.id).reponse.correct) {
+                        PNJ.setAttribute('animation', {
+                            property: 'opacity',
+                            to: 0,
+                            dur: 1000,
+                            easing: 'easeInSine',
+                            loop: false
+                        });
 
-                    //The pnj goes in the air when clicked
-                    let currentPosition = PNJ.getAttribute('position');
-        
-                    PNJ.setAttribute('animation', {
-                        property: 'position', 
-                        to: `${currentPosition.x} ${currentPosition.y + window.innerWidth/2} ${currentPosition.z}`, 
-                        dur: 10000, 
-                        easing: 'easeInSine',
-                        loop: false
-                    });
+                        setTimeout(() => {
+                            removePNJ(PNJ.dataset.id);
+                        }, 2000);
+                    }
+                    else {
+                        //The pnj goes in the air when clicked
+                        let currentPosition = PNJ.getAttribute('position');
+            
+                        PNJ.setAttribute('animation', {
+                            property: 'position', 
+                            to: `${currentPosition.x} ${currentPosition.y + window.innerWidth/2} ${currentPosition.z}`, 
+                            dur: 10000, 
+                            easing: 'easeInSine',
+                            loop: false
+                        });
 
-                    setTimeout(() => {
-                        console.log(PNJ.getAttribute('position').y);
-                        removePNJ(PNJ.dataset.id);
-                    }, 2000);
+                        setTimeout(() => {
+                            removePNJ(PNJ.dataset.id);
+                        }, 2000);
+                    }
                 }
     
                 PNJ.clicked = true;
@@ -134,6 +191,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+/*
+let aScene = document.querySelector("a-scene");
+let test = "<a-box position='0 0 -6' color='#4CC3D9'></a-box>"
+aScene.innerHTML += test;
+*/
+
 // components:raycaster:warn [raycaster] 
 // For performance, please define raycaster.objects when using raycaster or cursor components to whitelist which entities to intersect with. e.g., 
-// raycaster="objects: [data-raycastable]". 
+// raycaster="objects: [data-raycastable]".
