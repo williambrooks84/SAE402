@@ -76,3 +76,64 @@ let removePNJ = function(id){
         }
     }
 }
+
+//Dynamic text
+document.addEventListener("DOMContentLoaded", function () {
+    let textEntity = document.getElementById("dynamicText");
+
+    textEntity.setAttribute("text", {
+        value: "Texte Dynamique!",
+        align: "center",
+        color: "blue",
+        width: 4
+    });
+});
+
+//Clickable box
+document.addEventListener("DOMContentLoaded", function () {
+    let scene = document.querySelector("#scene");
+    let PNJs = document.querySelectorAll("#pnj");
+
+    // Event listener for clicking anywhere in the scene
+    if (scene) {
+        scene.addEventListener("click", function () {
+            console.log("Scene clicked!");
+        });
+    }
+
+    // Event listener for clicking directly on the cube
+    if (PNJs) {
+        for (let PNJ of PNJs) {
+            PNJ.addEventListener("click", function (event) {
+    
+                if (!PNJ.clicked) {
+
+
+                    //The pnj goes in the air when clicked
+                    let currentPosition = PNJ.getAttribute('position');
+        
+                    PNJ.setAttribute('animation', {
+                        property: 'position', 
+                        to: `${currentPosition.x} ${currentPosition.y + window.innerWidth/2} ${currentPosition.z}`, 
+                        dur: 10000, 
+                        easing: 'easeInSine',
+                        loop: false
+                    });
+
+                    setTimeout(() => {
+                        console.log(PNJ.getAttribute('position').y);
+                        removePNJ(PNJ.dataset.id);
+                    }, 2000);
+                }
+    
+                PNJ.clicked = true;
+
+                event.stopPropagation(); // Prevent the event from propagating to the scene
+            });
+        }
+    }
+});
+
+// components:raycaster:warn [raycaster] 
+// For performance, please define raycaster.objects when using raycaster or cursor components to whitelist which entities to intersect with. e.g., 
+// raycaster="objects: [data-raycastable]". 
