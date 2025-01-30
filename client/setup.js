@@ -1,6 +1,6 @@
 /* SETUP.JS
 
-Se charge de créer les questions et les PNJs pour le jeu.
+Se charge de créer les questions, les PNJs, etc. pour le jeu.
 
 */
 
