@@ -1,3 +1,13 @@
+/* INDEX.JS
+
+Script "utilitaire" qui vient déclarer les différents outils dont
+les autres scripts ont besoin.
+
+En théorie index.js est déjà dans sa version finale, en tout cas 
+pour ce qui est des features de base du jeu.
+
+*/
+
 class Question {
     constructor(id, texte, reponses, niveau) {
         this.id = id, // int
@@ -43,17 +53,9 @@ let createQuestion = function(id, texte, reponses, niveau) {
 export { createQuestion };
 
 class Reponse {
-    constructor(idquestion, texte, correct) {
-        this.idquestion = idquestion, // int
+    constructor(texte, correct) {
         this.texte = texte, // string
         this.correct = correct // boolean
-    }
-
-    get IDQuestion() {
-        return this.idquestion;
-    }
-    set IDQuestion(newidquestion) {
-        this.idquestion = newidquestion;
     }
 
     get Texte() {
@@ -71,8 +73,8 @@ class Reponse {
     }
 }
 
-let createReponse = function(idquestion, texte, correct) {
-    let reponse = new Reponse(idquestion, texte, correct);
+let createReponse = function(texte, correct) {
+    let reponse = new Reponse(texte, correct);
     return reponse;
 }
 
