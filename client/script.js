@@ -21,7 +21,7 @@ Notes : Pour l'instant, affiche des cubes. Affiche les PNJs de droite à gauche.
 
 */
 
-let renderPNJsForQuestion = function(question){ 
+let renderPNJsForQuestion = function(question) {
     let PNJsForQuestion = createPNJsForQuestion(question);
     let aScene = document.querySelector("a-scene");
     let distance = 4; // Distance between the boxes
@@ -35,13 +35,48 @@ let renderPNJsForQuestion = function(question){
         // Calculate the position of each PNJ relative to the center
         let position = centerPosition + (i * distance);
 
-        // Add the a-box and a-text elements for each PNJ to the scene
-        aScene.innerHTML += 
-            `<a-box id='pnj' data-id='${PNJ.id}' position='${position} 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>
-            <a-text value='${PNJ.reponse.texte}' position='${position} -1.5 -6' color='black' width='6' align='center'></a-text>`;
+        // Create the a-box element for each PNJ (the PNJ box itself)
+        let aBox = document.createElement("a-box");
+        aBox.setAttribute("id", `pnj-${PNJ.id}`);
+        aBox.setAttribute("data-id", PNJ.id);
+        aBox.setAttribute("position", `${position} 0 -6`);
+        aBox.setAttribute("rotation", "0 45 0");
+        aBox.setAttribute("color", "#4CC3D9");
 
-        // Optionally store the PNJ in the data.pnjs array
+        // Create the a-text element for displaying the PNJ response (the text)
+        let aText = document.createElement("a-text");
+        aText.setAttribute("value", PNJ.reponse.texte);
+        aText.setAttribute("position", `${position} -1.5 -6`);
+        aText.setAttribute("color", "black");
+        aText.setAttribute("width", "6");
+        aText.setAttribute("align", "center");
+
+        // Append the created elements to the a-scene
+        aScene.appendChild(aBox);
+        aScene.appendChild(aText);
+
+        // Optionally store the PNJ in the data.pnjs array for future use
         data.pnjs.push(PNJ);
+
+        // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+        aBox.addEventListener("click", function (event) {
+            console.log(`PNJ box ${PNJ.id} clicked!`);
+            
+            // Example animation when the box is clicked
+            let currentPosition = aBox.getAttribute('position');
+            aBox.setAttribute('animation', {
+                property: 'position',
+                to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
+                dur: 10000,
+                easing: 'easeInSine'
+            });
+
+            // Optionally remove the PNJ after some time
+            setTimeout(() => {
+                console.log(`Removing PNJ box ${PNJ.id}`);
+                removePNJ(PNJ.id);
+            }, 2000);
+        });
     }
 }
 
@@ -129,18 +164,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let scene = document.querySelector("a-scene");
     let PNJs = document.querySelectorAll("#pnj");
 
-    // Event listener for clicking anywhere in the scene
+    /*
+   // Event listener for clicking anywhere in the scene
     if (scene) {
         scene.addEventListener("click", function () {
             console.log("Scene clicked!");
         });
-    }
+    }*/
 
     // Event listener for clicking directly on the cube
     if (PNJs) {
         for (let PNJ of PNJs) {
             PNJ.addEventListener("click", function (event) {
-                console.log("Cube clicked!");
                 if (!PNJ.clicked) {
 
 
