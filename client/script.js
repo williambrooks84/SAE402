@@ -8,12 +8,13 @@ Script principal de l'application. Il gère le fonctionnement constant du jeu
 import { data } from "./setup.js";
 import { createPNJsForQuestion } from "./index.js";
 
+
+//Liste des questions déjà utilisées
 let questionsUtilisees = [];
 
 // test
 let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
-questionsUtilisees.push(questionEnCours);
-console.log(questionEnCours);
+questionsUtilisees.push(questionEnCours); //Ajouter la question à la liste des questions utilisées
 
 /* renderPNJsForQuestion
 
@@ -243,17 +244,6 @@ let removeUFO = function() {
     }
 }
 
-//Dynamic text
-document.addEventListener("DOMContentLoaded", function () {
-    let textEntity = document.getElementById("dynamicText");
-
-    textEntity.setAttribute("text", {
-        value: "Texte Dynamique!",
-        align: "center",
-        color: "blue",
-        width: 4
-    });
-});
 
 let renderNextQuestion = function() {
     // Clear everything before rendering the new question
@@ -276,7 +266,14 @@ let renderNextQuestion = function() {
     // 1. Reset the questionsUtilisees list (optional)
     // 2. Display a message that the game is over (recommended)
     if (unusedQuestions.length === 0) {
-        console.log("All questions have been used. The game is over!");
+        let aScene = document.querySelector("a-scene");
+        let aText = document.createElement("a-text");
+        aText.setAttribute("value", "Well done, you win the game!");
+        aText.setAttribute("position", "0 2 -6");
+        aText.setAttribute("color", "red");
+        aText.setAttribute("width", "48");
+        aText.setAttribute("align", "center");
+        aScene.appendChild(aText);
         return;
     }
 

@@ -9,15 +9,9 @@
 </head>
 <body>
     <a-scene>
-        <a-camera position="0 1.6 3">
+        <a-camera position="0 1.6 3" wasd-controls="enabled: false" look-controls>
             <a-cursor id="cursor" color="red" fuse="false"></a-cursor>
         </a-camera>
-
-        <!-- Texte statique -->
-        <a-text value="Hello, A-Frame!" position="-1 2 -3" material="color: blue" width="6"></a-text>
-
-        <!-- Conteneur pour le texte dynamique -->
-        <a-entity id="dynamicText" position="0 2 -3" material="color: blue"></a-entity>
 
     </a-scene>
 </body>
