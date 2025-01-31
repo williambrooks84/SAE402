@@ -37,7 +37,7 @@ let renderPNJsForQuestion = function(question){
 
         // Add the a-box and a-text elements for each PNJ to the scene
         aScene.innerHTML += 
-            `<a-box id='pnj-${PNJ.id}' data-id='${PNJ.id}' position='${position} 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>
+            `<a-box id='pnj' data-id='${PNJ.id}' position='${position} 0 -6' rotation='0 45 0' color='#4CC3D9'></a-box>
             <a-text value='${PNJ.reponse.texte}' position='${position} -1.5 -6' color='black' width='6' align='center'></a-text>`;
 
         // Optionally store the PNJ in the data.pnjs array
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Clickable box
 document.addEventListener("DOMContentLoaded", function () {
-    let scene = document.querySelector("#scene");
+    let scene = document.querySelector("a-scene");
     let PNJs = document.querySelectorAll("#pnj");
 
     // Event listener for clicking anywhere in the scene
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (PNJs) {
         for (let PNJ of PNJs) {
             PNJ.addEventListener("click", function (event) {
-    
+                console.log("Cube clicked!");
                 if (!PNJ.clicked) {
 
 
