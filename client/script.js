@@ -42,6 +42,8 @@ let renderPNJsForQuestion = function(question) {
         aBox.setAttribute("position", `${position} 0 -6`);
         aBox.setAttribute("rotation", "0 45 0");
         aBox.setAttribute("color", "#4CC3D9");
+        aBox.setAttribute("transparent", "true");
+        aBox.setAttribute("opacity", "1");
 
         // Create the a-text element for displaying the PNJ response (the text)
         let aText = document.createElement("a-text");
@@ -58,25 +60,53 @@ let renderPNJsForQuestion = function(question) {
         // Optionally store the PNJ in the data.pnjs array for future use
         data.pnjs.push(PNJ);
 
-        // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
-        aBox.addEventListener("click", function (event) {
-            console.log(`PNJ box ${PNJ.id} clicked!`);
-            
-            // Example animation when the box is clicked
-            let currentPosition = aBox.getAttribute('position');
-            aBox.setAttribute('animation', {
-                property: 'position',
-                to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
-                dur: 10000,
-                easing: 'easeInSine'
-            });
+        if (PNJ.reponse.correct){
+            // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+            aBox.addEventListener("click", function (event) {
 
-            // Optionally remove the PNJ after some time
-            setTimeout(() => {
-                console.log(`Removing PNJ box ${PNJ.id}`);
-                removePNJ(PNJ.id);
-            }, 2000);
-        });
+                aBox.clicked = false;
+
+                if (!aBox.clicked) {
+                    aBox.clicked = true;
+                    
+                    aBox.setAttribute('animation', {
+                        property: 'opacity',
+                        to: 0,
+                        dur: 1000,
+                        easing: 'easeInSine',
+                        loop: false
+                    });
+
+                    setTimeout(() => {
+                        removePNJ(PNJ.id);
+                    }, 2000);
+                }
+            });
+        }
+        else {
+            // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+            aBox.addEventListener("click", function (event) {
+
+                aBox.clicked = false;
+                
+                if (!aBox.clicked) {
+                    aBox.clicked = true;
+                    // Example animation when the box is clicked
+                    let currentPosition = aBox.getAttribute('position');
+                    aBox.setAttribute('animation', {
+                        property: 'position',
+                        to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
+                        dur: 10000,
+                        easing: 'easeInSine'
+                    });
+
+                    // Optionally remove the PNJ after some time
+                    setTimeout(() => {
+                        removePNJ(PNJ.id);
+                    }, 2000);
+                }
+            });                
+        }
     }
 }
 
@@ -216,49 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }*/
 
-    // Event listener for clicking directly on the cube
-    if (PNJs) {
-        for (let PNJ of PNJs) {
-            PNJ.addEventListener("click", function (event) {
-                if (!PNJ.clicked) {
-
-                    if (getPNJByID(PNJ.dataset.id).reponse.correct) {
-                        PNJ.setAttribute('animation', {
-                            property: 'opacity',
-                            to: 0,
-                            dur: 1000,
-                            easing: 'easeInSine',
-                            loop: false
-                        });
-
-                        setTimeout(() => {
-                            removePNJ(PNJ.dataset.id);
-                        }, 2000);
-                    }
-                    else {
-                        //The pnj goes in the air when clicked
-                        let currentPosition = PNJ.getAttribute('position');
-            
-                        PNJ.setAttribute('animation', {
-                            property: 'position', 
-                            to: `${currentPosition.x} ${currentPosition.y + window.innerWidth/2} ${currentPosition.z}`, 
-                            dur: 10000, 
-                            easing: 'easeInSine',
-                            loop: false
-                        });
-
-                        setTimeout(() => {
-                            removePNJ(PNJ.dataset.id);
-                        }, 2000);
-                    }
-                }
     
-                PNJ.clicked = true;
-
-                event.stopPropagation(); // Prevent the event from propagating to the scene
-            });
-        }
-    }
 });
 
 /*
