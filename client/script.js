@@ -8,8 +8,11 @@ Script principal de l'application. Il gère le fonctionnement constant du jeu
 import { data } from "./setup.js";
 import { createPNJsForQuestion } from "./index.js";
 
+let questionsUtilisees = [];
+
 // test
 let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
+questionsUtilisees.push(questionEnCours);
 console.log(questionEnCours);
 
 /* renderPNJsForQuestion
@@ -79,6 +82,7 @@ let renderPNJsForQuestion = function(question) {
 
                     setTimeout(() => {
                         removePNJ(PNJ.id);
+                        renderNextQuestion();
                     }, 2000);
                 }
             });
@@ -145,12 +149,24 @@ Vide aussi le tableau des PNJs.
 
 */
 
-let removeAllPNJs = function(){
+let removeAllPNJs = function() {
     let aScene = document.querySelector("a-scene");
-    let PNJs = document.querySelectorAll("#pnj");
-    for (let PNJ of PNJs){
-        aScene.removeChild(PNJ);
+
+    // Remove all PNJ elements (boxes)
+    let PNJs = document.querySelectorAll("a-box");
+    PNJs.forEach(PNJ => aScene.removeChild(PNJ));
+
+    // Remove all PNJ texts
+    let PNJTexts = document.querySelectorAll("a-text");
+    PNJTexts.forEach(PNJText => aScene.removeChild(PNJText));
+
+    // Optionally, also remove the dynamic text
+    let dynamicText = document.querySelector("#dynamicText");
+    if (dynamicText) {
+        aScene.removeChild(dynamicText);
     }
+
+    // Clear the array of PNJs
     data.pnjs = [];
 }
 
@@ -213,12 +229,18 @@ Ne retourne rien.
 
 */
 
-let removeUFO = function(){
+let removeUFO = function() {
     let aScene = document.querySelector("a-scene");
     let UFO = document.querySelector("#ufo");
     let beam = document.querySelector("#beam");
-    aScene.removeChild(UFO);
-    aScene.removeChild(beam);
+
+    // Check if the UFO and beam exist before removing them
+    if (UFO) {
+        aScene.removeChild(UFO);
+    }
+    if (beam) {
+        aScene.removeChild(beam);
+    }
 }
 
 //Dynamic text
@@ -233,21 +255,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//Clickable box
-document.addEventListener("DOMContentLoaded", function () {
-    let scene = document.querySelector("a-scene");
-    let PNJs = document.querySelectorAll("#pnj");
+let renderNextQuestion = function() {
+    // Clear everything before rendering the new question
+    removeAllPNJs();
 
-    /*
-   // Event listener for clicking anywhere in the scene
-    if (scene) {
-        scene.addEventListener("click", function () {
-            console.log("Scene clicked!");
-        });
-    }*/
+    // Remove the previous question from the scene (if needed)
+    let aScene = document.querySelector("a-scene");
+    let previousQuestion = document.querySelector("[text]"); // The text element displaying the question
+    if (previousQuestion) {
+        aScene.removeChild(previousQuestion);
+    }
 
+    // Optionally, remove the UFO or any other objects
+    removeUFO();
+
+    // Filter unused questions
+    let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
+
+    // If there are no more unused questions, you can either:
+    // 1. Reset the questionsUtilisees list (optional)
+    // 2. Display a message that the game is over (recommended)
+    if (unusedQuestions.length === 0) {
+        console.log("All questions have been used. The game is over!");
+        return;
+    }
+
+    // Select a new random question from unused questions
+    let nextQuestion = unusedQuestions[Math.floor(Math.random() * unusedQuestions.length)];
+    questionsUtilisees.push(nextQuestion); // Mark it as used
+
+    // Render the new question
+    renderQuestion(nextQuestion);
     
-});
+    // Render PNJs for the new question
+    renderPNJsForQuestion(nextQuestion);
+};
 
 /*
 let aScene = document.querySelector("a-scene");
