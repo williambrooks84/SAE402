@@ -32,7 +32,7 @@ reponse:{
 
 let reponses = [];
 reponses.push(createReponse("Yes, it is", true));
-reponses.push(createReponse("No, it isn&apos;t", false)); // &apos; = 
+reponses.push(createReponse("No, it isn't", false)); 
 reponses = reponses.sort(() => Math.random() - 0.5);
 let question = createQuestion(1, "Is the sky blue ?", reponses, 1);
 data.questions.push(question);
@@ -40,7 +40,7 @@ data.questions.push(question);
 reponses = [];
 reponses.push(createReponse("The sky is blue", true));
 reponses.push(createReponse("It is red", false));
-reponses.push(createReponse("It&apos;s green", false)); // &apos; = '
+reponses.push(createReponse("It's green", false)); 
 reponses = reponses.sort(() => Math.random() - 0.5); // mélange les réponses
 question = createQuestion(2, "What color is the sky ?", reponses, 2);
 data.questions.push(question);
