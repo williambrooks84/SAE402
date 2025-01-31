@@ -24,6 +24,11 @@
             <a-asset-item id="cargo" src="asset/Cargo.glb"></a-asset-item>
             <a-asset-item id="planet" src="asset/Planet.glb"></a-asset-item>
             <a-asset-item id="spacship" src="asset/Spaceship.glb"></a-asset-item>
+            <img id = "ciel" src = "asset/sky.png" >
+            
+            
+
+            
             
             
             </a-assets>
@@ -34,13 +39,7 @@
             <a-entity gltf-model="#planet" position="-80 80 -80" scale="7 7 7" rotation="0 0 0"  auto-center></a-entity>
             <a-entity gltf-model="#spacship" position="0 25 -10" scale="2 2 2" rotation="50 0 0"  auto-center></a-entity>s
 
-            
-
-
-            <a-entity gltf-model="#light" position="-17 -1 3" scale="7 7 7" rotation="0 90 0"  auto-center></a-entity>
-            <a-entity gltf-model="#light" position="17 -1 3" scale="7 7 7" rotation="0 90 0"  auto-center></a-entity>
-            <a-entity gltf-model="#light" position="11 -1 17" scale="7 7 7" rotation="0 90 0"  auto-center></a-entity>
-            <a-entity gltf-model="#light" position="10 4 -17" scale="7 7 7" rotation="0 90 0"  auto-center></a-entity>
+          
 
             <a-entity gltf-model="#cargo" position="-50 -1 20" scale="3 3 3" rotation="0 0 0"  auto-center></a-entity>
 
@@ -61,6 +60,7 @@
             <a-entity gltf-model="#rocks" position="0 -1 -100" scale="3 3 3" rotation="0 -90 0" auto-center></a-entity>
             <a-entity gltf-model="#rocks" position="10 -1 -100" scale="3 3 3" rotation="0 -90 0" auto-center></a-entity>
             <a-entity gltf-model="#rocks" position="-22 3.5 -137" scale="3 3 3" rotation="0 -90 0" auto-center></a-entity>
+            <a-entity gltf-model="#rocks" position="-5 0 0" scale="20 20 20"  auto-center></a-entity>
 
             <a-entity gltf-model="#depot" position="20 4 -20" scale="7 7 7 " rotation="0 90 0"  auto-center></a-entity>
             <a-entity gltf-model="#spacebase" position="20 2 20" target-part="basemodule_A" scale="7 7 7 " rotation="0 -90 0" auto-center></a-entity>
@@ -90,74 +90,18 @@
             <a-entity gltf-model="#decor" target-part="terrain_slope" position="-10 -1 -15" scale="5 5 5" rotation="0 90 0" auto-center></a-entity>
             <a-entity gltf-model="#decor" target-part="terrain_slope_inner_corner" position="-20 -1 -15" scale="5 5 5" rotation="0 90 0" auto-center></a-entity>
             
-            <a-plane position="0 -1 -4" rotation="-90 0 0" width="100" height="100" color="#b55e2e"></a-plane>
+            <a-plane position="0 -1 -4" rotation="-90 0 0" width="100" height="100" color="#b55e2e" material="metalness: 0.2; roughness: 0.2"></a-plane>
             
+            
+           <a-cylinder position="0 22.9 -8.35" rotation="50 0 90" scale="2.4 4.8 1.2" color="cyan" material="emissive: #0000ff" light="type: point; intensity: 1; distance: 2;"></a-box> 
+            
+             <a-sky src = "#ciel" > </a-ciel > 
 
+              <a-light type="ambient" color="#55A"></a-light>
+          
             
-            
-            
-            <script>
-              AFRAME.registerComponent('filter-part', {
-              schema: {
-                targetPart: { type: 'string', default: '' },
-                autoCenter: { type: 'boolean', default: false }
-              },
-            
-              init: function () {
-                this.el.addEventListener('model-loaded', () => this.filterModel());
-              },
-            
-              filterModel: function () {
-                let model = this.el.getObject3D('mesh');
-                if (!model) return;
-            
-                let bbox = new THREE.Box3();
-                let targetMesh = null;
-            
-                model.traverse((node) => {
-                if (node.isMesh) {
-                  if (node.name === this.data.targetPart) {
-                  targetMesh = node;
-                  } else {
-                  node.visible = false;
-                  }
-                }
-                });
-            
-                if (targetMesh && this.data.autoCenter) {
-                bbox.setFromObject(targetMesh);
-                let center = new THREE.Vector3();
-                bbox.getCenter(center);
-                targetMesh.position.sub(center); // Recentrer l'objet
-                }
-              }
-              });
-            
-              document.querySelectorAll("[gltf-model='#decor']").forEach(el => {
-              let part = el.getAttribute("target-part");
-              let autoCenter = el.hasAttribute("auto-center");
-              el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
-              });
-
-              document.querySelectorAll("[gltf-model='#spacebase']").forEach(el => {
-              let part = el.getAttribute("target-part");
-              let autoCenter = el.hasAttribute("auto-center");
-              el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
-              });
-
-              document.querySelectorAll("[gltf-model='#tunnel']").forEach(el => {
-              let part = el.getAttribute("target-part");
-              let autoCenter = el.hasAttribute("auto-center");
-              el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
-              });
-
-              document.querySelectorAll("[gltf-model='#cargotoit']").forEach(el => {
-              let part = el.getAttribute("target-part");
-              let autoCenter = el.hasAttribute("auto-center");
-              el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
-              });
-            </script>
-            
+         
+            <script src="decor.js"></script>
             
           
           
