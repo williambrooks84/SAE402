@@ -169,6 +169,8 @@ scene.addEventListener('loaded', () => {
         { position: '3.7 16.8 -11', rotation: '0 -35 0', scale:'2.2 0.9 0.2'},
         { position: '-2.9 16.8 -15.6', rotation: '0 -35 0', scale:'2.2 0.9 0.2'},
         
+        //spaceship
+        
         
         
         
