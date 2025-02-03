@@ -217,25 +217,25 @@ AFRAME.registerComponent('filter-part', {
     });
   
     document.querySelectorAll("[gltf-model='#decor']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#spacebase']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#tunnel']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#cargotoit']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
