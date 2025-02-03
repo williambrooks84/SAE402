@@ -40,20 +40,32 @@ let renderPNJsForQuestion = function(question) {
         let position = centerPosition + (i * distance);
 
         // Create the a-box element for each PNJ (the PNJ box itself)
-        let aBox = document.createElement("a-box");
+        /*let aBox = document.createElement("a-box");
         aBox.setAttribute("id", `pnj-${PNJ.id}`);
         aBox.setAttribute("data-id", PNJ.id);
         aBox.setAttribute("position", `${position} 0 -6`);
         aBox.setAttribute("rotation", "0 45 0");
         aBox.setAttribute("color", "#4CC3D9");
         aBox.setAttribute("transparent", "true");
-        aBox.setAttribute("opacity", "1");
+        aBox.setAttribute("opacity", "1");*/
+
+
+        let aBox = document.createElement("a-entity");
+        aBox.setAttribute("id", `pnj`);
+        aBox.setAttribute("data-id", PNJ.id);
+        aBox.setAttribute("gltf-model", "#astro");
+        aBox.setAttribute("position", `${position} -1 -8`);
+        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+        aBox.setAttribute("transparent", "true");
+        aBox.setAttribute("visible", "true");
+        aBox.setAttribute("scale", "1.3 1.3 1.3");
+        
 
         // Create the a-text element for displaying the PNJ response (the text)
         let aText = document.createElement("a-text");
         aText.setAttribute("value", PNJ.reponse.texte);
-        aText.setAttribute("position", `${position} -1.5 -6`);
-        aText.setAttribute("color", "black");
+        aText.setAttribute("position", `${position} 1 -4`);
+        aText.setAttribute("color", "white");
         aText.setAttribute("width", "6");
         aText.setAttribute("align", "center");
 
@@ -68,14 +80,12 @@ let renderPNJsForQuestion = function(question) {
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
 
-                aBox.clicked = false;
-
                 if (!aBox.clicked) {
                     aBox.clicked = true;
                     
                     aBox.setAttribute('animation', {
-                        property: 'opacity',
-                        to: 0,
+                        property: 'visible',
+                        to: false,
                         dur: 1000,
                         easing: 'easeInSine',
                         loop: false
@@ -91,8 +101,6 @@ let renderPNJsForQuestion = function(question) {
         else {
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
-
-                aBox.clicked = false;
                 
                 if (!aBox.clicked) {
                     aBox.clicked = true;
@@ -132,7 +140,7 @@ let renderQuestion = function(question){
     questionEntity.setAttribute("text", {
         value: question.texte,
         align: "center",
-        color: "black",
+        color: "white",
         width: 32 // Change the text size here
     });
     questionEntity.setAttribute("position", position);
@@ -154,7 +162,7 @@ let removeAllPNJs = function() {
     let aScene = document.querySelector("a-scene");
 
     // Remove all PNJ elements (boxes)
-    let PNJs = document.querySelectorAll("a-box");
+    let PNJs = document.querySelectorAll("#pnj");
     PNJs.forEach(PNJ => aScene.removeChild(PNJ));
 
     // Remove all PNJ texts
@@ -184,9 +192,10 @@ let removePNJ = function(id){
     let aScene = document.querySelector("a-scene");
     let PNJs = document.querySelectorAll("#pnj");
     for (let PNJ of PNJs){
-        //console.log(PNJ);
+        
         if (PNJ.dataset.id == id){
             aScene.removeChild(PNJ);
+            
             data.pnjs = data.pnjs.filter(pnj => pnj.id != id);
             break;
         }
@@ -216,7 +225,7 @@ Ne retourne rien.
 let createUFO = function(posX){
     let spaceship = "<a-cylinder id='ufo' position='" + posX +  " 26 -6' rotation='0 0 0' radius='2' height='0.5' color='#4CC3D9'></a-cylinder>";
     let beam = "<a-cylinder id='beam' position='" + posX +  " 13 -6' rotation='0 0 0' radius='0.5' height='26' color='#4CC3D9' transparent='true' opacity='0.5'></a-cylinder>";
-    console.log(spaceship, beam);
+    
     let aScene = document.querySelector("a-scene");
     aScene.innerHTML += spaceship;
     aScene.innerHTML += beam;
@@ -259,33 +268,57 @@ let renderNextQuestion = function() {
     // Optionally, remove the UFO or any other objects
     removeUFO();
 
-    // Filter unused questions
-    let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
-
-    // If there are no more unused questions, you can either:
-    // 1. Reset the questionsUtilisees list (optional)
-    // 2. Display a message that the game is over (recommended)
-    if (unusedQuestions.length === 0) {
+    // After half a second
+    setTimeout(() =>  {
+        console.log("AHHHHH");
         let aScene = document.querySelector("a-scene");
-        let aText = document.createElement("a-text");
-        aText.setAttribute("value", "Well done, you win the game!");
-        aText.setAttribute("position", "0 2 -6");
-        aText.setAttribute("color", "red");
-        aText.setAttribute("width", "48");
-        aText.setAttribute("align", "center");
-        aScene.appendChild(aText);
-        return;
-    }
+        let text = document.createElement("a-text");
+        text.setAttribute("value", "Next question...");
+        text.setAttribute("position", "0 2 -6");
+        text.setAttribute("color", "red");
+        text.setAttribute("width", "48");
+        text.setAttribute("align", "center");
+        text.setAttribute("id", "nextQuestionText")
+        aScene.appendChild(text);
+    }, 500)
 
-    // Select a new random question from unused questions
-    let nextQuestion = unusedQuestions[Math.floor(Math.random() * unusedQuestions.length)];
-    questionsUtilisees.push(nextQuestion); // Mark it as used
+    // After 2.5 seconds
+    setTimeout(() => {
+        let aScene = document.querySelector("a-scene");
+        let text = document.querySelector("#nextQuestionText");
+        aScene.removeChild(text);
+    }, 2500)
 
-    // Render the new question
-    renderQuestion(nextQuestion);
-    
-    // Render PNJs for the new question
-    renderPNJsForQuestion(nextQuestion);
+    // After 3 seconds
+    setTimeout(() => {
+        // Filter unused questions
+        let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
+
+        // If there are no more unused questions, you can either:
+        // 1. Reset the questionsUtilisees list (optional)
+        // 2. Display a message that the game is over (recommended)
+        if (unusedQuestions.length === 0) {
+            let aScene = document.querySelector("a-scene");
+            let aText = document.createElement("a-text");
+            aText.setAttribute("value", "Well done, you win the game!");
+            aText.setAttribute("position", "0 2 -6");
+            aText.setAttribute("color", "red");
+            aText.setAttribute("width", "48");
+            aText.setAttribute("align", "center");
+            aScene.appendChild(aText);
+            return;
+        }
+
+        // Select a new random question from unused questions
+        let nextQuestion = unusedQuestions[Math.floor(Math.random() * unusedQuestions.length)];
+        questionsUtilisees.push(nextQuestion); // Mark it as used
+
+        // Render the new question
+        renderQuestion(nextQuestion);
+        
+        // Render PNJs for the new question
+        renderPNJsForQuestion(nextQuestion);
+    }, 3000);
 };
 
 /*
