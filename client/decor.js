@@ -83,7 +83,7 @@ let createLampPostLights = function(lampArray) {
         }
     }
 }
-
+/*
 scene.addEventListener('loaded', () => {
     createLampPostLights([
         '-17 -1 3', 
@@ -91,7 +91,7 @@ scene.addEventListener('loaded', () => {
         '11 -1 17', 
         '10 4 -17'
     ]);
-});
+});*/
 
 
 
@@ -107,7 +107,7 @@ let createBoxes = function(boxArray) {
         boxElement.setAttribute('scale', box.scale);
         boxElement.setAttribute('color', 'yellow');
         boxElement.setAttribute('material', 'emissive: #ffee55');
-        boxElement.setAttribute('light', 'type: point; intensity: 1; distance: 2');
+       /* boxElement.setAttribute('light', 'type: point; intensity: 1; distance: 2');*/
         scene.appendChild(boxElement);
     }
 }
