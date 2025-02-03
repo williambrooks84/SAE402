@@ -6,19 +6,20 @@
 <script src="https://unpkg.com/aframe-text-geometry-component@latest/dist/aframe-text-geometry-component.min.js"></script>
       </head>
       <body>
-        <a-scene>
+        
+        <a-scene  vr-mode-ui="enabled: true">
             <a-assets>
               <a-asset-item id="astro" src="asset/Astronaut.glb"></a-asset-item>
               <a-asset-item id="decor" src="asset/Modular Rocks.glb"></a-asset-item>
               <a-asset-item id="landerA" src="asset/Lander A.glb"></a-asset-item>
               <a-asset-item id="landerB" src="asset/Lander B.glb"></a-asset-item>
             <a-asset-item id="rocks" src="asset/Rocks.glb"></a-asset-item>  
-            <a-asset-item id="spacebase" src="asset/Space Base Modules.glb"></a-assets-item>
+            <a-asset-item id="spacebase" src="asset/Space Base Modules.glb"></a-asset-item>
             <a-asset-item id="tunnel" src="asset/Tunnels.glb"></a-asset-item>
             <a-asset-item id="spaceplateformA" src="asset/Platform Structure.glb"></a-asset-item>
             <a-asset-item id="spaceplateformB" src="asset/Space Platform.glb"></a-asset-item>
             <a-asset-item id="car" src="asset/Space Truck.glb"></a-asset-item>
-            <a-asset-item id="light" src="asset/lights.glb"></a-asset-item>
+            <a-asset-item id="light" src="asset/Lights.glb"></a-asset-item>
             <a-asset-item id="depot" src="asset/Cargo Depot A.glb"></a-asset-item>
             <a-asset-item id="cargotoit" src="asset/Cargo Roof Modules.glb"></a-asset-item>
             <a-asset-item id="cargo" src="asset/Cargo.glb"></a-asset-item>
@@ -112,11 +113,20 @@
           
             
          
-            <script src="decor.js"></script>
+        <script src="decor.js"></script>
             
           
           
           
         </a-scene>
+<script>
+  navigator.xr.isSessionSupported('immersive-vr').then(supported => {
+    console.log("VR supporté :", supported);
+    if (supported) {
+      document.querySelector("a-scene").setAttribute("vr-mode-ui", "enabled: true");
+    }
+  }).catch(err => console.error("Erreur WebXR :", err));
+</script>
+       
       </body>
 </html>

@@ -27,11 +27,11 @@ let createLights = function(lampArray){
     // <a-light type="spot" color="yellow" position="-17 8 3" intensity="1" angle="30" rotation="-90 0 0" penumbra="0.5" ><a-light>
 
     for (let position of lampArray) {
-        console.log(position);
+        
         let posArray = position.split(' ');
         posArray[1] = (parseFloat(posArray[1]) + 6).toString();
         position = posArray.join(' ');
-        console.log(position);
+        
 
         let spotLight = document.createElement('a-light');
         spotLight.setAttribute('type', 'spot');
@@ -41,7 +41,7 @@ let createLights = function(lampArray){
         spotLight.setAttribute('angle', '30');
         spotLight.setAttribute('rotation', '-90 0 0');
         spotLight.setAttribute('penumbra', '0.5');
-        console.log(spotLight);
+       
 
         scene.appendChild(spotLight);
     }
@@ -111,7 +111,7 @@ let createBoxes = function(boxArray) {
         scene.appendChild(boxElement);
     }
 }
-
+/*
 scene.addEventListener('loaded', () => {
     createBoxes([
         //house 1
@@ -170,7 +170,7 @@ scene.addEventListener('loaded', () => {
         { position: '-2.9 16.8 -15.6', rotation: '0 -35 0', scale:'2.2 0.9 0.2'},
         
         //spaceship
-        
+
         
         
         
@@ -178,7 +178,7 @@ scene.addEventListener('loaded', () => {
        
     ]);
 });
-
+*/
 
 AFRAME.registerComponent('filter-part', {
     schema: {
