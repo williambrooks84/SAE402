@@ -63,4 +63,13 @@ reponses = reponses.sort(() => Math.random() - 0.5); // mélange les réponses
 question = createQuestion(4, "How do you answer \"How are you?\"?", reponses, 1);
 data.questions.push(question);
 
+reponses = [];
+reponses.push(createReponse("A chair", false));
+reponses.push(createReponse("A toilet", false));
+reponses.push(createReponse("A car", false));
+reponses.push(createReponse("A bed", true));
+reponses = reponses.sort(() => Math.random() - 0.5); // mélange les réponses
+question = createQuestion(4, "What do you use to sleep?", reponses, 1);
+data.questions.push(question);
+
 export { data };
