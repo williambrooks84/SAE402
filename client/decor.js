@@ -27,11 +27,11 @@ let createLights = function(lampArray){
     // <a-light type="spot" color="yellow" position="-17 8 3" intensity="1" angle="30" rotation="-90 0 0" penumbra="0.5" ><a-light>
 
     for (let position of lampArray) {
-        console.log(position);
+        
         let posArray = position.split(' ');
         posArray[1] = (parseFloat(posArray[1]) + 6).toString();
         position = posArray.join(' ');
-        console.log(position);
+        
 
         let spotLight = document.createElement('a-light');
         spotLight.setAttribute('type', 'spot');
@@ -41,7 +41,7 @@ let createLights = function(lampArray){
         spotLight.setAttribute('angle', '30');
         spotLight.setAttribute('rotation', '-90 0 0');
         spotLight.setAttribute('penumbra', '0.5');
-        console.log(spotLight);
+        
 
         scene.appendChild(spotLight);
     }
@@ -83,7 +83,7 @@ let createLampPostLights = function(lampArray) {
         }
     }
 }
-
+/*
 scene.addEventListener('loaded', () => {
     createLampPostLights([
         '-17 -1 3', 
@@ -91,7 +91,7 @@ scene.addEventListener('loaded', () => {
         '11 -1 17', 
         '10 4 -17'
     ]);
-});
+});*/
 
 
 
@@ -107,7 +107,7 @@ let createBoxes = function(boxArray) {
         boxElement.setAttribute('scale', box.scale);
         boxElement.setAttribute('color', 'yellow');
         boxElement.setAttribute('material', 'emissive: #ffee55');
-        boxElement.setAttribute('light', 'type: point; intensity: 1; distance: 2');
+       /* boxElement.setAttribute('light', 'type: point; intensity: 1; distance: 2');*/
         scene.appendChild(boxElement);
     }
 }
@@ -217,25 +217,25 @@ AFRAME.registerComponent('filter-part', {
     });
   
     document.querySelectorAll("[gltf-model='#decor']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#spacebase']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#tunnel']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
-
+    
     document.querySelectorAll("[gltf-model='#cargotoit']").forEach(el => {
-    let part = el.getAttribute("target-part");
+    let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
     });
