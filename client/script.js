@@ -155,6 +155,9 @@ let renderPNJsForQuestion = function(question) {
                     moveUFO(aBox.getAttribute('position').x);
 
                     revealAliens();
+                    
+                   
+                    
                     setTimeout(() => {
                     let currentPosition = aBox.getAttribute('position');
                     let drone = document.querySelector("#drone");
@@ -489,11 +492,15 @@ Ne retourne rien.
 let revealAliens = function() {
     let PNJs = document.querySelectorAll("#pnj");
     for (let PNJ of PNJs) {
+        
         let pnjData = data.pnjs.find(p => p.id == PNJ.dataset.id);
         if (pnjData) {
             if (!pnjData.reponse.correct) {
                 PNJ.setAttribute("gltf-model", "#alien");
-                PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                setTimeout(() => {
+                    PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                }, 2000);
+                
             }
         }
     }
