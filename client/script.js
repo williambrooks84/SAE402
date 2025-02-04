@@ -94,25 +94,27 @@ let renderPNJsForQuestion = function(question) {
 
                 if (!aBox.clicked) {
                     aBox.clicked = true;
-                    setTimeout(() => {
-                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
-                }, 1000);
-                aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
 
                     setTimeout(() => {
-                    aBox.setAttribute('animation', {
-                        property: 'visible',
-                        to: false,
-                        dur: 1000,
-                        easing: 'easeInSine',
-                        loop: false
-                    });
+                        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
+                    }, 1000);
+                    
+                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
 
-                    setTimeout(() => {
-                        removePNJ(PNJ.id);
-                        renderNextQuestion();
-                    }, 2000);
-                }, 2500);
+                        setTimeout(() => {
+                        aBox.setAttribute('animation', {
+                            property: 'visible',
+                            to: false,
+                            dur: 1000,
+                            easing: 'easeInSine',
+                            loop: false
+                        });
+
+                        setTimeout(() => {
+                            removePNJ(PNJ.id);
+                            renderNextQuestion();
+                        }, 2000);
+                    }, 2500);
                 }
             });
         }
@@ -124,19 +126,22 @@ let renderPNJsForQuestion = function(question) {
                     aBox.clicked = true;
                     // Example animation when the box is clicked
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
+
+                    moveUFO(aBox.getAttribute('position').x);
+
                     setTimeout(() => {
-                        
-                    let currentPosition = aBox.getAttribute('position');
-                    aBox.setAttribute('animation', {
-                        property: 'position',
-                        to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
-                        dur: 10000,
-                        easing: 'easeInSine'
+                        let currentPosition = aBox.getAttribute('position');
+                        aBox.setAttribute('animation', {
+                            property: 'position',
+                            to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
+                            dur: 10000,
+                            easing: 'easeInSine'
                     });
 
                     // Optionally remove the PNJ after some time
                     setTimeout(() => {
                         removePNJ(PNJ.id);
+                        resetUFO();
                     }, 2000);
                 }, 2000);
             
@@ -245,13 +250,68 @@ Ne retourne rien.
 
 */
 
-let createUFO = function(posX){
-    let spaceship = "<a-cylinder id='ufo' position='" + posX +  " 26 -6' rotation='0 0 0' radius='2' height='0.5' color='#4CC3D9'></a-cylinder>";
-    let beam = "<a-cylinder id='beam' position='" + posX +  " 13 -6' rotation='0 0 0' radius='0.5' height='26' color='#4CC3D9' transparent='true' opacity='0.5'></a-cylinder>";
+let moveUFO = function(posX){
+    let beam = document.createElement("a-entity");
+    beam.setAttribute("id", "beam");
+    beam.setAttribute("geometry", {
+        primitive: "cylinder",
+        radius: 2,
+        height: 50,
+    });
+    beam.setAttribute("rotation", "-5 0 0");
+    beam.setAttribute("material", {
+        color: "#00FFFF",
+        transparent: true,
+        opacity: 0
+    });
+    beam.setAttribute("position", `${posX} -1 -8`);
+    setTimeout(() => {
+        beam.setAttribute("animation", {
+            property: 'material.opacity',
+            to: 0.2,
+            dur: 500,
+            easing: 'easeInSine',
+        });
+    }, 1000);
+    setTimeout(() => {
+        beam.setAttribute("animation", {
+            property: 'material.opacity',
+            to: 0.5,
+            dur: 500,
+            easing: 'easeInSine',
+            loop: true,
+            dir: 'alternate'
+        })
+    }, 1500);
     
     let aScene = document.querySelector("a-scene");
-    aScene.innerHTML += spaceship;
-    aScene.innerHTML += beam;
+    aScene.appendChild(beam);
+    
+    let drone = document.querySelector("#drone");
+    drone.setAttribute('animation', {
+        property: 'position',
+        to: `${posX} 25 -10`,
+        dur: 1000,
+        easing: 'easeInSine'
+    });
+
+    let lights = document.querySelectorAll("#drone-light");
+    for (let light of lights){
+        console.log(light);
+        let adjustedPosition = posX;
+        if (light.getAttribute('rotation').x != 0){
+            adjustedPosition = -posX;
+        }
+        light.setAttribute('animation', {
+            property: 'position',
+            to: `${adjustedPosition} 22 -10`,
+            dur: 1000,
+            easing: 'easeInSine'
+        });
+        setTimeout(() => {
+        console.log(light);
+        }, 1000);
+    }
 }
 
 /* removeUFO
@@ -262,14 +322,30 @@ Ne retourne rien.
 
 */
 
-let removeUFO = function() {
+let resetUFO = function() {
     let aScene = document.querySelector("a-scene");
-    let UFO = document.querySelector("#ufo");
+    let drone = document.querySelector("#drone");
+    let lights = document.querySelectorAll("#drone-light");
     let beam = document.querySelector("#beam");
 
-    // Check if the UFO and beam exist before removing them
-    if (UFO) {
-        aScene.removeChild(UFO);
+    // Check if the UFO and beam exist before removing/resetting them
+    if (drone) {
+        if (drone.attributes.position.value !== "0 25 -10") {
+            drone.setAttribute('animation', {
+                property: 'position',
+                to: `0 25 -10`,
+                dur: 1000,
+                easing: 'easeInSine'
+            });
+            for (let light of lights){
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `0 25 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            }
+        }
     }
     if (beam) {
         aScene.removeChild(beam);
@@ -288,8 +364,8 @@ let renderNextQuestion = function() {
         aScene.removeChild(previousQuestion);
     }
 
-    // Optionally, remove the UFO or any other objects
-    removeUFO();
+    // Optionally, reset the drone's position or any other objects
+    resetUFO();
 
     // After half a second
     setTimeout(() =>  {
