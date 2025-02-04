@@ -48,12 +48,13 @@ let renderPNJsForQuestion = function(question) {
         aBox.setAttribute("color", "#4CC3D9");
         aBox.setAttribute("transparent", "true");
         aBox.setAttribute("opacity", "1");*/
-
+        let models = ["#astro", "#astro1", "#astro2"];
+        let randomModel = models[Math.floor(Math.random() * models.length)];
 
         let aBox = document.createElement("a-entity");
         aBox.setAttribute("id", `pnj`);
         aBox.setAttribute("data-id", PNJ.id);
-        aBox.setAttribute("gltf-model", "#astro");
+        aBox.setAttribute("gltf-model", randomModel);
         aBox.setAttribute("position", `${position} -1 -8`);
         aBox.setAttribute("transparent", "true");
         aBox.setAttribute("visible", "true");
@@ -91,7 +92,15 @@ let renderPNJsForQuestion = function(question) {
         if (PNJ.reponse.correct){
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
+                let randomposition= Math.random() < 0.5 ? -20 : 20;
+                let rotationposition;
+                if(randomposition == -20){
+                    rotationposition = -45;
+                }else{
+                    rotationposition = 45;
+                }
 
+                console.log(randomposition);
                 if (!aBox.clicked) {
                     aBox.clicked = true;
                     setTimeout(() => {
@@ -100,12 +109,18 @@ let renderPNJsForQuestion = function(question) {
                 aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
 
                     setTimeout(() => {
-                    aBox.setAttribute('animation', {
-                        property: 'visible',
-                        to: false,
-                        dur: 1000,
-                        easing: 'easeInSine',
-                        loop: false
+                        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
+                    aBox.setAttribute('animation__position', {
+                        property: 'position',
+                        to: `${randomposition} -1 -1.5`,
+                        dur: 2000,
+                        easing: 'easeInSine'
+                    });
+                    aBox.setAttribute('animation__rotation', {
+                        property: 'rotation',
+                        to: `0 ${rotationposition} 0`,
+                        dur: 200,
+                        easing: 'easeInSine'
                     });
 
                     setTimeout(() => {
@@ -129,8 +144,8 @@ let renderPNJsForQuestion = function(question) {
                     let currentPosition = aBox.getAttribute('position');
                     aBox.setAttribute('animation', {
                         property: 'position',
-                        to: `${currentPosition.x} ${window.innerWidth/2} ${currentPosition.z}`,
-                        dur: 10000,
+                        to: `0 25 -10`,
+                        dur: 1000,
                         easing: 'easeInSine'
                     });
 
@@ -298,7 +313,7 @@ let renderNextQuestion = function() {
         let text = document.createElement("a-text");
         text.setAttribute("value", "Next question...");
         text.setAttribute("position", "0 2 -6");
-        text.setAttribute("color", "red");
+        text.setAttribute("color", "white");
         text.setAttribute("width", "48");
         text.setAttribute("align", "center");
         text.setAttribute("id", "nextQuestionText")
