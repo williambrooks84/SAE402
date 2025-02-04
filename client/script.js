@@ -61,12 +61,10 @@ let renderPNJsForQuestion = function(question) {
         aBox.setAttribute("scale", "1.3 1.3 1.3");
         
         aBox.addEventListener("model-loaded", (event) => {
-            console.log("Modèle chargé !");
             
             // Attendre un peu avant d'ajouter l'animation-mixer
             setTimeout(() => {
                 aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
-                console.log("Animation appliquée :", aBox.getAttribute("animation-mixer"));
             }, 1000);
         });
         
@@ -100,7 +98,6 @@ let renderPNJsForQuestion = function(question) {
                     rotationposition = 45;
                 }
 
-                console.log(randomposition);
                 if (!aBox.clicked) {
                     aBox.clicked = true;
                     setTimeout(() => {
@@ -327,7 +324,6 @@ let moveUFO = function(posX){
 
     let lights = document.querySelectorAll("#drone-light");
     for (let light of lights){
-        console.log(light);
         let adjustedPosition = posX;
         if (light.getAttribute('rotation').x != 0){
             adjustedPosition = -posX;
@@ -339,7 +335,6 @@ let moveUFO = function(posX){
             easing: 'easeInSine'
         });
         setTimeout(() => {
-        console.log(light);
         }, 1000);
     }
 }
@@ -399,7 +394,6 @@ let renderNextQuestion = function() {
 
     // After half a second
     setTimeout(() =>  {
-        console.log("AHHHHH");
         let aScene = document.querySelector("a-scene");
         let text = document.createElement("a-text");
         text.setAttribute("value", "Next question...");
