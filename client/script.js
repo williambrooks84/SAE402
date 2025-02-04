@@ -106,8 +106,13 @@ let renderPNJsForQuestion = function(question) {
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
+                    
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
+                    
+
+                    
                     setTimeout(() => {
+                        
                             aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
                         aBox.setAttribute('animation__position', {
                             property: 'position',
@@ -121,22 +126,7 @@ let renderPNJsForQuestion = function(question) {
                             dur: 200,
                             easing: 'easeInSine'
                         });
-                    });
-
-                    setTimeout(() => {
-                        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
-                    }, 1000);
                     
-                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
-
-                    setTimeout(() => {
-                        aBox.setAttribute('animation', {
-                            property: 'visible',
-                            to: false,
-                            dur: 1000,
-                            easing: 'easeInSine',
-                            loop: false
-                        });
 
                         setTimeout(() => {
                             removePNJ(PNJ.id);
@@ -163,7 +153,7 @@ let renderPNJsForQuestion = function(question) {
                     let dronePosition = drone.getAttribute('position');
                     aBox.setAttribute('animation', {
                         property: 'position',
-                        to: drone,
+                        to: dronePosition,
                         dur: 1000,
                         easing: 'easeInSine'
                     });
