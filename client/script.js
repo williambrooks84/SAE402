@@ -63,11 +63,9 @@ let renderPNJsForQuestion = function(question) {
         
         aBox.addEventListener("model-loaded", (event) => {
             
-            
             // Attendre un peu avant d'ajouter l'animation-mixer
             setTimeout(() => {
                 aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
-                
             }, 1000);
         });
         
@@ -90,8 +88,6 @@ let renderPNJsForQuestion = function(question) {
         // Optionally store the PNJ in the data.pnjs array for future use
         data.pnjs.push(PNJ);
 
-        
-            
             if (PNJ.reponse.correct){
                 
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
@@ -104,11 +100,12 @@ let renderPNJsForQuestion = function(question) {
                 }else{
                     rotationposition = 45;
                 }
-
                 
                 if (!aBox.clicked && !checkclick) {
                     checkclick=true;
                     aBox.clicked = true;
+                    revealAliens();
+                  
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
@@ -150,13 +147,13 @@ let renderPNJsForQuestion = function(question) {
             aBox.addEventListener("click", function (event) {
                 if (!aBox.clicked && !checkclick) {
                     checkclick=true;
-                  
                     aBox.clicked = true;
                     // Example animation when the box is clicked
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
 
                     moveUFO(aBox.getAttribute('position').x);
 
+                    revealAliens();
                     setTimeout(() => {
                     let currentPosition = aBox.getAttribute('position');
                     let drone = document.querySelector("#drone");
@@ -183,7 +180,6 @@ let renderPNJsForQuestion = function(question) {
             }
         }
     }
-
 
 // test
 renderPNJsForQuestion(questionEnCours);
@@ -353,7 +349,6 @@ let moveUFO = function(posX){
 
     let lights = document.querySelectorAll("#drone-light");
     for (let light of lights){
-        
         let adjustedPosition = posX;
         if (light.getAttribute('rotation').x != 0){
             adjustedPosition = -posX;
@@ -364,9 +359,6 @@ let moveUFO = function(posX){
             dur: 1000,
             easing: 'easeInSine'
         });
-        setTimeout(() => {
-        
-        }, 1000);
     }
 }
 
@@ -425,7 +417,6 @@ let renderNextQuestion = function() {
 
     // After half a second
     setTimeout(() =>  {
-       
         let aScene = document.querySelector("a-scene");
         let text = document.createElement("a-text");
         text.setAttribute("value", "Next question...");
@@ -485,3 +476,24 @@ aScene.innerHTML += test;
 // components:raycaster:warn [raycaster] 
 // For performance, please define raycaster.objects when using raycaster or cursor components to whitelist which entities to intersect with. e.g., 
 // raycaster="objects: [data-raycastable]".
+
+/* revealAliens
+
+Ne prend aucun argument.
+Fait apparaître les aliens PNJs.
+Ne retourne rien.
+
+*/
+
+let revealAliens = function() {
+    let PNJs = document.querySelectorAll("#pnj");
+    for (let PNJ of PNJs) {
+        let pnjData = data.pnjs.find(p => p.id == PNJ.dataset.id);
+        if (pnjData) {
+            if (!pnjData.reponse.correct) {
+                PNJ.setAttribute("gltf-model", "#alien");
+                PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+            }
+        }
+    }
+}
