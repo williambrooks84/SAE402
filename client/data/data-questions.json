@@ -1,0 +1,57 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "texte": "Is the sky blue?",
+            "reponses": [
+                { "texte": "Yes, it is", "correct": true },
+                { "texte": "No, it isn't", "correct": false }
+            ],
+            "niveau": 1
+        },
+        {
+            "id": 2,
+            "texte": "What color is the sky?",
+            "reponses": [
+                { "texte": "The sky is blue", "correct": true },
+                { "texte": "It is red", "correct": false },
+                { "texte": "It's green", "correct": false }
+            ],
+            "niveau": 2
+        },
+        {
+            "id": 3,
+            "texte": "What is a car?",
+            "reponses": [
+                { "texte": "It is a vehicle with four wheels", "correct": true },
+                { "texte": "It is a vehicle with two wheels", "correct": false },
+                { "texte": "It is a vehicle with three wheels", "correct": false },
+                { "texte": "It is a vehicle with sixteen wheels", "correct": false }
+            ],
+            "niveau": 3
+        },
+        {
+            "id": 4,
+            "texte": "How do you answer \"How are you?\"?",
+            "reponses": [
+                { "texte": "I'm 16 years old.", "correct": false },
+                { "texte": "I'm tall", "correct": false },
+                { "texte": "I'm fine, thank you.", "correct": true },
+                { "texte": "I'm a girl.", "correct": false }
+            ],
+            "niveau": 1
+        },
+        {
+            "id": 5,
+            "texte": "What do you use to sleep?",
+            "reponses": [
+                { "texte": "A chair", "correct": false },
+                { "texte": "A toilet", "correct": false },
+                { "texte": "A car", "correct": false },
+                { "texte": "A bed", "correct": true }
+            ],
+            "niveau": 1
+        }
+    ],
+    "pnjs": []
+}

@@ -110,7 +110,6 @@ let renderPNJsForQuestion = function(question) {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
-
                     setTimeout(() => {
                             aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
                         aBox.setAttribute('animation__position', {
