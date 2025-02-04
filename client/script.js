@@ -159,9 +159,11 @@ let renderPNJsForQuestion = function(question) {
 
                     setTimeout(() => {
                     let currentPosition = aBox.getAttribute('position');
+                    let drone = document.querySelector("#drone");
+                    let dronePosition = drone.getAttribute('position');
                     aBox.setAttribute('animation', {
                         property: 'position',
-                        to: `0 25 -10`,
+                        to: drone,
                         dur: 1000,
                         easing: 'easeInSine'
                     });
