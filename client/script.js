@@ -100,9 +100,10 @@ let renderPNJsForQuestion = function(question) {
                 }else{
                     rotationposition = 45;
                 }
-                
+              
                 if (!aBox.clicked && !checkclick) {
                     checkclick=true;
+
                     aBox.clicked = true;
                     revealAliens();
                   
