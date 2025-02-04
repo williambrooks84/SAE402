@@ -103,10 +103,14 @@ let renderPNJsForQuestion = function(question) {
                 console.log(randomposition);
                 if (!aBox.clicked) {
                     aBox.clicked = true;
+                    
+                    revealAliens();
+
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
+
                     setTimeout(() => {
                             aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
                         aBox.setAttribute('animation__position', {
@@ -156,24 +160,26 @@ let renderPNJsForQuestion = function(question) {
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
 
                     moveUFO(aBox.getAttribute('position').x);
+                    
+                    revealAliens();
 
                     setTimeout(() => {
-                    let currentPosition = aBox.getAttribute('position');
-                    let drone = document.querySelector("#drone");
-                    let dronePosition = drone.getAttribute('position');
-                    aBox.setAttribute('animation', {
-                        property: 'position',
-                        to: drone,
-                        dur: 1000,
-                        easing: 'easeInSine'
-                    });
+                        let currentPosition = aBox.getAttribute('position');
+                        let drone = document.querySelector("#drone");
+                        let dronePosition = drone.getAttribute('position');
+                        aBox.setAttribute('animation', {
+                            property: 'position',
+                            to: dronePosition,
+                            dur: 1000,
+                            easing: 'easeInSine'
+                        });
 
-                    // Optionally remove the PNJ after some time
-                    setTimeout(() => {
-                        removePNJ(PNJ.id);
-                        resetUFO();
+                        // Optionally remove the PNJ after some time
+                        setTimeout(() => {
+                            removePNJ(PNJ.id);
+                            resetUFO();
+                        }, 2000);
                     }, 2000);
-                }, 2000);
             
                 }
             });                
@@ -459,3 +465,24 @@ aScene.innerHTML += test;
 // components:raycaster:warn [raycaster] 
 // For performance, please define raycaster.objects when using raycaster or cursor components to whitelist which entities to intersect with. e.g., 
 // raycaster="objects: [data-raycastable]".
+
+/* revealAliens
+
+Ne prend aucun argument.
+Fait apparaître les aliens PNJs.
+Ne retourne rien.
+
+*/
+
+let revealAliens = function() {
+    let PNJs = document.querySelectorAll("#pnj");
+    for (let PNJ of PNJs) {
+        let pnjData = data.pnjs.find(p => p.id == PNJ.dataset.id);
+        if (pnjData) {
+            if (!pnjData.reponse.correct) {
+                PNJ.setAttribute("gltf-model", "#alien");
+                PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+            }
+        }
+    }
+}
