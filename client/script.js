@@ -136,6 +136,7 @@ let renderPNJsForQuestion = function(question) {
 
                         setTimeout(() => {
                             removePNJ(PNJ.id);
+                            moveUFO(0);
                             renderNextQuestion();
                             checkclick=false;
                         }, 2000);
@@ -171,6 +172,7 @@ let renderPNJsForQuestion = function(question) {
                     setTimeout(() => {
                         removePNJ(PNJ.id);
                         resetUFO();
+                        moveUFO(0);
                         renderNextQuestion();
                         checkclick=false;
                     }, 2000);
