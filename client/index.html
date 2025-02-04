@@ -13,9 +13,9 @@
 </head>
 <body>
     <a-scene>
-        <a-camera position="0 1.6 3" wasd-controls="enabled: false" look-controls>
-            <a-cursor id="cursor" color="red" fuse="false"></a-cursor>
-        </a-camera>
+      <a-camera position="0 1.6 3" wasd-controls="enabled: false" look-controls="pointerLockEnabled: true">
+        <a-cursor id="cursor" color="red" fuse="false"></a-cursor>
+      </a-camera>
 
         <a-assets>
             <a-asset-item id="astro" src="asset/Astronaut.glb"></a-asset-item>
@@ -51,7 +51,7 @@
 
           <a-entity gltf-model="#planet" position="-80 80 -80" scale="7 7 7" rotation="0 0 0"  auto-center></a-entity>
 
-          <a-entity id="drone" gltf-model="#spaceship" position="0 25 -10" scale="2 2 2" rotation="50 0 0"  auto-center></a-entity>s
+          <a-entity id="drone" gltf-model="#spaceship" position="0 25 -10" scale="2 2 2" rotation="50 0 0"  auto-center></a-entity>
 
         
 
@@ -114,8 +114,8 @@
           
           
          <a-cylinder id="drone-light" position="0 22 -10" rotation="0 0 90" scale="0.4 4 0.4" color="yellow" material="emissive: #ffdd00" light="type: point; intensity: 1; distance: 2;"></a-cylinder> 
-          <a-light id="drone-light" data-side="left" type="point" color="yellow"  position="-2 21 -10" light="type: point; intensity: 1; distance: 5;"></a-light>
-          <a-light id="drone-light" data-side="right" type="point" color="yellow"  position="2 21 -10" light="type: point; intensity: 1; distance: 5;"></a-light>
+          <a-light id="light-left" type="point" color="yellow"  position="-2 21 -10" light="type: point; intensity: 1; distance: 5;"></a-light>
+          <a-light id="light-right" type="point" color="yellow"  position="2 21 -10" light="type: point; intensity: 1; distance: 5;"></a-light>
          
          
           <a-light type="ambient" color="#77A"></a-light>
@@ -134,4 +134,4 @@
     </a-scene>
 </body>
 </html>
-<script src="script.js" type="module"></script>
+<script src="start.js" type="module"></script>
