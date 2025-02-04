@@ -104,31 +104,32 @@ let renderPNJsForQuestion = function(question) {
                 if (!aBox.clicked) {
                     aBox.clicked = true;
                     setTimeout(() => {
-                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
-                }, 1000);
-                aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
-
+                        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
+                    }, 1000);
+                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
                     setTimeout(() => {
-                        aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
-                    aBox.setAttribute('animation__position', {
-                        property: 'position',
-                        to: `${randomposition} -1 -1.5`,
-                        dur: 2000,
-                        easing: 'easeInSine'
+                            aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
+                        aBox.setAttribute('animation__position', {
+                            property: 'position',
+                            to: `${randomposition} -1 -1.5`,
+                            dur: 2000,
+                            easing: 'easeInSine'
+                        });
+                        aBox.setAttribute('animation__rotation', {
+                            property: 'rotation',
+                            to: `0 ${rotationposition} 0`,
+                            dur: 200,
+                            easing: 'easeInSine'
+                        });
                     });
-                    aBox.setAttribute('animation__rotation', {
-                        property: 'rotation',
-                        to: `0 ${rotationposition} 0`,
-                        dur: 200,
-                        easing: 'easeInSine'
-                    });
+
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
                     
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
 
-                        setTimeout(() => {
+                    setTimeout(() => {
                         aBox.setAttribute('animation', {
                             property: 'visible',
                             to: false,
