@@ -29,6 +29,7 @@ let renderPNJsForQuestion = function(question) {
     let PNJsForQuestion = createPNJsForQuestion(question);
     let aScene = document.querySelector("a-scene");
     let distance = 4; // Distance between the boxes
+    let checkclick=false;
 
     // Calculate the center position based on the number of PNJs
     let centerPosition = -(PNJsForQuestion.length - 1) * distance / 2;
@@ -61,12 +62,12 @@ let renderPNJsForQuestion = function(question) {
         aBox.setAttribute("scale", "1.3 1.3 1.3");
         
         aBox.addEventListener("model-loaded", (event) => {
-            console.log("Modèle chargé !");
+            
             
             // Attendre un peu avant d'ajouter l'animation-mixer
             setTimeout(() => {
                 aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
-                console.log("Animation appliquée :", aBox.getAttribute("animation-mixer"));
+                
             }, 1000);
         });
         
@@ -77,7 +78,7 @@ let renderPNJsForQuestion = function(question) {
         // Create the a-text element for displaying the PNJ response (the text)
         let aText = document.createElement("a-text");
         aText.setAttribute("value", PNJ.reponse.texte);
-        aText.setAttribute("position", `${position} 1 -4`);
+        aText.setAttribute("position", `${position} 3 -8`);
         aText.setAttribute("color", "white");
         aText.setAttribute("width", "6");
         aText.setAttribute("align", "center");
@@ -89,9 +90,13 @@ let renderPNJsForQuestion = function(question) {
         // Optionally store the PNJ in the data.pnjs array for future use
         data.pnjs.push(PNJ);
 
-        if (PNJ.reponse.correct){
+        
+            
+            if (PNJ.reponse.correct){
+                
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
+                
                 let randomposition= Math.random() < 0.5 ? -20 : 20;
                 let rotationposition;
                 if(randomposition == -20){
@@ -100,8 +105,9 @@ let renderPNJsForQuestion = function(question) {
                     rotationposition = 45;
                 }
 
-                console.log(randomposition);
-                if (!aBox.clicked) {
+                
+                if (!aBox.clicked && !checkclick) {
+                    checkclick=true;
                     aBox.clicked = true;
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
@@ -131,16 +137,19 @@ let renderPNJsForQuestion = function(question) {
                         setTimeout(() => {
                             removePNJ(PNJ.id);
                             renderNextQuestion();
+                            checkclick=false;
                         }, 2000);
                     }, 2500);
                 }
             });
-        }
-        else {
+            }
+            else {
+                
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
-                
-                if (!aBox.clicked) {
+                if (!aBox.clicked && !checkclick) {
+                    checkclick=true;
+                  
                     aBox.clicked = true;
                     // Example animation when the box is clicked
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
@@ -162,14 +171,17 @@ let renderPNJsForQuestion = function(question) {
                     setTimeout(() => {
                         removePNJ(PNJ.id);
                         resetUFO();
+                        renderNextQuestion();
+                        checkclick=false;
                     }, 2000);
                 }, 2000);
             
                 }
             });                
+            }
         }
     }
-}
+
 
 // test
 renderPNJsForQuestion(questionEnCours);
@@ -315,9 +327,31 @@ let moveUFO = function(posX){
         easing: 'easeInSine'
     });
 
+    let lights1 = document.querySelectorAll("#light-left");
+    lights1.forEach(light => {
+        light.setAttribute('animation', {
+            property: 'position',
+            to: `${posX-2} 21 -10`,
+            dur: 1000,
+            easing: 'easeInSine'
+        });
+    });
+
+    let lights2 = document.querySelectorAll("#light-right");
+    lights2.forEach(light => {
+        light.setAttribute('animation', {
+            property: 'position',
+            to: `${posX+2} 21 -10`,
+            dur: 1000,
+            easing: 'easeInSine'
+        });
+    });
+
+
+
     let lights = document.querySelectorAll("#drone-light");
     for (let light of lights){
-        console.log(light);
+        
         let adjustedPosition = posX;
         if (light.getAttribute('rotation').x != 0){
             adjustedPosition = -posX;
@@ -329,7 +363,7 @@ let moveUFO = function(posX){
             easing: 'easeInSine'
         });
         setTimeout(() => {
-        console.log(light);
+        
         }, 1000);
     }
 }
@@ -389,7 +423,7 @@ let renderNextQuestion = function() {
 
     // After half a second
     setTimeout(() =>  {
-        console.log("AHHHHH");
+       
         let aScene = document.querySelector("a-scene");
         let text = document.createElement("a-text");
         text.setAttribute("value", "Next question...");
