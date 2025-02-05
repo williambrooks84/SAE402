@@ -84,19 +84,22 @@ let renderPNJsForQuestion = function(question) {
                 } else {
                     rotationposition = 45;
                 }
+              
+                if (!aBox.clicked && !checkclick) {
+                    checkclick=true;
 
                 if (!aBox.clicked && !checkclick) {
                     checkclick = true;
 
                     aBox.clicked = true;
                     revealAliens();
-
+                  
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
-
+                  
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
-
+                                        
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
                         aBox.setAttribute('animation__position', {
@@ -111,7 +114,7 @@ let renderPNJsForQuestion = function(question) {
                             dur: 200,
                             easing: 'easeInSine'
                         });
-
+                    
                         setTimeout(() => {
                             removePNJ(PNJ.id);
                             moveUFO(0);
@@ -134,17 +137,17 @@ let renderPNJsForQuestion = function(question) {
 
                     revealAliens();
                     setTimeout(() => {
-                        let currentPosition = aBox.getAttribute('position');
-                        let drone = document.querySelector("#drone");
-                        let dronePosition = drone.getAttribute('position');
-                        aBox.setAttribute('animation', {
-                            property: 'position',
-                            to: dronePosition,
-                            dur: 1000,
-                            easing: 'easeInSine'
-                        });
+                    let currentPosition = aBox.getAttribute('position');
+                    let drone = document.querySelector("#drone");
+                    let dronePosition = drone.getAttribute('position');
+                    aBox.setAttribute('animation', {
+                        property: 'position',
+                        to: dronePosition,
+                        dur: 1000,
+                        easing: 'easeInSine'
+                    });
 
-                        // Optionally remove the PNJ after some time
+                      // Optionally remove the PNJ after some time
                         setTimeout(() => {
                             removePNJ(PNJ.id);
                             resetUFO();
@@ -157,7 +160,6 @@ let renderPNJsForQuestion = function(question) {
             });
         }
     }
-}
 
 // test
 renderPNJsForQuestion(questionEnCours);
