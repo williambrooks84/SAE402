@@ -31,7 +31,6 @@ reponse:{
 
 async function loadData() {
     data.questions = await QuestionData.fetchAll();
-    console.log(data.questions);
 
     data.pnjs = [];
 }
