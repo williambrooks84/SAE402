@@ -7,7 +7,12 @@ Script principal de l'application. Il gère le fonctionnement constant du jeu
 
 import { data } from "./setup.js";
 import { createPNJsForQuestion } from "./index.js";
+import { endgame } from "./endgame.js";
 
+let scoregame = 0;
+
+
+export function startGame(){
 //Liste des questions déjà utilisées
 let questionsUtilisees = [];
 
@@ -23,6 +28,10 @@ Ne retourne ne rien.
 Notes : Pour l'instant, affiche des cubes. Affiche les PNJs de droite à gauche.
 
 */
+
+
+
+
 
 let renderPNJsForQuestion = function(question) {
     let PNJsForQuestion = createPNJsForQuestion(question);
@@ -92,14 +101,18 @@ let renderPNJsForQuestion = function(question) {
                     checkclick = true;
 
                     aBox.clicked = true;
-                    revealAliens();
+                    revealAliens(1);
                   
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
                     }, 1000);
                   
                     aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Yes; loop: repeat; timeScale: 1");
-                                        
+
+                    
+                    scoregame++;
+
+                    
                     setTimeout(() => {
                         aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
                         aBox.setAttribute('animation__position', {
@@ -131,11 +144,17 @@ let renderPNJsForQuestion = function(question) {
                     checkclick = true;
                     aBox.clicked = true;
                     // Example animation when the box is clicked
-                    aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
+                    
 
                     moveUFO(aBox.getAttribute('position').x);
 
-                    revealAliens();
+                    revealAliens(2);
+                    
+                    
+                        
+                    
+                   
+                    
                     setTimeout(() => {
                     let currentPosition = aBox.getAttribute('position');
                     let drone = document.querySelector("#drone");
@@ -259,6 +278,12 @@ Ne retourne rien.
 */
 
 let moveUFO = function(posX) {
+
+    // Ensure the UFO is created before moving it
+    let drone = document.querySelector("#drone");
+    if (!drone) {
+        createUFO(posX);
+    }
     let beam = document.createElement("a-entity");
     beam.setAttribute("id", "beam");
     beam.setAttribute("geometry", {
@@ -295,7 +320,9 @@ let moveUFO = function(posX) {
     let aScene = document.querySelector("a-scene");
     aScene.appendChild(beam);
 
-    let drone = document.querySelector("#drone");
+    
+     drone = document.querySelector("#drone");
+
     drone.setAttribute('animation', {
         property: 'position',
         to: `${posX} 25 -10`,
@@ -376,6 +403,16 @@ let resetUFO = function() {
     }
 }
 
+let maxquestions = 2;
+let questioncounter = 0;
+
+let timer = 0;
+let timermax = 0.5;
+let timerInterval = setInterval(() => {
+    timer++;
+}, 1000);
+
+
 let renderNextQuestion = function() {
     // Clear everything before rendering the new question
     removeAllPNJs();
@@ -395,6 +432,7 @@ let renderNextQuestion = function() {
         let aScene = document.querySelector("a-scene");
         let text = document.createElement("a-text");
         text.setAttribute("value", "Next question...");
+        questioncounter++;
         text.setAttribute("position", "0 2 -6");
         text.setAttribute("color", "white");
         text.setAttribute("width", "48");
@@ -411,23 +449,23 @@ let renderNextQuestion = function() {
     }, 2500)
 
     // After 3 seconds
-    setTimeout(() => {
+    setTimeout(async () => {
         // Filter unused questions
         let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
 
         // If there are no more unused questions, you can either:
         // 1. Reset the questionsUtilisees list (optional)
         // 2. Display a message that the game is over (recommended)
-        if (unusedQuestions.length === 0) {
-            let aScene = document.querySelector("a-scene");
-            let aText = document.createElement("a-text");
-            aText.setAttribute("value", "Well done, you win the game!");
-            aText.setAttribute("position", "0 2 -6");
-            aText.setAttribute("color", "red");
-            aText.setAttribute("width", "48");
-            aText.setAttribute("align", "center");
-            aScene.appendChild(aText);
-            return;
+        if (questioncounter >= maxquestions || timer >= timermax*60) {
+            
+        clearInterval(timerInterval);
+        timer = 0;
+                
+                endgame(scoregame, questioncounter);
+                scoregame = 0;
+                questioncounter = 0;            
+                return;
+            
         }
 
         // Select a new random question from unused questions
@@ -450,15 +488,42 @@ Ne retourne rien.
 
 */
 
-let revealAliens = function() {
+let revealAliens = function( chiffre) {
     let PNJs = document.querySelectorAll("#pnj");
     for (let PNJ of PNJs) {
+    
+
+        
         let pnjData = data.pnjs.find(p => p.id == PNJ.dataset.id);
         if (pnjData) {
             if (!pnjData.reponse.est_correcte) {
                 PNJ.setAttribute("gltf-model", "#alien");
-                PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                PNJ.removeAttribute("animation-mixer"); // Réinitialiser avant d'ajouter
+
+                if(chiffre == 1){
+                    
+                PNJ.addEventListener("model-loaded", function () {
+                    PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Duck; loop: repeat; timeScale: 1");
+                    setTimeout(() => {
+                        PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                    }, 1500);
+                
+                }, { once: true });
+            }else if(chiffre == 2){
+                PNJ.addEventListener("model-loaded", function () {
+                    PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
+                    setTimeout(() => {
+                        PNJ.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                    }, 1500);
+                
+                }, { once: true });
+
+            }
+                
             }
         }
     }
 }
+
+}
+
