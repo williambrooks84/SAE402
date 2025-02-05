@@ -6,6 +6,7 @@ Se charge de créer les questions, les PNJs, etc. pour le jeu.
 
 import { createQuestion } from "./index.js";
 import { createReponse } from "./index.js";
+import { QuestionData } from "./data/data.js";
 
 let data = {
     questions: [],
@@ -29,19 +30,13 @@ reponse:{
 */
 
 async function loadData() {
-    const response = await fetch("./data/data-questions.json");
+    data.questions = await QuestionData.fetchAll();
+    console.log(data.questions);
 
-    const jsonData = await response.json();
-
-    jsonData.questions.forEach(q => {
-        let reponses = q.reponses.map(r => createReponse(r.texte, r.correct)); //Créer les réponses
-        reponses = reponses.sort(() => Math.random() - 0.5); // Mélanger les réponses
-        data.questions.push(createQuestion(q.id, q.texte, reponses, q.niveau)); //Créer la question
-    });
-
-    data.pnjs = jsonData.pnjs; //Affecter une réponse à chaque PNJ
+    data.pnjs = [];
 }
 
 await loadData();
+
 
 export { data };
