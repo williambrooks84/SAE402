@@ -136,7 +136,9 @@ let renderPNJsForQuestion = function(question) {
                         }, 2000);
                     }, 2500);
                 }
+            }
             });
+        
         } else {
             // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
             aBox.addEventListener("click", function (event) {
@@ -527,3 +529,4 @@ let revealAliens = function( chiffre) {
 
 }
 
+}
