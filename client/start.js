@@ -1,7 +1,9 @@
+
 import { startGame } from "./script.js";
 
 
 export function startmenu() {
+
     let aScene = document.querySelector("a-scene");
 
     let paragraph = document.createElement("a-text");
