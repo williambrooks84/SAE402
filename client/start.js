@@ -1,6 +1,7 @@
+import { startGame } from "./script.js";
 
 
-let startmenu = function() {
+export function startmenu() {
     let aScene = document.querySelector("a-scene");
 
     let paragraph = document.createElement("a-text");
@@ -17,15 +18,17 @@ let startmenu = function() {
     let startButton = document.createElement("a-entity");
     
     
-    startButton.setAttribute("geometry", "primitive: plane; width: 0.6; height: 0.4; buffer: false; segmentsWidth: 10; segmentsHeight: 10");
-    startButton.setAttribute("material", "color: #000; opacity: 0.8");
-    startButton.setAttribute("text", "value: Start; align: center; width: 2; color: #ffffff");
+    startButton.setAttribute("geometry", "primitive: plane; width: 0.6; height: 0.4;");
+    
+    startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+
+    startButton.setAttribute("text", "value: START; align: center; width: 4; color: #ffffff");
     startButton.setAttribute("position", "0 1.2 1");
     startButton.setAttribute("class", "clickable");
     startButton.addEventListener("click", async function () {
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
-        await import("./script.js"); // Charge et exécute script.js au clic
+        startGame();
     });
     aScene.appendChild(startButton);
 }
