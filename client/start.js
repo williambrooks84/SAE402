@@ -1,5 +1,3 @@
-
-
 let startmenu = function() {
     let aScene = document.querySelector("a-scene");
 
