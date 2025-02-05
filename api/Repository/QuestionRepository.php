@@ -71,7 +71,6 @@ class QuestionRepository extends EntityRepository
                 $questions[$result->id_question]->addReponse($reponse);
             }
         }
-
         return array_values($questions);
     }
 

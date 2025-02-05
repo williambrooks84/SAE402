@@ -2,29 +2,7 @@
 require_once "Controller/QuestionController.php";
 require_once "Class/HttpRequest.php";
 
-session_start();
 
-/** IMPORTANT
- * 
- *  De part le .htaccess, toutes les requêtes seront redirigées vers ce fichier index.php
- * 
- *  On pose le principe que toutes les requêtes, pour être valides, doivent être dee la forme :
- * 
- *  http://.../api/ressources ou  http://.../api/ressources/{id}
- * 
- *  Par exemple : http://.../api/products ou  http://.../api/products/3
- */
-
-
-
-/**
- *  $router est notre "routeur" rudimentaire.
- * 
- *  C'est un tableau associatif qui associe à chaque nom de ressource 
- *  le Controller en charge de traiter la requête.
- *  Ici ProductController est le controleur qui traitera toutes les requêtes ciblant la ressource "products"
- *  On ajoutera des "routes" à $router si l'on a d'autres ressource à traiter.
- */
 $router = [
     "questions" => new QuestionController(),
 ];
@@ -34,6 +12,9 @@ $request = new HttpRequest();
 
 // on récupère la ressource ciblée par la requête
 $route = $request->getRessources();
+
+error_log("Route: " . $route);
+error_log("Router: " . print_r($router, true));
 
 if ( isset($router[$route]) ){ // si on a un controleur pour cette ressource
     $ctrl = $router[$route];  // on le récupère
@@ -49,8 +30,5 @@ if ( isset($router[$route]) ){ // si on a un controleur pour cette ressource
 }
 http_response_code(404); // si on a pas de controlleur pour traiter la requête -> 404
 
-
 die();
-
-
 ?>
