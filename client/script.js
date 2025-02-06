@@ -17,6 +17,20 @@ export function startGame(muted){
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
+
+    /* ambientSound
+
+    Ne prend aucun argument, ne retourne rien.
+    Mettre un son d'ambiance au lancement du jeu.
+
+    */
+    async function ambientSound() {
+        let ambientSound = document.querySelector("#ambient");
+        ambientSound.play();
+    }
+
+    ambientSound();
+
     // test
     let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
     questionsUtilisees.push(questionEnCours); //Ajouter la question à la liste des questions utilisées
