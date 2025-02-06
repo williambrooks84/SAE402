@@ -11,6 +11,7 @@ import { endgame } from "./endgame.js";
 
 let scoregame = 0;
 
+
 let version= "click";
 
 
@@ -101,6 +102,7 @@ export function startGame(){
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
 
+
                         aBox.clicked = true;
                         revealAliens(1);
                     
@@ -140,7 +142,9 @@ export function startGame(){
                 });
             } else {
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+
                 aBox.addEventListener(version, function (event) {
+
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
                         aBox.clicked = true;
@@ -399,11 +403,13 @@ export function startGame(){
         }
     }
 
+
     let maxquestions = 1;
     let questioncounter = 0;
 
     let timer = 0;
     let timermax = 0.01;
+
     let timerInterval = setInterval(() => {
         timer++;
     }, 1000);
