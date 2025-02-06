@@ -81,6 +81,8 @@ export function startGame(){
             data.pnjs.push(PNJ);
 
             if (PNJ.reponse.est_correcte) {
+                aBox.setAttribute("sound", "src: #success; on: click");
+
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
                 aBox.addEventListener("click", function (event) {
                     let randomposition = Math.random() < 0.5 ? -20 : 20;
@@ -132,6 +134,8 @@ export function startGame(){
                     }
                 });
             } else {
+                aBox.setAttribute("sound", "src: #fail; on: click");
+
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
                 aBox.addEventListener("click", function (event) {
                     if (!aBox.clicked && !checkclick) {
