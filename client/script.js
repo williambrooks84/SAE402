@@ -94,6 +94,9 @@ export function startGame(){
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
 
+                        let successAudio = document.querySelector("#success");
+                        successAudio.play();
+
                         aBox.clicked = true;
                         revealAliens(1);
                     
@@ -124,7 +127,7 @@ export function startGame(){
                         
                             setTimeout(() => {
                                 removePNJ(PNJ.id);
-                                moveUFO(0);
+                                resetUFO();
                                 renderNextQuestion();
                                 checkclick = false;
                             }, 2000);
@@ -138,7 +141,9 @@ export function startGame(){
                         checkclick = true;
                         aBox.clicked = true;
                         // Example animation when the box is clicked
-                        
+
+                        let failAudio = document.querySelector("#fail");
+                        failAudio.play();                        
 
                         moveUFO(aBox.getAttribute('position').x);
 
@@ -159,7 +164,6 @@ export function startGame(){
                             setTimeout(() => {
                                 removePNJ(PNJ.id);
                                 resetUFO();
-                                moveUFO(0);
                                 renderNextQuestion();
                                 checkclick = false;
                             }, 2000);
@@ -268,11 +272,7 @@ export function startGame(){
 
     let moveUFO = function(posX) {
 
-        // Ensure the UFO is created before moving it
         let drone = document.querySelector("#drone");
-        if (!drone) {
-            createUFO(posX);
-        }
         let beam = document.createElement("a-entity");
         beam.setAttribute("id", "beam");
         beam.setAttribute("geometry", {
@@ -354,7 +354,7 @@ export function startGame(){
         }
     }
 
-    /* removeUFO
+    /* resetUFO
 
     Ne prend aucun argument.
     Retire l'objet UFO de la scène.
@@ -370,25 +370,50 @@ export function startGame(){
 
         // Check if the UFO and beam exist before removing/resetting them
         if (drone) {
-            if (drone.attributes.position.value !== "0 25 -10") {
-                drone.setAttribute('animation', {
+            let posX = 0;
+            drone.setAttribute('animation', {
+                property: 'position',
+                to: `${posX} 25 -10`,
+                dur: 1000,
+                easing: 'easeInSine'
+            });
+    
+            let lights1 = document.querySelectorAll("#light-left");
+            lights1.forEach(light => {
+                light.setAttribute('animation', {
                     property: 'position',
-                    to: `0 25 -10`,
+                    to: `${posX - 2} 21 -10`,
                     dur: 1000,
                     easing: 'easeInSine'
                 });
-                for (let light of lights) {
-                    light.setAttribute('animation', {
-                        property: 'position',
-                        to: `0 25 -10`,
-                        dur: 1000,
-                        easing: 'easeInSine'
-                    });
+            });
+    
+            let lights2 = document.querySelectorAll("#light-right");
+            lights2.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX + 2} 21 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            });
+    
+            let lights = document.querySelectorAll("#drone-light");
+            for (let light of lights) {
+                let adjustedPosition = posX;
+                if (light.getAttribute('rotation').x != 0) {
+                    adjustedPosition = -posX;
                 }
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${adjustedPosition} 22 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
             }
         }
         if (beam) {
-            aScene.removeChild(beam);
+            beam.parentNode.removeChild(beam);
         }
     }
 
