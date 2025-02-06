@@ -5,13 +5,13 @@ class Reponse implements JsonSerializable {
     private string $texte_reponse;
     private bool $est_correcte;
     
-    public function __construct(int $id_question, string $texte_reponse = "", bool $est_correcte = false,) {
+    public function __construct(int $id_question, string $texte_reponse = "", bool $est_correcte = false) { // Correction ici
         $this->id_question = $id_question;
         $this->texte_reponse = $texte_reponse;
         $this->est_correcte = $est_correcte;
     }
 
-    public function JsonSerialize(): mixed {
+    public function JsonSerialize(): array {
         return [
             'id_question' => $this->id_question,
             'texte_reponse' => $this->texte_reponse,

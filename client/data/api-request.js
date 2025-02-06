@@ -4,7 +4,7 @@
  */
 
 
-let API_URL = "https://mmi.unilim.fr/~doutreligne1/SAE402/api/";
+let API_URL = "https://www.owlywood.lightprince.fr/jeuVr/api/";
 
 
 /**
@@ -40,7 +40,9 @@ let getRequest = async function(uri){
         return false; // si le serveur a renvoyé une erreur, on retourne false
     }  // si le serveur a renvoyé une erreur, on retourne false
     let $obj = await response.json(); // extraction du json retourné par le serveur (opération asynchrone aussi)
+    
     return $obj; // et on retourne le tout (response.json() a déjà converti le json en objet Javscript)
+    
 }
 
 

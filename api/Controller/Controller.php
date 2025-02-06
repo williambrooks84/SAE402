@@ -52,6 +52,7 @@ abstract class Controller {
         }
 
         if ($data) { $json = json_encode($data); }
+
         return $json;
     }
 

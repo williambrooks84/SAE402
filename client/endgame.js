@@ -25,13 +25,14 @@ export function endgame(scoregames,questioncounter) {
     let menuButton = document.createElement("a-entity");
     
     
-    menuButton.setAttribute("geometry", "primitive: plane; width: 1.4; height: 0.4;");
+    menuButton.setAttribute("geometry", "primitive: plane; width: 3.6; height: 0.8;");
     
     menuButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
 
-    menuButton.setAttribute("text", "value: Retrun to Menu; align: center; width: 4; color: #ffffff");
-    menuButton.setAttribute("position", "-1 1.2 1");
+    menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; color: #ffffff");
+    menuButton.setAttribute("position", "-2 0.5 -3");
     menuButton.setAttribute("class", "clickable");
+    menuButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
     menuButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
@@ -44,6 +45,7 @@ export function endgame(scoregames,questioncounter) {
         }
         
         startmenu();
+        setTimeout(resetRaycaster, 500);
 
     });
     aScene.appendChild(menuButton);
@@ -51,13 +53,14 @@ export function endgame(scoregames,questioncounter) {
     let startButton = document.createElement("a-entity");
     
     
-    startButton.setAttribute("geometry", "primitive: plane; width: 0.8; height: 0.4;");
+    startButton.setAttribute("geometry", "primitive: plane; width: 2.4; height: 0.8;");
     
     startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
 
-    startButton.setAttribute("text", "value: RESTART; align: center; width: 4; color: #ffffff");
-    startButton.setAttribute("position", "1 1.2 1");
+    startButton.setAttribute("text", "value: RESTART; align: center; width: 10; color: #ffffff");
+    startButton.setAttribute("position", "2 0.5 -3");
     startButton.setAttribute("class", "clickable");
+    startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
     startButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
@@ -65,8 +68,22 @@ export function endgame(scoregames,questioncounter) {
         startButton.parentNode.removeChild(startButton);
         
         startGame();
+        
     });
     aScene.appendChild(startButton);
     
 }
 
+
+
+function resetRaycaster() {
+    let rightController = document.querySelector("#rightController");
+    let leftController = document.querySelector("#leftController");
+
+    if (rightController && rightController.components.raycaster) {
+        rightController.components.raycaster.refreshObjects();
+    }
+    if (leftController && leftController.components.raycaster) {
+        leftController.components.raycaster.refreshObjects();
+    }
+}

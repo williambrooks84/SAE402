@@ -13,12 +13,12 @@ class Question implements JsonSerializable {
         $this->reponses = $reponses;
     }
 
-    public function JsonSerialize(): mixed {
+    public function jsonSerialize(): array {
         return [
             'id_question' => $this->id_question,
             'texte_question' => $this->texte_question,
             'niveau_question' => $this->niveau_question,
-            'reponses' => $this->reponses
+            'reponses' => $this->reponses,
         ];
     }
 

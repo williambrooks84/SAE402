@@ -11,9 +11,14 @@ import { endgame } from "./endgame.js";
 
 let scoregame = 0;
 
+
+
+
+
 // Fait toute la longueur du document
 export function startGame(muted){
 
+   
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
@@ -73,7 +78,8 @@ export function startGame(muted){
             aBox.setAttribute("transparent", "true");
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
-
+            aBox.setAttribute("class", "clickable");
+            aBox.setAttribute("cursor","fuse: false; rayOrigin: mouse")
             aBox.addEventListener("model-loaded", (event) => {
                 // Attendre un peu avant d'ajouter l'animation-mixer
                 setTimeout(() => {
@@ -97,6 +103,8 @@ export function startGame(muted){
             data.pnjs.push(PNJ);
 
             if (PNJ.reponse.est_correcte) {
+
+               
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
                 aBox.addEventListener("click", function (event) {
                     let randomposition = Math.random() < 0.5 ? -20 : 20;
@@ -154,7 +162,9 @@ export function startGame(muted){
                 });
             } else {
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+
                 aBox.addEventListener("click", function (event) {
+
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
                         aBox.clicked = true;
@@ -438,11 +448,13 @@ export function startGame(muted){
         }
     }
 
-    let maxquestions = 2;
+
+    let maxquestions = 1;
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 0.5;
+    let timermax = 0.01;
+
     let timerInterval = setInterval(() => {
         timer++;
     }, 1000);
