@@ -12,7 +12,7 @@ import { endgame } from "./endgame.js";
 let scoregame = 0;
 
 // Fait toute la longueur du document
-export function startGame(){
+export function startGame(muted){
 
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
@@ -94,8 +94,10 @@ export function startGame(){
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
 
-                        let successAudio = document.querySelector("#success");
-                        successAudio.play();
+                        if (!muted) {
+                            let successAudio = document.querySelector("#success");
+                            successAudio.play();
+                        }
 
                         aBox.clicked = true;
                         revealAliens(1);
@@ -142,8 +144,11 @@ export function startGame(){
                         aBox.clicked = true;
                         // Example animation when the box is clicked
 
-                        let failAudio = document.querySelector("#fail");
-                        failAudio.play();                        
+                        if (!muted) {
+                            let failAudio = document.querySelector("#fail");
+                            failAudio.play();
+                        }
+                    
 
                         moveUFO(aBox.getAttribute('position').x);
 
