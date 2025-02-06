@@ -1,7 +1,6 @@
 
 import { startGame } from "./script.js";
 
-
 export function startmenu() {
 
     let aScene = document.querySelector("a-scene");
