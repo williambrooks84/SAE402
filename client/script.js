@@ -12,16 +12,13 @@ import { endgame } from "./endgame.js";
 let scoregame = 0;
 
 
-let version= "click";
+
 
 
 // Fait toute la longueur du document
 export function startGame(){
 
-    document.querySelector("a-scene").addEventListener("enter-vr", () => {
-        version= "triggerdown";
-    });
-
+   
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
@@ -65,7 +62,8 @@ export function startGame(){
             aBox.setAttribute("transparent", "true");
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
-
+            aBox.setAttribute("class", "clickable");
+            aBox.setAttribute("cursor","fuse: false; rayOrigin: mouse")
             aBox.addEventListener("model-loaded", (event) => {
                 // Attendre un peu avant d'ajouter l'animation-mixer
                 setTimeout(() => {
@@ -89,8 +87,10 @@ export function startGame(){
             data.pnjs.push(PNJ);
 
             if (PNJ.reponse.est_correcte) {
+
+               
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
-                aBox.addEventListener(version, function (event) {
+                aBox.addEventListener("click", function (event) {
                     let randomposition = Math.random() < 0.5 ? -20 : 20;
                     let rotationposition;
                     if (randomposition == -20) {
@@ -143,7 +143,7 @@ export function startGame(){
             } else {
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
 
-                aBox.addEventListener(version, function (event) {
+                aBox.addEventListener("click", function (event) {
 
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;

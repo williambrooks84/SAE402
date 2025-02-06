@@ -2,13 +2,10 @@
 import {startGame} from './script.js';
 import {startmenu} from './start.js';
 
-let version = "click";
 
 export function endgame(scoregames,questioncounter) {
 
-    document.querySelector("a-scene").addEventListener("enter-vr", () => {
-        version= "triggerdown";
-    });
+ 
 
 
    
@@ -36,16 +33,18 @@ export function endgame(scoregames,questioncounter) {
     
     menuButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
 
-    menuButton.setAttribute("text", "value: Retrun to Menu; align: center; width: 10; color: #ffffff");
+    menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; color: #ffffff");
     menuButton.setAttribute("position", "-2 0.5 -3");
     menuButton.setAttribute("class", "clickable");
-    menuButton.addEventListener(version, async function () {
+    menuButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
+    menuButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
         menuButton.parentNode.removeChild(menuButton);
         startButton.parentNode.removeChild(startButton);
         
         startmenu();
+        setTimeout(resetRaycaster, 500);
 
     });
     aScene.appendChild(menuButton);
@@ -60,15 +59,30 @@ export function endgame(scoregames,questioncounter) {
     startButton.setAttribute("text", "value: RESTART; align: center; width: 10; color: #ffffff");
     startButton.setAttribute("position", "2 0.5 -3");
     startButton.setAttribute("class", "clickable");
-    startButton.addEventListener(version, async function () {
+    startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
+    startButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
         menuButton.parentNode.removeChild(menuButton);
         startButton.parentNode.removeChild(startButton);
         
         startGame();
+        
     });
     aScene.appendChild(startButton);
     
 }
 
+
+
+function resetRaycaster() {
+    let rightController = document.querySelector("#rightController");
+    let leftController = document.querySelector("#leftController");
+
+    if (rightController && rightController.components.raycaster) {
+        rightController.components.raycaster.refreshObjects();
+    }
+    if (leftController && leftController.components.raycaster) {
+        leftController.components.raycaster.refreshObjects();
+    }
+}

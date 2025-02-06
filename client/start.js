@@ -1,13 +1,10 @@
 
 import { startGame } from "./script.js";
 
-let version = "click";
+
 
 export function startmenu() {
 
-    document.querySelector("a-scene").addEventListener("enter-vr", () => {
-        version= "triggerdown";
-    });
 
 
     let aScene = document.querySelector("a-scene");
@@ -38,7 +35,8 @@ export function startmenu() {
     startButton.setAttribute("text", "value: START; align: center; width: 10; color: #ffffff");
     startButton.setAttribute("position", "0 0.5 -3");
     startButton.setAttribute("class", "clickable");
-    startButton.addEventListener(version, async function () {
+    startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
+    startButton.addEventListener("click", async function () {
         plane.parentNode.removeChild(plane);
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
