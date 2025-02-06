@@ -32,7 +32,6 @@ export function endgame(scoregames,questioncounter) {
     menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; color: #ffffff");
     menuButton.setAttribute("position", "-2 0.5 -3");
     menuButton.setAttribute("class", "clickable");
-    menuButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
     menuButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
@@ -60,7 +59,6 @@ export function endgame(scoregames,questioncounter) {
     startButton.setAttribute("text", "value: RESTART; align: center; width: 10; color: #ffffff");
     startButton.setAttribute("position", "2 0.5 -3");
     startButton.setAttribute("class", "clickable");
-    startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
     startButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);

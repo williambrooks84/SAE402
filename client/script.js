@@ -79,7 +79,7 @@ export function startGame(muted){
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
             aBox.setAttribute("class", "clickable");
-            aBox.setAttribute("cursor","fuse: false; rayOrigin: mouse")
+            
             aBox.addEventListener("model-loaded", (event) => {
                 // Attendre un peu avant d'ajouter l'animation-mixer
                 setTimeout(() => {
@@ -449,11 +449,11 @@ export function startGame(muted){
     }
 
 
-    let maxquestions = 1;
+    let maxquestions = 100;
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 0.01;
+    let timermax = 5;
 
     let timerInterval = setInterval(() => {
         timer++;

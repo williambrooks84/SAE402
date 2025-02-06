@@ -35,9 +35,10 @@ export function startmenu() {
     startButton.setAttribute("text", "value: START; align: center; width: 10; color: #ffffff");
     startButton.setAttribute("position", "-0.8 0.5 -3");
     startButton.setAttribute("class", "clickable");
-    startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
+
     startButton.addEventListener("click", async function () {
         plane.parentNode.removeChild(plane);
+        
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
         soundButton.parentNode.removeChild(soundButton);
@@ -46,13 +47,15 @@ export function startmenu() {
     aScene.appendChild(startButton);
 
     let soundButton = document.createElement("a-entity");
-    soundButton.setAttribute("geometry", "primitive: plane; width: 1.2; height: 0.4;");
+    soundButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.8;");
     soundButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
     soundButton.setAttribute("text", "value: START MUTED; align: center; width: 4; color: #ffffff");
     soundButton.setAttribute("position", "0.8 0.5 -3");
     soundButton.setAttribute("class", "clickable");
     soundButton.addEventListener("click", async function () {
+        
         paragraph.parentNode.removeChild(paragraph);
+        plane.parentNode.removeChild(plane);
         soundButton.parentNode.removeChild(soundButton);
         startButton.parentNode.removeChild(startButton);
         startGame(true);
