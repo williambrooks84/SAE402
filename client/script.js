@@ -29,7 +29,9 @@ export function startGame(muted){
         ambientSound.play();
     }
 
-    ambientSound();
+    if (!muted) {
+        ambientSound();
+    }
 
     // test
     let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
