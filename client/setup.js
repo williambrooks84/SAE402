@@ -33,6 +33,7 @@ async function loadData() {
     data.questions = await QuestionData.fetchAll();
 
     data.pnjs = [];
+
 }
 
 await loadData();

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAE402</title>
+    <title>TellApart</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@master/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@master/dist/aframe-extras.min.js"></script>
+    <link rel="icon" href="favicon.png" type="image/png">
 <script src="https://unpkg.com/aframe-text-geometry-component@latest/dist/aframe-text-geometry-component.min.js"></script>
 <script>
   
@@ -86,6 +87,10 @@ document.querySelector("#leftController").addEventListener("triggerdown", onTrig
           <a-asset-item id="planet" src="asset/Planet.glb"></a-asset-item>
           <a-asset-item id="spaceship" src="asset/Spaceship.glb"></a-asset-item>
           <a-asset-item id="alien" src="asset/Enemy Large.glb"></a-asset-item>
+          <audio id="ambient" src="asset/ambient.mp3" autoplay loop></audio>
+          <audio id="beam" src="asset/beam.ogg"></audio>
+          <audio id="fail" src="asset/fail.wav"></audio>
+          <audio id="success" src="asset/success.wav"></audio>
           <img id = "ciel" src = "asset/sky.png" >
 
         </a-assets>
