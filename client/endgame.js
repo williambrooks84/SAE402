@@ -4,7 +4,6 @@ import {startmenu} from './start.js';
 
 
 export function endgame(scoregames,questioncounter) {
-
    
     let aScene = document.querySelector("a-scene");
     let aText = document.createElement("a-text");
@@ -38,6 +37,11 @@ export function endgame(scoregames,questioncounter) {
         ascore.parentNode.removeChild(ascore);
         menuButton.parentNode.removeChild(menuButton);
         startButton.parentNode.removeChild(startButton);
+        let ambientSound = document.querySelector("#ambient");
+        if (ambientSound) {
+            ambientSound.pause();
+            ambientSound.currentTime = 0;
+        }
         
         startmenu();
 
