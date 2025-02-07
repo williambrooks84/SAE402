@@ -7,17 +7,15 @@ export function endgame(scoregames,questioncounter) {
    
     let aScene = document.querySelector("a-scene");
     let aText = document.createElement("a-text");
-    aText.setAttribute("value", "Well done, you win the game!");
+    aText.setAttribute("text", "value: Well done, you win the game!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     aText.setAttribute("position", "0 6 -8");
-    aText.setAttribute("color", "white");
     aText.setAttribute("width", "48");
     aText.setAttribute("align", "center");
     aScene.appendChild(aText);
 
     let ascore = document.createElement("a-text");
-    ascore.setAttribute("value", "Score: " + scoregames+"/"+questioncounter+" questions");
+    ascore.setAttribute("text", "value: Score: " + scoregames+"/"+questioncounter+" questions; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     ascore.setAttribute("position", "0 2 -8");
-    ascore.setAttribute("color", "white");
     ascore.setAttribute("width", "48");
     ascore.setAttribute("align", "center");
     aScene.appendChild(ascore);
