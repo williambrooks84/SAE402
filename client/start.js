@@ -4,9 +4,14 @@ import { startGame } from "./script.js";
 
 export function startmenu() {
 
-
-
     let aScene = document.querySelector("a-scene");
+
+    let title = document.createElement("a-text");
+    title.setAttribute("text", "value: Welcome to TellApart!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    title.setAttribute("position", `0 8 -5`);
+    title.setAttribute("width", "36");
+    title.setAttribute("align", "center");
+    aScene.append(title);
 
     let plane = document.createElement("a-plane");
     plane.setAttribute("material", "shader: flat; side: double; color: #000000; opacity: 0.4");
@@ -15,8 +20,7 @@ export function startmenu() {
     aScene.appendChild(plane);
 
     let paragraph = document.createElement("a-text");
-    
-    paragraph.setAttribute("value", "The game consists of finding out who the real astronaut is. A question in English will be asked, and you must identify the one who gives the correct answer.But be careful—you have limited time! To play, it's simple: carefully observe the astronauts' answers, target the real astronaut, and click on them before time runs out. Be quick and precise to win the game! ");
+    paragraph.setAttribute("value", "The game consists of finding out who the real astronaut is. A question in English will be asked, and you must identify the one who gives the correct answer. But be careful, you have limited time! To play, it's simple: carefully observe the astronauts' answers, target the real astronaut, and click on them before time runs out. Be quick and precise to win the game! ");
     paragraph.setAttribute("position", `0 4 -5`);
     paragraph.setAttribute("color", "white");
     paragraph.setAttribute("width", "12");
@@ -37,6 +41,7 @@ export function startmenu() {
     startButton.setAttribute("class", "clickable");
     startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
     startButton.addEventListener("click", async function () {
+        title.parentNode.removeChild(title);
         plane.parentNode.removeChild(plane);
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
@@ -46,12 +51,13 @@ export function startmenu() {
     aScene.appendChild(startButton);
 
     let soundButton = document.createElement("a-entity");
-    soundButton.setAttribute("geometry", "primitive: plane; width: 1.2; height: 0.4;");
+    soundButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.8;");
     soundButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
     soundButton.setAttribute("text", "value: START MUTED; align: center; width: 4; color: #ffffff");
     soundButton.setAttribute("position", "0.8 0.5 -3");
     soundButton.setAttribute("class", "clickable");
     soundButton.addEventListener("click", async function () {
+        title.parentNode.removeChild(title);
         paragraph.parentNode.removeChild(paragraph);
         soundButton.parentNode.removeChild(soundButton);
         startButton.parentNode.removeChild(startButton);
