@@ -7,17 +7,15 @@ export function endgame(scoregames,questioncounter) {
    
     let aScene = document.querySelector("a-scene");
     let aText = document.createElement("a-text");
-    aText.setAttribute("value", "Well done, you win the game!");
+    aText.setAttribute("text", "value: Well done, you win the game!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     aText.setAttribute("position", "0 6 -8");
-    aText.setAttribute("color", "white");
     aText.setAttribute("width", "48");
     aText.setAttribute("align", "center");
     aScene.appendChild(aText);
 
     let ascore = document.createElement("a-text");
-    ascore.setAttribute("value", "Score: " + scoregames+"/"+questioncounter+" questions");
+    ascore.setAttribute("text", "value: Score: " + scoregames+"/"+questioncounter+" questions; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     ascore.setAttribute("position", "0 2 -8");
-    ascore.setAttribute("color", "white");
     ascore.setAttribute("width", "48");
     ascore.setAttribute("align", "center");
     aScene.appendChild(ascore);
@@ -29,7 +27,7 @@ export function endgame(scoregames,questioncounter) {
     
     menuButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
 
-    menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; color: #ffffff");
+    menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
     menuButton.setAttribute("position", "-2 0.5 -3");
     menuButton.setAttribute("class", "clickable");
     menuButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
@@ -57,7 +55,7 @@ export function endgame(scoregames,questioncounter) {
     
     startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
 
-    startButton.setAttribute("text", "value: RESTART; align: center; width: 10; color: #ffffff");
+    startButton.setAttribute("text", "value: RESTART; align: center; width: 10; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
     startButton.setAttribute("position", "2 0.5 -3");
     startButton.setAttribute("class", "clickable");
     startButton.setAttribute("cursor","fuse: false; rayOrigin: mouse");
