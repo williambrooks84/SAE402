@@ -109,6 +109,7 @@ let createPNJ = function(id, reponse) {
 let createPNJsForQuestion = function(question) {
     let pnjs = [];
     let reponses = question.reponses;
+    reponses = reponses.sort(() => Math.random() - 0.5);
     for (let i = 0; i < reponses.length; i++) {
         let pnj = createPNJ(i, reponses[i]);
         pnjs.push(pnj);

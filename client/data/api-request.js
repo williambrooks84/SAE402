@@ -4,7 +4,7 @@
  */
 
 
-let API_URL = "https://www.owlywood.lightprince.fr/jeuVr/api/";
+let API_URL = "https://mmi.unilim.fr/~doutreligne1/SAE402/api/";
 
 
 /**

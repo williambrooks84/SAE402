@@ -10,15 +10,17 @@ import { createPNJsForQuestion } from "./index.js";
 import { endgame } from "./endgame.js";
 
 let scoregame = 0;
-
-
+let ligne = 0;
+let timermin = 0;
+let timersec = 0;
+let gamefinished = false;
 
 
 
 // Fait toute la longueur du document
 export function startGame(muted){
 
-   
+   gamefinished = false;
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
@@ -87,13 +89,23 @@ export function startGame(muted){
                 }, 1000);
             });
 
+            
             // Create the a-text element for displaying the PNJ response (the text)
             let aText = document.createElement("a-text");
-            aText.setAttribute("value", PNJ.reponse.texte_reponse);
-            aText.setAttribute("position", `${position} 3 -8`);
+            aText.setAttribute("text", "value: " + PNJ.reponse.texte_reponse + "; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
+            
             aText.setAttribute("color", "white");
-            aText.setAttribute("width", "6");
+            aText.setAttribute("width", "20");
             aText.setAttribute("align", "center");
+
+            if (ligne % 2 == 0) {
+                aText.setAttribute("position", `${position} 3 -8`);
+                ligne++;
+            } else {
+                aText.setAttribute("position", `${position} 4 -8`);
+                ligne++;
+            }
+            
 
             // Append the created elements to the a-scene
             aScene.appendChild(aBox);
@@ -222,7 +234,12 @@ export function startGame(muted){
             value: question.texte_question,
             align: "center",
             color: "white",
-            width: 32 // Change the text size here
+            width: 32,
+            font: "asset/Audiowide-Regular-msdf.json",
+            color: "#FFFFFF", 
+            negate: false,
+            opacity: 1,
+            alphaTest: 0.5
         });
         questionEntity.setAttribute("position", position);
         aScene.appendChild(questionEntity);
@@ -255,6 +272,7 @@ export function startGame(muted){
         if (dynamicText) {
             aScene.removeChild(dynamicText);
         }
+       
 
         // Clear the array of PNJs
         data.pnjs = [];
@@ -453,7 +471,7 @@ export function startGame(muted){
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 5;
+    let timermax = 0.05;
 
     let timerInterval = setInterval(() => {
         timer++;
@@ -463,6 +481,15 @@ export function startGame(muted){
     let renderNextQuestion = function() {
         // Clear everything before rendering the new question
         removeAllPNJs();
+        let timerDisplay = document.querySelector("#timerDisplay");
+        if (timerDisplay) {
+            timerDisplay.parentNode.removeChild(timerDisplay);
+        }
+
+        let scoreDisplay = document.querySelector("#scoreDisplay");
+        if (scoreDisplay) {
+            scoreDisplay.parentNode.removeChild(scoreDisplay);
+        }
 
         // Remove the previous question from the scene (if needed)
         let aScene = document.querySelector("a-scene");
@@ -478,7 +505,7 @@ export function startGame(muted){
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("value", "Next question...");
+            text.setAttribute("text", "value: Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
@@ -506,11 +533,17 @@ export function startGame(muted){
             if (questioncounter >= maxquestions || timer >= timermax*60) {
                 
             clearInterval(timerInterval);
+            gamefinished = true;
             timer = 0;
                     
                     endgame(scoregame, questioncounter);
                     scoregame = 0;
-                    questioncounter = 0;            
+                    questioncounter = 0;
+                    ligne = 0;
+                    timermin = 0;
+                    timersec = 0;
+                    
+
                     return;
                 
             }
@@ -581,6 +614,13 @@ export function startGame(muted){
 
     */
 
+    
+
+ 
+
+    // Call updateHUD every second
+   
+
     let updateHUD = function() {
         let aScene = document.querySelector("a-scene");
 
@@ -591,11 +631,13 @@ export function startGame(muted){
             timerDisplay.setAttribute("id", "timerDisplay");
             timerDisplay.setAttribute("position", "-3 1.5 3");
             timerDisplay.setAttribute("rotation", "0 90 0");
+            timerDisplay.setAttribute("font", "asset/Audiowide-Regular-msdf.json");
+            timerDisplay.setAttribute("negate", "false");
             timerDisplay.setAttribute("color", "white");
             timerDisplay.setAttribute("width", "10");
             aScene.appendChild(timerDisplay);
         }
-        timerDisplay.setAttribute("value", `Time: ${timer}s`);
+        timerDisplay.setAttribute("value", `Time: ${timermin}min ${timersec}s`);
 
         // Create or update the score display
         let scoreDisplay = document.querySelector("#scoreDisplay");
@@ -604,6 +646,8 @@ export function startGame(muted){
             scoreDisplay.setAttribute("id", "scoreDisplay");
             scoreDisplay.setAttribute("position", "3 1.5 1.5");
             scoreDisplay.setAttribute("rotation", "0 -90 0");
+            scoreDisplay.setAttribute("font", "asset/Audiowide-Regular-msdf.json");
+            scoreDisplay.setAttribute("negate", "false");
             scoreDisplay.setAttribute("color", "white");
             scoreDisplay.setAttribute("width", "10");
             aScene.appendChild(scoreDisplay);
@@ -611,7 +655,22 @@ export function startGame(muted){
         scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
     }
 
-    // Call updateHUD every second
-    setInterval(updateHUD, 1000);
+
+    let gameInterval = setInterval(() => {
+        if (gamefinished) {
+            clearInterval(gameInterval);
+            timersec = 0;
+            timermin = 0;
+        } else {
+            timersec++;
+            if (timersec >= 60) {
+                timersec = 0;
+                timermin++;
+            }
+            updateHUD();
+        }
+    }, 1000);
+        
+    
 
 }
