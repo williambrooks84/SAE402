@@ -10,25 +10,46 @@
     <link rel="icon" href="favicon.png" type="image/png">
 <script src="https://unpkg.com/aframe-text-geometry-component@latest/dist/aframe-text-geometry-component.min.js"></script>
 <script>
-  
-    let player = document.querySelector("#player");
-    if (player) {
-        player.setAttribute("position", "0 0 4"); // Nouvelle position en VR
+  document.addEventListener("DOMContentLoaded", function () {
+      let cursor = document.querySelector("#cursor");
+      let isVR = AFRAME.utils.device.isMobileVR();
+
+      if (isVR) {
+        console.log("VR");
+          cursor.setAttribute("visible", "false");
+          function onTriggerDown(evt) {
+              let intersectedEl = evt.target.components.raycaster.intersectedEls[0];
+              if (intersectedEl) {
+                  
+                  intersectedEl.setAttribute("material", "color: red"); // Changement de couleur
+              }
+          }
+
+          document.querySelector("#rightController").addEventListener("triggerdown", onTriggerDown);
+          document.querySelector("#leftController").addEventListener("triggerdown", onTriggerDown);
+      } else {
+        console.log("PC");
+        cursor.setAttribute("visible", "true");
+
+        cursor.addEventListener("mousedown", function (evt) {
+    let intersectedEl = evt.detail.intersectedEl;
+    
+    if (intersectedEl && intersectedEl.classList.contains("clickable")) {
+        
+        intersectedEl.setAttribute("material", "color: red");
+        
+        // Empêche toute propagation de l'événement pour éviter des déclenchements indésirables
+        evt.stopPropagation();
+    } else {
+        
+        evt.preventDefault(); // Essaye aussi ceci pour empêcher des effets indésirables
     }
- 
+});
 
-  function onTriggerDown(evt) {
-let intersectedEl = evt.target.components.raycaster.intersectedEls[0];
-if (intersectedEl) {
-console.log("Objet cliqué :", intersectedEl);
-intersectedEl.setAttribute("color", "red"); // Exemple : changer la couleur
-}
-}
+      }
+  });
+</script>
 
-document.querySelector("#rightController").addEventListener("triggerdown", onTriggerDown);
-document.querySelector("#leftController").addEventListener("triggerdown", onTriggerDown);
-
-  </script>
 <script src="start.js" type="module"></script>
 
 </head>

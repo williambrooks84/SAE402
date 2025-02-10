@@ -79,7 +79,7 @@ export function startGame(muted){
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
             aBox.setAttribute("class", "clickable");
-            aBox.setAttribute("cursor","fuse: false; rayOrigin: mouse")
+            
             aBox.addEventListener("model-loaded", (event) => {
                 // Attendre un peu avant d'ajouter l'animation-mixer
                 setTimeout(() => {
@@ -454,11 +454,11 @@ export function startGame(muted){
     }
 
 
-    let maxquestions = 1;
+    let maxquestions = 100;
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 0.01;
+    let timermax = 5;
 
     let timerInterval = setInterval(() => {
         timer++;
@@ -576,5 +576,47 @@ export function startGame(muted){
             }
         }
     }
+
+
+    /* updateHUD
+
+    Ne prend aucun argument.
+    Met à jour l'affichage du temps et du score.
+    Ne retourne rien.
+
+    */
+
+    let updateHUD = function() {
+        let aScene = document.querySelector("a-scene");
+
+        // Create or update the timer display
+        let timerDisplay = document.querySelector("#timerDisplay");
+        if (!timerDisplay) {
+            timerDisplay = document.createElement("a-text");
+            timerDisplay.setAttribute("id", "timerDisplay");
+            timerDisplay.setAttribute("position", "-3 1.5 3");
+            timerDisplay.setAttribute("rotation", "0 90 0");
+            timerDisplay.setAttribute("color", "white");
+            timerDisplay.setAttribute("width", "10");
+            aScene.appendChild(timerDisplay);
+        }
+        timerDisplay.setAttribute("value", `Time: ${timer}s`);
+
+        // Create or update the score display
+        let scoreDisplay = document.querySelector("#scoreDisplay");
+        if (!scoreDisplay) {
+            scoreDisplay = document.createElement("a-text");
+            scoreDisplay.setAttribute("id", "scoreDisplay");
+            scoreDisplay.setAttribute("position", "3 1.5 1.5");
+            scoreDisplay.setAttribute("rotation", "0 -90 0");
+            scoreDisplay.setAttribute("color", "white");
+            scoreDisplay.setAttribute("width", "10");
+            aScene.appendChild(scoreDisplay);
+        }
+        scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
+    }
+
+    // Call updateHUD every second
+    setInterval(updateHUD, 1000);
 
 }
