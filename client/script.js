@@ -89,7 +89,7 @@ export function startGame(muted){
 
             // Create the a-text element for displaying the PNJ response (the text)
             let aText = document.createElement("a-text");
-            aText.setAttribute("text", PNJ.reponse.texte_reponse);
+            aText.setAttribute("text", "value: " + PNJ.reponse.texte_reponse + "; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             aText.setAttribute("position", `${position} 3 -8`);
             aText.setAttribute("color", "white");
             aText.setAttribute("width", "6");
@@ -483,7 +483,7 @@ export function startGame(muted){
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("value", "Next question...");
+            text.setAttribute("text", "value: Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
