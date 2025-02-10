@@ -10,14 +10,14 @@ export function startmenu() {
 
     let plane = document.createElement("a-plane");
     plane.setAttribute("material", "shader: flat; side: double; color: #000000; opacity: 0.4");
-    plane.setAttribute("geometry", "primitive: plane; width: 14; height: 6");
-    plane.setAttribute("position", `0 4 -5.2`);
+    plane.setAttribute("geometry", "primitive: plane; width: 14; height: 3");
+    plane.setAttribute("position", `0 2.2 -5.2`);
     aScene.appendChild(plane);
 
     let paragraph = document.createElement("a-text");
     
-    paragraph.setAttribute("value", "The game consists of finding out who the real astronaut is. A question in English will be asked, and you must identify the one who gives the correct answer.But be careful—you have limited time! To play, it's simple: carefully observe the astronauts' answers, target the real astronaut, and click on them before time runs out. Be quick and precise to win the game! ");
-    paragraph.setAttribute("position", `0 4 -5`);
+    paragraph.setAttribute("value", "Find the real astronaut! A question appears—spot the correct answer and click before time runs out. Stay quick and precise to win! ");
+    paragraph.setAttribute("position", `0 2.2 -5`);
     paragraph.setAttribute("color", "white");
     paragraph.setAttribute("width", "12");
     paragraph.setAttribute("align", "center");

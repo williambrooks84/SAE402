@@ -572,4 +572,46 @@ export function startGame(muted){
         }
     }
 
+
+    /* updateHUD
+
+    Ne prend aucun argument.
+    Met à jour l'affichage du temps et du score.
+    Ne retourne rien.
+
+    */
+
+    let updateHUD = function() {
+        let aScene = document.querySelector("a-scene");
+
+        // Create or update the timer display
+        let timerDisplay = document.querySelector("#timerDisplay");
+        if (!timerDisplay) {
+            timerDisplay = document.createElement("a-text");
+            timerDisplay.setAttribute("id", "timerDisplay");
+            timerDisplay.setAttribute("position", "-3 1.5 3");
+            timerDisplay.setAttribute("rotation", "0 90 0");
+            timerDisplay.setAttribute("color", "white");
+            timerDisplay.setAttribute("width", "10");
+            aScene.appendChild(timerDisplay);
+        }
+        timerDisplay.setAttribute("value", `Time: ${timer}s`);
+
+        // Create or update the score display
+        let scoreDisplay = document.querySelector("#scoreDisplay");
+        if (!scoreDisplay) {
+            scoreDisplay = document.createElement("a-text");
+            scoreDisplay.setAttribute("id", "scoreDisplay");
+            scoreDisplay.setAttribute("position", "3 1.5 1.5");
+            scoreDisplay.setAttribute("rotation", "0 -90 0");
+            scoreDisplay.setAttribute("color", "white");
+            scoreDisplay.setAttribute("width", "10");
+            aScene.appendChild(scoreDisplay);
+        }
+        scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
+    }
+
+    // Call updateHUD every second
+    setInterval(updateHUD, 1000);
+
 }
