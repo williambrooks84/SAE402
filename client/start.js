@@ -37,7 +37,7 @@ export function startmenu() {
     startButton.setAttribute("class", "clickable");
 
     startButton.addEventListener("click", async function () {
-        console.log("start button clicked");
+        title.parentNode.removeChild(title);
         plane.parentNode.removeChild(plane);
         
         paragraph.parentNode.removeChild(paragraph);
@@ -54,7 +54,7 @@ export function startmenu() {
     soundButton.setAttribute("position", "0.8 0.5 -3");
     soundButton.setAttribute("class", "clickable");
     soundButton.addEventListener("click", async function () {
-        
+        title.parentNode.removeChild(title);
         paragraph.parentNode.removeChild(paragraph);
         plane.parentNode.removeChild(plane);
         soundButton.parentNode.removeChild(soundButton);
