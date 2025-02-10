@@ -37,6 +37,7 @@ export function startmenu() {
     startButton.setAttribute("class", "clickable");
 
     startButton.addEventListener("click", async function () {
+        console.log("start button clicked");
         plane.parentNode.removeChild(plane);
         
         paragraph.parentNode.removeChild(paragraph);
