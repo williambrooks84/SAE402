@@ -471,7 +471,7 @@ export function startGame(muted){
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 0.05;
+    let timermax = 2.5;
 
     let timerInterval = setInterval(() => {
         timer++;
