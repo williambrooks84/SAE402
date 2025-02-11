@@ -99,6 +99,9 @@ scene.addEventListener('loaded', () => {
 
 
 
+
+
+
 let createBoxes = function(boxArray) {
     for (let box of boxArray) {
         let boxElement = document.createElement('a-box');

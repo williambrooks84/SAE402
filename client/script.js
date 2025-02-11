@@ -11,11 +11,32 @@ import { endgame } from "./endgame.js";
 
 let scoregame = 0;
 
-// Fait toute la longueur du document
-export function startGame(){
 
+
+
+
+// Fait toute la longueur du document
+export function startGame(muted){
+
+   
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
+
+
+    /* ambientSound
+
+    Ne prend aucun argument, ne retourne rien.
+    Mettre un son d'ambiance au lancement du jeu.
+
+    */
+    async function ambientSound() {
+        let ambientSound = document.querySelector("#ambient");
+        ambientSound.play();
+    }
+
+    if (!muted) {
+        ambientSound();
+    }
 
     // test
     let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
@@ -57,7 +78,8 @@ export function startGame(){
             aBox.setAttribute("transparent", "true");
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
-
+            aBox.setAttribute("class", "clickable");
+            
             aBox.addEventListener("model-loaded", (event) => {
                 // Attendre un peu avant d'ajouter l'animation-mixer
                 setTimeout(() => {
@@ -67,7 +89,7 @@ export function startGame(){
 
             // Create the a-text element for displaying the PNJ response (the text)
             let aText = document.createElement("a-text");
-            aText.setAttribute("value", PNJ.reponse.texte_reponse);
+            aText.setAttribute("text", "value: " + PNJ.reponse.texte_reponse + "; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             aText.setAttribute("position", `${position} 3 -8`);
             aText.setAttribute("color", "white");
             aText.setAttribute("width", "6");
@@ -81,8 +103,8 @@ export function startGame(){
             data.pnjs.push(PNJ);
 
             if (PNJ.reponse.est_correcte) {
-                aBox.setAttribute("sound", "src: #success; on: click");
 
+               
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
                 aBox.addEventListener("click", function (event) {
                     let randomposition = Math.random() < 0.5 ? -20 : 20;
@@ -95,6 +117,11 @@ export function startGame(){
 
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
+
+                        if (!muted) {
+                            let successAudio = document.querySelector("#success");
+                            successAudio.play();
+                        }
 
                         aBox.clicked = true;
                         revealAliens(1);
@@ -126,7 +153,7 @@ export function startGame(){
                         
                             setTimeout(() => {
                                 removePNJ(PNJ.id);
-                                moveUFO(0);
+                                resetUFO();
                                 renderNextQuestion();
                                 checkclick = false;
                             }, 2000);
@@ -137,12 +164,19 @@ export function startGame(){
                 aBox.setAttribute("sound", "src: #fail; on: click");
 
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
+
                 aBox.addEventListener("click", function (event) {
+
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
                         aBox.clicked = true;
                         // Example animation when the box is clicked
-                        
+
+                        if (!muted) {
+                            let failAudio = document.querySelector("#fail");
+                            failAudio.play();
+                        }
+                    
 
                         moveUFO(aBox.getAttribute('position').x);
 
@@ -163,7 +197,6 @@ export function startGame(){
                             setTimeout(() => {
                                 removePNJ(PNJ.id);
                                 resetUFO();
-                                moveUFO(0);
                                 renderNextQuestion();
                                 checkclick = false;
                             }, 2000);
@@ -191,7 +224,12 @@ export function startGame(){
             value: question.texte_question,
             align: "center",
             color: "white",
-            width: 32 // Change the text size here
+            width: 32,
+            font: "asset/Audiowide-Regular-msdf.json",
+            color: "#FFFFFF", 
+            negate: false,
+            opacity: 1,
+            alphaTest: 0.5
         });
         questionEntity.setAttribute("position", position);
         aScene.appendChild(questionEntity);
@@ -272,11 +310,7 @@ export function startGame(){
 
     let moveUFO = function(posX) {
 
-        // Ensure the UFO is created before moving it
         let drone = document.querySelector("#drone");
-        if (!drone) {
-            createUFO(posX);
-        }
         let beam = document.createElement("a-entity");
         beam.setAttribute("id", "beam");
         beam.setAttribute("geometry", {
@@ -358,7 +392,7 @@ export function startGame(){
         }
     }
 
-    /* removeUFO
+    /* resetUFO
 
     Ne prend aucun argument.
     Retire l'objet UFO de la scène.
@@ -374,33 +408,60 @@ export function startGame(){
 
         // Check if the UFO and beam exist before removing/resetting them
         if (drone) {
-            if (drone.attributes.position.value !== "0 25 -10") {
-                drone.setAttribute('animation', {
+            let posX = 0;
+            drone.setAttribute('animation', {
+                property: 'position',
+                to: `${posX} 25 -10`,
+                dur: 1000,
+                easing: 'easeInSine'
+            });
+    
+            let lights1 = document.querySelectorAll("#light-left");
+            lights1.forEach(light => {
+                light.setAttribute('animation', {
                     property: 'position',
-                    to: `0 25 -10`,
+                    to: `${posX - 2} 21 -10`,
                     dur: 1000,
                     easing: 'easeInSine'
                 });
-                for (let light of lights) {
-                    light.setAttribute('animation', {
-                        property: 'position',
-                        to: `0 25 -10`,
-                        dur: 1000,
-                        easing: 'easeInSine'
-                    });
+            });
+    
+            let lights2 = document.querySelectorAll("#light-right");
+            lights2.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX + 2} 21 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            });
+    
+            let lights = document.querySelectorAll("#drone-light");
+            for (let light of lights) {
+                let adjustedPosition = posX;
+                if (light.getAttribute('rotation').x != 0) {
+                    adjustedPosition = -posX;
                 }
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${adjustedPosition} 22 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
             }
         }
         if (beam) {
-            aScene.removeChild(beam);
+            beam.parentNode.removeChild(beam);
         }
     }
 
-    let maxquestions = 2;
+
+    let maxquestions = 100;
     let questioncounter = 0;
 
     let timer = 0;
-    let timermax = 0.5;
+    let timermax = 5;
+
     let timerInterval = setInterval(() => {
         timer++;
     }, 1000);
@@ -424,7 +485,7 @@ export function startGame(){
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("value", "Next question...");
+            text.setAttribute("text", "value: Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
@@ -517,5 +578,47 @@ export function startGame(){
             }
         }
     }
+
+
+    /* updateHUD
+
+    Ne prend aucun argument.
+    Met à jour l'affichage du temps et du score.
+    Ne retourne rien.
+
+    */
+
+    let updateHUD = function() {
+        let aScene = document.querySelector("a-scene");
+
+        // Create or update the timer display
+        let timerDisplay = document.querySelector("#timerDisplay");
+        if (!timerDisplay) {
+            timerDisplay = document.createElement("a-text");
+            timerDisplay.setAttribute("id", "timerDisplay");
+            timerDisplay.setAttribute("position", "-3 1.5 3");
+            timerDisplay.setAttribute("rotation", "0 90 0");
+            timerDisplay.setAttribute("color", "white");
+            timerDisplay.setAttribute("width", "10");
+            aScene.appendChild(timerDisplay);
+        }
+        timerDisplay.setAttribute("value", `Time: ${timer}s`);
+
+        // Create or update the score display
+        let scoreDisplay = document.querySelector("#scoreDisplay");
+        if (!scoreDisplay) {
+            scoreDisplay = document.createElement("a-text");
+            scoreDisplay.setAttribute("id", "scoreDisplay");
+            scoreDisplay.setAttribute("position", "3 1.5 1.5");
+            scoreDisplay.setAttribute("rotation", "0 -90 0");
+            scoreDisplay.setAttribute("color", "white");
+            scoreDisplay.setAttribute("width", "10");
+            aScene.appendChild(scoreDisplay);
+        }
+        scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
+    }
+
+    // Call updateHUD every second
+    setInterval(updateHUD, 1000);
 
 }
