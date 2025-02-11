@@ -74,6 +74,36 @@ class QuestionRepository extends EntityRepository
         return array_values($questions);
     }
 
+    public function findLevel($level): array
+    {
+        $requete = $this->cnx->prepare("
+            SELECT q.*, r.id_question, r.texte_reponse, r.est_correcte 
+            FROM Question q
+            LEFT JOIN Reponses r ON q.id_question = r.id_question
+            WHERE q.niveau_question = :value
+        ");
+        $requete->bindParam(':value', $level);
+        $requete->execute();
+        $results = $requete->fetchAll(PDO::FETCH_OBJ);
+
+        $questions = [];
+        foreach ($results as $result) {
+            if (!isset($questions[$result->id_question])) {
+                $question = new Question($result->id_question);
+                $question->setTexteQuestion($result->texte_question);
+                $question->setNiveauQuestion($result->niveau_question);
+                $questions[$result->id_question] = $question;
+            }
+            if ($result->texte_reponse !== null) {
+                $reponse = new Reponse($result->id_question);
+                $reponse->setTexteReponse($result->texte_reponse);
+                $reponse->setEstCorrecte($result->est_correcte);
+                $questions[$result->id_question]->addReponse($reponse);
+            }
+        }
+        return array_values($questions);
+    }
+
     // Sauvegarder une commande
 
     public function save($commande)

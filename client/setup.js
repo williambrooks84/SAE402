@@ -9,7 +9,11 @@ import { createReponse } from "./index.js";
 import { QuestionData } from "./data/data.js";
 
 let data = {
-    questions: [],
+    questions: {
+        niveau1:[],
+        niveau2:[],
+        niveau3:[]
+    },
     pnjs: [],
 }
 
@@ -30,10 +34,11 @@ reponse:{
 */
 
 async function loadData() {
-    data.questions = await QuestionData.fetchAll();
+    data.questions.niveau1 = await QuestionData.fetchNiveau(1);
+    data.questions.niveau2 = await QuestionData.fetchNiveau(2);
+    data.questions.niveau3 = await QuestionData.fetchNiveau(3);
 
     data.pnjs = [];
-
 }
 
 await loadData();
