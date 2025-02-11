@@ -13,5 +13,9 @@ QuestionData.fetchAll = async function(){
     return data;
 }
 
+QuestionData.fetchNiveau = async function(niveau){
+    let data = await getRequest('questions?niveau='+niveau);
+    return data;
+}
 
 export {QuestionData};

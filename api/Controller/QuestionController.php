@@ -20,10 +20,14 @@ class QuestionController extends Controller
     protected function processGetRequest(HttpRequest $request)
     {
         $id = $request->getId("id");
+        $niveau = $request->getParam("niveau");
 
         if ($id) {
             // On donne les détails de la question
             return $this->questions->find($id);
+        } elseif ($niveau){
+            // On donne la liste des questions pour un niveau donné
+            return $this->questions->findLevel($niveau);
         } else {
             // Sinon on renvoie la liste de toutes les questions
             return $this->questions->findAll();

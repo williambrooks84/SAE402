@@ -38,9 +38,26 @@ export function startGame(muted){
         ambientSound();
     }
 
-    // test
-    let questionEnCours = data.questions[Math.floor(Math.random() * data.questions.length)];
-    questionsUtilisees.push(questionEnCours); //Ajouter la question à la liste des questions utilisées
+    let questionEnCours;
+    if (timer < 60){
+        questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+        while (questionsUtilisees.includes(questionEnCours)) {
+            questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+        }
+    }
+    else if (timer >= 60 && timer < 120){
+        questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+        while (questionsUtilisees.includes(questionEnCours)) {
+            questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+        }
+    }
+    else if (timer >= 120){
+        questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+        while (questionsUtilisees.includes(questionEnCours)) {
+            questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+        }
+    }
+    questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
 

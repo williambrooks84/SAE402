@@ -42,7 +42,7 @@ abstract class Controller {
                 $data = $this->processPatchRequest($request);
                 break;
 
-            case "PUT": // a priori, vous pourrez vous passer de requêtes en PUT. A priori.
+            case "PUT":
                 $data = $this->processPutRequest($request);
                 break;
 
