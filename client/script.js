@@ -539,9 +539,26 @@ export function startGame(muted){
                 
             }
 
-            // Select a new random question from unused questions
-            let nextQuestion = unusedQuestions[Math.floor(Math.random() * unusedQuestions.length)];
-            questionsUtilisees.push(nextQuestion); // Mark it as used
+            let questionEnCours;
+            if (timer < 60){
+                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+                while (questionsUtilisees.includes(questionEnCours)) {
+                    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+                }
+            }
+            else if (timer >= 60 && timer < 120){
+                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+                while (questionsUtilisees.includes(questionEnCours)) {
+                    questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+                }
+            }
+            else if (timer >= 120){
+                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+                while (questionsUtilisees.includes(questionEnCours)) {
+                    questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+                }
+            }
+            questionsUtilisees.push(questionEnCours);
 
             // Render the new question
             renderQuestion(nextQuestion);
