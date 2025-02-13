@@ -211,6 +211,8 @@ export function startGame(muted){
 
                         
                         scoregame++;
+                        console.log("score de la question : " + questionEnCours.score);
+                        console.log("question : ", questionEnCours);
                         totalscore += questionEnCours.score;
                         console.log("score total : " + totalscore);
 
