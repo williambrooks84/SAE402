@@ -13,6 +13,7 @@ let scoregame = 0;
 let totalscore = 0;
 
 let ligne = 0;
+let timer = 0;
 let timermin = 0;
 let timersec = 0;
 let gamefinished = false;
@@ -534,7 +535,6 @@ export function startGame(muted){
     let maxquestions = 100;
     let questioncounter = 0;
 
-    let timer = 0;
     let timermax = 2.5;
 
     let timerInterval = setInterval(() => {
