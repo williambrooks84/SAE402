@@ -9,12 +9,15 @@ import { data } from "./setup.js";
 import { createPNJsForQuestion } from "./index.js";
 import { endgame } from "./endgame.js";
 
+
+
 let scoregame = 0;
 let ligne = 0;
 let timermin = 0;
 let timersec = 0;
 let gamefinished = false;
-
+let timer = 0;
+    let timermax = 3;
 
 
 // Fait toute la longueur du document
@@ -41,24 +44,7 @@ export function startGame(muted){
     }
 
     let questionEnCours;
-    if (timer < 60){
-        questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
-            questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-        }
-    }
-    else if (timer >= 60 && timer < 120){
-        questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
-            questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-        }
-    }
-    else if (timer >= 120){
-        questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
-            questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-        }
-    }
+    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
     questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
@@ -489,8 +475,7 @@ export function startGame(muted){
     let maxquestions = 100;
     let questioncounter = 0;
 
-    let timer = 0;
-    let timermax = 2.5;
+    
 
     let timerInterval = setInterval(() => {
         timer++;
@@ -544,7 +529,7 @@ export function startGame(muted){
         // After 3 seconds
         setTimeout(async () => {
             // Filter unused questions
-            let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
+           
 
             // If there are no more unused questions, you can either:
             // 1. Reset the questionsUtilisees list (optional)
@@ -586,13 +571,14 @@ export function startGame(muted){
                     questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
                 }
             }
+            
             questionsUtilisees.push(questionEnCours);
 
             // Render the new question
-            renderQuestion(nextQuestion);
+            renderQuestion(questionEnCours);
 
             // Render PNJs for the new question
-            renderPNJsForQuestion(nextQuestion);
+            renderPNJsForQuestion(questionEnCours);
         }, 3000);
     };
 
