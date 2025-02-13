@@ -66,6 +66,47 @@ export function startGame(muted){
         questionEnCours.bonus = true;
         console.log("Question bonus !");
     }
+
+    let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+    questionEnCours.score = 0;
+    if (questionEnCours.niveau_question == 1){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 5;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 15;
+        }
+    }
+    else if (questionEnCours.niveau_question == 2){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 20;
+        }
+    }
+    else if (questionEnCours.niveau_question == 3){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 20;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 25;
+        }
+    }
+    if (questionEnCours.bonus){
+        questionEnCours.score *= 2;
+    }
+    console.log("score question : " + questionEnCours.score);
+
     questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
@@ -170,46 +211,7 @@ export function startGame(muted){
 
                         
                         scoregame++;
-                        let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
-                        let scoreQuestion = 0;
-                        if (questionEnCours.niveau_question == 1){
-                            if (nbMauvaisesReponses == 1){
-                                scoreQuestion = 5;
-                            }
-                            else if (nbMauvaisesReponses == 2){
-                                scoreQuestion = 10;
-                            }
-                            else if (nbMauvaisesReponses == 3){
-                                scoreQuestion = 15;
-                            }
-                        }
-                        else if (questionEnCours.niveau_question == 2){
-                            if (nbMauvaisesReponses == 1){
-                                scoreQuestion = 10;
-                            }
-                            else if (nbMauvaisesReponses == 2){
-                                scoreQuestion = 15;
-                            }
-                            else if (nbMauvaisesReponses == 3){
-                                scoreQuestion = 20;
-                            }
-                        }
-                        else if (questionEnCours.niveau_question == 3){
-                            if (nbMauvaisesReponses == 1){
-                                scoreQuestion = 15;
-                            }
-                            else if (nbMauvaisesReponses == 2){
-                                scoreQuestion = 20;
-                            }
-                            else if (nbMauvaisesReponses == 3){
-                                scoreQuestion = 25;
-                            }
-                        }
-                        if (questionEnCours.bonus){
-                            scoreQuestion *= 2;
-                        }
-                        console.log("score question : " + scoreQuestion);
-                        totalscore += scoreQuestion;
+                        totalscore += questionEnCours.score;
                         console.log("score total : " + totalscore);
 
                         
@@ -634,6 +636,46 @@ export function startGame(muted){
                 questionEnCours.bonus = true;
                 console.log("Question bonus !");
             }
+            let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+            questionEnCours.score = 0;
+            if (questionEnCours.niveau_question == 1){
+                if (nbMauvaisesReponses == 1){
+                    questionEnCours.score = 5;
+                }
+                else if (nbMauvaisesReponses == 2){
+                    questionEnCours.score = 10;
+                }
+                else if (nbMauvaisesReponses == 3){
+                    questionEnCours.score = 15;
+                }
+            }
+            else if (questionEnCours.niveau_question == 2){
+                if (nbMauvaisesReponses == 1){
+                    questionEnCours.score = 10;
+                }
+                else if (nbMauvaisesReponses == 2){
+                    questionEnCours.score = 15;
+                }
+                else if (nbMauvaisesReponses == 3){
+                    questionEnCours.score = 20;
+                }
+            }
+            else if (questionEnCours.niveau_question == 3){
+                if (nbMauvaisesReponses == 1){
+                    questionEnCours.score = 15;
+                }
+                else if (nbMauvaisesReponses == 2){
+                    questionEnCours.score = 20;
+                }
+                else if (nbMauvaisesReponses == 3){
+                    questionEnCours.score = 25;
+                }
+            }
+            if (questionEnCours.bonus){
+                questionEnCours.score *= 2;
+            }
+            console.log("score question : " + questionEnCours.score);
+
             questionsUtilisees.push(questionEnCours);
 
             // Render the new question
