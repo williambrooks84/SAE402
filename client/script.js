@@ -171,7 +171,7 @@ export function startGame(muted){
                         scoregame++;
                         let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
                         let scoreQuestion = 0;
-                        if (questionEnCours.niveau == 1){
+                        if (questionEnCours.niveau_question == 1){
                             if (nbMauvaisesReponses == 1){
                                 scoreQuestion = 5;
                             }
@@ -182,7 +182,7 @@ export function startGame(muted){
                                 scoreQuestion = 15;
                             }
                         }
-                        else if (questionEnCours.niveau == 2){
+                        else if (questionEnCours.niveau_question == 2){
                             if (nbMauvaisesReponses == 1){
                                 scoreQuestion = 10;
                             }
@@ -193,7 +193,7 @@ export function startGame(muted){
                                 scoreQuestion = 20;
                             }
                         }
-                        else if (questionEnCours.niveau == 3){
+                        else if (questionEnCours.niveau_question == 3){
                             if (nbMauvaisesReponses == 1){
                                 scoreQuestion = 15;
                             }
