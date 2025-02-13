@@ -64,7 +64,6 @@ export function startGame(muted){
     }
     if (Math.random() < 0.1) {
         questionEnCours.bonus = true;
-        console.log("Question bonus !");
     }
 
     let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
@@ -105,7 +104,6 @@ export function startGame(muted){
     if (questionEnCours.bonus){
         questionEnCours.score *= 2;
     }
-    console.log("score question : " + questionEnCours.score);
 
     questionsUtilisees.push(questionEnCours);
 
@@ -211,10 +209,7 @@ export function startGame(muted){
 
                         
                         scoregame++;
-                        console.log("score de la question : " + questionEnCours.score);
-                        console.log("question : ", questionEnCours);
                         totalscore += questionEnCours.score;
-                        console.log("score total : " + totalscore);
 
                         
                         setTimeout(() => {
@@ -635,7 +630,6 @@ export function startGame(muted){
             }
             if (Math.random() < 0.1) {
                 questionEnCours.bonus = true;
-                console.log("Question bonus !");
             }
             let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
             questionEnCours.score = 0;
@@ -675,7 +669,6 @@ export function startGame(muted){
             if (questionEnCours.bonus){
                 questionEnCours.score *= 2;
             }
-            console.log("score question : " + questionEnCours.score);
 
             questionsUtilisees.push(questionEnCours);
 
