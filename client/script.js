@@ -615,7 +615,6 @@ export function startGame(muted){
                 
             }
 
-            let questionEnCours;
             if (timer < 60){
                 questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
                 while (questionsUtilisees.includes(questionEnCours)) {
