@@ -10,6 +10,8 @@ import { createPNJsForQuestion } from "./index.js";
 import { endgame } from "./endgame.js";
 
 let scoregame = 0;
+let totalscore = 0;
+
 let ligne = 0;
 let timermin = 0;
 let timersec = 0;
@@ -58,6 +60,9 @@ export function startGame(muted){
         while (questionsUtilisees.includes(questionEnCours)) {
             questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
         }
+    }
+    if (Math.random() < 0.1) {
+        questionEnCours.bonus = true;
     }
     questionsUtilisees.push(questionEnCours);
 
@@ -131,7 +136,7 @@ export function startGame(muted){
             // Optionally store the PNJ in the data.pnjs array for future use
             data.pnjs.push(PNJ);
 
-            if (PNJ.reponse.est_correcte) {
+            if (PNJ.reponse.est_correcte) { // Bonne réponse
 
                
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
@@ -163,6 +168,46 @@ export function startGame(muted){
 
                         
                         scoregame++;
+                        let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+                        let scoreQuestion = 0;
+                        if (questionEnCours.niveau == 1){
+                            if (nbMauvaisesReponses == 1){
+                                scoreQuestion = 5;
+                            }
+                            else if (nbMauvaisesReponses == 2){
+                                scoreQuestion = 10;
+                            }
+                            else if (nbMauvaisesReponses == 3){
+                                scoreQuestion = 15;
+                            }
+                        }
+                        else if (questionEnCours.niveau == 2){
+                            if (nbMauvaisesReponses == 1){
+                                scoreQuestion = 10;
+                            }
+                            else if (nbMauvaisesReponses == 2){
+                                scoreQuestion = 15;
+                            }
+                            else if (nbMauvaisesReponses == 3){
+                                scoreQuestion = 20;
+                            }
+                        }
+                        else if (questionEnCours.niveau == 3){
+                            if (nbMauvaisesReponses == 1){
+                                scoreQuestion = 15;
+                            }
+                            else if (nbMauvaisesReponses == 2){
+                                scoreQuestion = 20;
+                            }
+                            else if (nbMauvaisesReponses == 3){
+                                scoreQuestion = 25;
+                            }
+                        }
+                        if (questionEnCours.bonus){
+                            scoreQuestion *= 2;
+                        }
+                        totalscore += scoreQuestion;
+                        console.log(totalscore);
 
                         
                         setTimeout(() => {
@@ -189,7 +234,7 @@ export function startGame(muted){
                         }, 2500);
                     }
                 });
-            } else {
+            } else { // Mauvaise réponse
                 aBox.setAttribute("sound", "src: #fail; on: click");
 
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
@@ -555,14 +600,13 @@ export function startGame(muted){
             gamefinished = true;
             timer = 0;
                     
-                    endgame(scoregame, questioncounter);
+                    endgame(scoregame, questioncounter, totalscore);
                     scoregame = 0;
+                    totalscore = 0;
                     questioncounter = 0;
                     ligne = 0;
                     timermin = 0;
                     timersec = 0;
-                    
-
                     return;
                 
             }
@@ -585,6 +629,9 @@ export function startGame(muted){
                 while (questionsUtilisees.includes(questionEnCours)) {
                     questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
                 }
+            }
+            if (Math.random() < 0.1) {
+                questionEnCours.bonus = true;
             }
             questionsUtilisees.push(questionEnCours);
 
@@ -688,7 +735,7 @@ export function startGame(muted){
             scoreDisplay.setAttribute("width", "10");
             aScene.appendChild(scoreDisplay);
         }
-        scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
+        scoreDisplay.setAttribute("value", `Score: ${totalscore}`);
     }
 
 
