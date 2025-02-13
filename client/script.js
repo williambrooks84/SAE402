@@ -207,6 +207,7 @@ export function startGame(muted){
                         if (questionEnCours.bonus){
                             scoreQuestion *= 2;
                         }
+                        console.log(scoreQuestion);
                         totalscore += scoreQuestion;
                         console.log(totalscore);
 
@@ -588,8 +589,6 @@ export function startGame(muted){
 
         // After 3 seconds
         setTimeout(async () => {
-            // Filter unused questions
-            let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
 
             // If there are no more unused questions, you can either:
             // 1. Reset the questionsUtilisees list (optional)
