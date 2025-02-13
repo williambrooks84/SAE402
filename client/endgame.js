@@ -3,8 +3,18 @@ import {startGame} from './script.js';
 import {startmenu} from './start.js';
 
 
+
 export function endgame(scoregames,questioncounter,totalscore) {
-   
+    let timerDisplay = document.querySelector("#timerDisplay");
+    if (timerDisplay) {
+        timerDisplay.parentNode.removeChild(timerDisplay);
+    }
+  
+    let scoreDisplay = document.querySelector("#scoreDisplay");
+    if (scoreDisplay) {
+        scoreDisplay.parentNode.removeChild(scoreDisplay);
+    }
+
     let aScene = document.querySelector("a-scene");
     let aText = document.createElement("a-text");
     aText.setAttribute("text", "value: Well done, you win the game!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
