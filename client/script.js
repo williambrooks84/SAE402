@@ -635,10 +635,10 @@ export function startGame(muted){
             questionsUtilisees.push(questionEnCours);
 
             // Render the new question
-            renderQuestion(nextQuestion);
+            renderQuestion(questionEnCours);
 
             // Render PNJs for the new question
-            renderPNJsForQuestion(nextQuestion);
+            renderPNJsForQuestion(questionEnCours);
         }, 3000);
     };
 
