@@ -64,6 +64,7 @@ export function startGame(muted){
     }
     if (Math.random() < 0.1) {
         questionEnCours.bonus = true;
+        console.log("Question bonus !");
     }
     questionsUtilisees.push(questionEnCours);
 
@@ -207,9 +208,9 @@ export function startGame(muted){
                         if (questionEnCours.bonus){
                             scoreQuestion *= 2;
                         }
-                        console.log(scoreQuestion);
+                        console.log("score question : " + scoreQuestion);
                         totalscore += scoreQuestion;
-                        console.log(totalscore);
+                        console.log("score total : " + totalscore);
 
                         
                         setTimeout(() => {
@@ -631,6 +632,7 @@ export function startGame(muted){
             }
             if (Math.random() < 0.1) {
                 questionEnCours.bonus = true;
+                console.log("Question bonus !");
             }
             questionsUtilisees.push(questionEnCours);
 
