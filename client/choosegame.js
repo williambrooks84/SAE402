@@ -18,19 +18,19 @@ export function chooseGame() {
     gameButtons.forEach((game, index) => {
         let button = document.createElement("a-entity");
         button.setAttribute("geometry", "primitive: plane; width: 2; height: 0.8;");
-        button.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+        button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 0.5; transparent: true");
         button.setAttribute("text", `value: ${game}; align: center; width: 6; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5`);
         button.setAttribute("position", `-2 ${1.5 + index * 1} -3`);
         button.setAttribute("class", "clickable");
 
         button.addEventListener("click", function () {
             if (selectedButton) {
-                selectedButton.setAttribute("material", "color: #0000FF; opacity: 0.7;");
+                selectedButton.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 0.5;");
                 selectedButton.setAttribute("outline", "width: 0px;");
             }
             selectedButton = button;
             selectedGame = parseInt(game.replace(" min", ""));
-            button.setAttribute("material", "color: #FF0000; opacity: 0.7;");
+            button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 100;");
             button.setAttribute("outline", "width: 2px; color: #FFFFFF;");
             console.log(selectedGame);
         });
@@ -47,19 +47,19 @@ export function chooseGame() {
     difficultyButtons.forEach((difficulty, index) => {
         let button = document.createElement("a-entity");
         button.setAttribute("geometry", "primitive: plane; width: 2; height: 0.8;");
-        button.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+        button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 0.5; transparent: true");
         button.setAttribute("text", `value: ${difficulty}; align: center; width: 6; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5`);
         button.setAttribute("position", `2 ${1.5 + index * 1} -3`);
         button.setAttribute("class", "clickable");
 
         button.addEventListener("click", function () {
             if (selecteddifficult) {
-                selecteddifficult.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+                selecteddifficult.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 0.5;");
                 selecteddifficult.setAttribute("outline", "width: 0px;");
             }
             selecteddifficult = button;
             selectedDifficulty = parseInt(difficulty.replace("niv ", ""));
-            button.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+            button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 100; ");
             button.setAttribute("outline", "width: 2rem; color: #FFFFFF;");
             console.log(selectedDifficulty);
         });
