@@ -15,6 +15,7 @@ export function startmenu() {
     hintNpc.setAttribute("data-id", PNJ.id);
     hintNpc.setAttribute("gltf-model", randomModel);
     hintNpc.setAttribute("position", `${position} -1 -8`);
+    hintNpc.setAttribute("rotation", "0 -90 0");
     hintNpc.setAttribute("transparent", "true");
     hintNpc.setAttribute("visible", "true");
     hintNpc.setAttribute("scale", "1.3 1.3 1.3");
@@ -26,20 +27,14 @@ export function startmenu() {
         }, 1000);
     });
     hintNpc.clicked = false
-    hintNpc.setAttribute("data-ingame", 'false');
     hintNpc.addEventListener("click", async function () {
-        if (hintNpc.dataset.ingame == 'false'){
-            if (!hintNpc.clicked){
-                hintNpc.clicked = true;
-                hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; timeScale: 1")
-                setTimeout(() => {
-                    hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
-                    hintNpc.clicked = false;
-                });
-            }
-        }
-        else if (hintNpc.dataset.ingame == 'true'){
-            console.log("npc clicked");
+        if (!hintNpc.clicked){
+            hintNpc.clicked = true;
+            hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; timeScale: 1")
+            setTimeout(() => {
+                hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                hintNpc.clicked = false;
+            });
         }
     });
     aScene.appendChild(hintNpc);
@@ -84,7 +79,7 @@ export function startmenu() {
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
         soundButton.parentNode.removeChild(soundButton);
-        hintNpc.dataset.ingame = 'true';
+        hintNpc.removeEventListener("click", handleClick);
         startGame(false);
     });
     aScene.appendChild(startButton);
@@ -101,7 +96,7 @@ export function startmenu() {
         plane.parentNode.removeChild(plane);
         soundButton.parentNode.removeChild(soundButton);
         startButton.parentNode.removeChild(startButton);
-        hintNpc.dataset.ingame = 'true';
+        hintNpc.removeEventListener("click", handleClick);
         startGame(true);
     });
     aScene.appendChild(soundButton);

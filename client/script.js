@@ -27,7 +27,6 @@ export function startGame(muted){
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
-
     /* ambientSound
 
     Ne prend aucun argument, ne retourne rien.
@@ -63,6 +62,25 @@ export function startGame(muted){
         }
     }
     questionEnCours.bonus = false;
+
+    let hintNpc = document.querySelector("#pnj-special");
+    hintNpc.clicked = false
+    hintNpc.addEventListener("click", async function () {
+        if (!hintNpc.clicked){
+            hintNpc.clicked = true;
+            let wrongAnswers = questionEnCours.reponses.filter(reponse => !reponse.est_correcte);
+            let wrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+            let speech = document.createElement("a-text");
+            speech.setAttribute("text", "value: " + wrongAnswer.texte_reponse + "is not the answer.; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+            speech.setAttribute("id", "hintNpc-speech");
+            speech.setAttribute("position", "17 4 1");
+            speech.setAttribute("rotation", "0 -90 0");
+            speech.setAttribute("color", "white");
+            speech.setAttribute("width", "20");
+            speech.setAttribute("align", "center");
+            aScene.appendChild(speech);
+        }
+    });
 
     let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
     questionEnCours.score = 0;

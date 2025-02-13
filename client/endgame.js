@@ -5,7 +5,9 @@ import {startmenu} from './start.js';
 
 export function endgame(scoregames,questioncounter,totalscore) {
     let hintNpc = document.querySelector("#pnj-special");
-    hintNpc.dataset.ingame = 'false';
+    if (hintNpc) {
+        hintNpc.removeEventListener("click", npcClickHandler);
+    }
 
     let timerDisplay = document.querySelector("#timerDisplay");
     if (timerDisplay) {
