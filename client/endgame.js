@@ -51,6 +51,7 @@ export function endgame(scoregames,questioncounter,totalscore) {
     menuButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
+        atotalscore.parentNode.removeChild(atotalscore);
         menuButton.parentNode.removeChild(menuButton);
         startButton.parentNode.removeChild(startButton);
         let ambientSound = document.querySelector("#ambient");
@@ -78,6 +79,7 @@ export function endgame(scoregames,questioncounter,totalscore) {
     startButton.addEventListener("click", async function () {
         aText.parentNode.removeChild(aText);
         ascore.parentNode.removeChild(ascore);
+        atotalscore.parentNode.removeChild(atotalscore);
         menuButton.parentNode.removeChild(menuButton);
         startButton.parentNode.removeChild(startButton);
         

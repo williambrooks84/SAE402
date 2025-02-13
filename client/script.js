@@ -627,7 +627,7 @@ export function startGame(muted){
 
         let texteBonus = ''; // On ajoute du texte si c'est une question bonus
         if (questionEnCours.bonus) {
-            texteBonus = '...is a bonus question!';
+            texteBonus = '(Bonus !) ';
         }
         else {
             texteBonus = '';
@@ -639,7 +639,7 @@ export function startGame(muted){
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("text", "value: Next question..." + texteBonus + "; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
+            text.setAttribute("text", "value: " + texteBonus + "Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
