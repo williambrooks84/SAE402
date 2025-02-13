@@ -18,21 +18,21 @@ export function endgame(scoregames,questioncounter,totalscore) {
     let aScene = document.querySelector("a-scene");
     let aText = document.createElement("a-text");
     aText.setAttribute("text", "value: Well done, you win the game!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    aText.setAttribute("position", "0 6 -8");
+    aText.setAttribute("position", "0 9 -8");
     aText.setAttribute("width", "48");
     aText.setAttribute("align", "center");
     aScene.appendChild(aText);
 
     let ascore = document.createElement("a-text");
     ascore.setAttribute("text", "value: Questions: " + scoregames+"/"+questioncounter+" questions; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    ascore.setAttribute("position", "-6 2 -8");
+    ascore.setAttribute("position", "0 6 -8");
     ascore.setAttribute("width", "48");
     ascore.setAttribute("align", "center");
     aScene.appendChild(ascore);
 
     let atotalscore = document.createElement("a-text");
     atotalscore.setAttribute("text", "value: Total Score: " + totalscore+" points; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    atotalscore.setAttribute("position", "6 2 -8");
+    atotalscore.setAttribute("position", "0 3 -8");
     atotalscore.setAttribute("width", "48");
     atotalscore.setAttribute("align", "center");
     aScene.appendChild(atotalscore);

@@ -62,9 +62,7 @@ export function startGame(muted){
             questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
         }
     }
-    if (Math.random() < 0.1) {
-        questionEnCours.bonus = true;
-    }
+    questionEnCours.bonus = false;
 
     let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
     questionEnCours.score = 0;
@@ -566,11 +564,82 @@ export function startGame(muted){
         // Optionally, reset the drone's position or any other objects
         resetUFO();
 
+        // Choose a new question
+        if (timer < 60){
+            questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+            }
+        }
+        else if (timer >= 60 && timer < 120){
+            questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+            }
+        }
+        else if (timer >= 120){
+            questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+            }
+        }
+        if (Math.random() < 0.1) {
+            questionEnCours.bonus = true;
+        }
+        let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+        questionEnCours.score = 0;
+        if (questionEnCours.niveau_question == 1){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 5;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 10;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 15;
+            }
+        }
+        else if (questionEnCours.niveau_question == 2){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 10;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 15;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 20;
+            }
+        }
+        else if (questionEnCours.niveau_question == 3){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 15;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 20;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 25;
+            }
+        }
+        if (questionEnCours.bonus){
+            questionEnCours.score *= 2;
+        }
+
+        let texteBonus = ''; // On ajoute du texte si c'est une question bonus
+        if (questionEnCours.bonus) {
+            texteBonus = '...is a bonus question!';
+        }
+        else {
+            texteBonus = '';
+        }
+
+        questionsUtilisees.push(questionEnCours);
+
         // After half a second
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("text", "value: Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
+            text.setAttribute("text", "value: Next question..." + texteBonus + "; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
@@ -609,68 +678,6 @@ export function startGame(muted){
                     return;
                 
             }
-
-            if (timer < 60){
-                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                }
-            }
-            else if (timer >= 60 && timer < 120){
-                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                }
-            }
-            else if (timer >= 120){
-                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                }
-            }
-            if (Math.random() < 0.1) {
-                questionEnCours.bonus = true;
-            }
-            let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
-            questionEnCours.score = 0;
-            if (questionEnCours.niveau_question == 1){
-                if (nbMauvaisesReponses == 1){
-                    questionEnCours.score = 5;
-                }
-                else if (nbMauvaisesReponses == 2){
-                    questionEnCours.score = 10;
-                }
-                else if (nbMauvaisesReponses == 3){
-                    questionEnCours.score = 15;
-                }
-            }
-            else if (questionEnCours.niveau_question == 2){
-                if (nbMauvaisesReponses == 1){
-                    questionEnCours.score = 10;
-                }
-                else if (nbMauvaisesReponses == 2){
-                    questionEnCours.score = 15;
-                }
-                else if (nbMauvaisesReponses == 3){
-                    questionEnCours.score = 20;
-                }
-            }
-            else if (questionEnCours.niveau_question == 3){
-                if (nbMauvaisesReponses == 1){
-                    questionEnCours.score = 15;
-                }
-                else if (nbMauvaisesReponses == 2){
-                    questionEnCours.score = 20;
-                }
-                else if (nbMauvaisesReponses == 3){
-                    questionEnCours.score = 25;
-                }
-            }
-            if (questionEnCours.bonus){
-                questionEnCours.score *= 2;
-            }
-
-            questionsUtilisees.push(questionEnCours);
 
             // Render the new question
             renderQuestion(questionEnCours);
