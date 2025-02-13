@@ -3,8 +3,10 @@ import {startGame} from './script.js';
 import {startmenu} from './start.js';
 
 
-
 export function endgame(scoregames,questioncounter,totalscore) {
+    let hintNpc = document.querySelector("#pnj-special");
+    hintNpc.dataset.ingame = 'false';
+
     let timerDisplay = document.querySelector("#timerDisplay");
     if (timerDisplay) {
         timerDisplay.parentNode.removeChild(timerDisplay);

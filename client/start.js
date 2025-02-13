@@ -6,6 +6,44 @@ export function startmenu() {
 
     let aScene = document.querySelector("a-scene");
 
+    // Create the a-box element for each PNJ (the PNJ box itself)
+    let models = ["#astro", "#astro1", "#astro2"];
+    let randomModel = models[Math.floor(Math.random() * models.length)];
+
+    let hintNpc = document.createElement("a-entity");
+    hintNpc.setAttribute("id", `pnj-special`);
+    hintNpc.setAttribute("data-id", PNJ.id);
+    hintNpc.setAttribute("gltf-model", randomModel);
+    hintNpc.setAttribute("position", `${position} -1 -8`);
+    hintNpc.setAttribute("transparent", "true");
+    hintNpc.setAttribute("visible", "true");
+    hintNpc.setAttribute("scale", "1.3 1.3 1.3");
+    hintNpc.setAttribute("class", "clickable");
+    hintNpc.addEventListener("model-loaded", (event) => {
+        // Attendre un peu avant d'ajouter l'animation-mixer
+        setTimeout(() => {
+            hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+        }, 1000);
+    });
+    hintNpc.clicked = false
+    hintNpc.setAttribute("data-ingame", 'false');
+    hintNpc.addEventListener("click", async function () {
+        if (hintNpc.dataset.ingame == 'false'){
+            if (!hintNpc.clicked){
+                hintNpc.clicked = true;
+                hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; timeScale: 1")
+                setTimeout(() => {
+                    hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Idle; loop: repeat; timeScale: 1");
+                    hintNpc.clicked = false;
+                });
+            }
+        }
+        else if (hintNpc.dataset.ingame == 'true'){
+            console.log("npc clicked");
+        }
+    });
+    aScene.appendChild(hintNpc);
+
     let title = document.createElement("a-text");
     title.setAttribute("text", "value: Welcome to TellApart!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     title.setAttribute("position", `0 5 -5`);
@@ -46,6 +84,7 @@ export function startmenu() {
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
         soundButton.parentNode.removeChild(soundButton);
+        hintNpc.dataset.ingame = 'true';
         startGame(false);
     });
     aScene.appendChild(startButton);
@@ -62,6 +101,7 @@ export function startmenu() {
         plane.parentNode.removeChild(plane);
         soundButton.parentNode.removeChild(soundButton);
         startButton.parentNode.removeChild(startButton);
+        hintNpc.dataset.ingame = 'true';
         startGame(true);
     });
     aScene.appendChild(soundButton);
