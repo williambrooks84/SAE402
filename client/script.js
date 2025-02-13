@@ -204,6 +204,17 @@ export function startGame(muted){
                         if (!muted) {
                             let failAudio = document.querySelector("#fail");
                             failAudio.play();
+                            // Play beam sound when the beam appears
+                            let beamSound = document.querySelector("#beamSound");
+                            if (!beamSound) {
+                                beamSound = document.createElement("audio");
+                                beamSound.setAttribute("src", "asset/beam.mp3");
+                                beamSound.setAttribute("id", "beamSound");
+                                document.querySelector("a-scene").appendChild(beamSound);
+                            }
+                            setTimeout(() => {
+                                beamSound.play();
+                            }, 2000);
                         }
                     
 
