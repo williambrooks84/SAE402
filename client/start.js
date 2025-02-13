@@ -12,9 +12,8 @@ export function startmenu() {
 
     let hintNpc = document.createElement("a-entity");
     hintNpc.setAttribute("id", `pnj-special`);
-    hintNpc.setAttribute("data-id", PNJ.id);
     hintNpc.setAttribute("gltf-model", randomModel);
-    hintNpc.setAttribute("position", `${position} -1 -8`);
+    hintNpc.setAttribute("position", `17 -1 3`);
     hintNpc.setAttribute("rotation", "0 -90 0");
     hintNpc.setAttribute("transparent", "true");
     hintNpc.setAttribute("visible", "true");
@@ -27,7 +26,7 @@ export function startmenu() {
         }, 1000);
     });
     hintNpc.clicked = false
-    hintNpc.addEventListener("click", async function () {
+    let handleHintNpcClick = async function () {
         if (!hintNpc.clicked){
             hintNpc.clicked = true;
             hintNpc.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; timeScale: 1")
@@ -36,7 +35,8 @@ export function startmenu() {
                 hintNpc.clicked = false;
             });
         }
-    });
+    }
+    hintNpc.addEventListener("click", handleHintNpcClick);
     aScene.appendChild(hintNpc);
 
     let title = document.createElement("a-text");
@@ -79,7 +79,7 @@ export function startmenu() {
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
         soundButton.parentNode.removeChild(soundButton);
-        hintNpc.removeEventListener("click", handleClick);
+        hintNpc.removeEventListener("click", handleHintNpcClick);
         startGame(false);
     });
     aScene.appendChild(startButton);

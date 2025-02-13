@@ -65,7 +65,7 @@ export function startGame(muted){
 
     let hintNpc = document.querySelector("#pnj-special");
     hintNpc.clicked = false
-    hintNpc.addEventListener("click", async function () {
+    let handleHintNpcClick = async function () {
         if (!hintNpc.clicked){
             hintNpc.clicked = true;
             let wrongAnswers = questionEnCours.reponses.filter(reponse => !reponse.est_correcte);
@@ -80,7 +80,8 @@ export function startGame(muted){
             speech.setAttribute("align", "center");
             aScene.appendChild(speech);
         }
-    });
+    }
+    hintNpc.addEventListener("click", handleHintNpcClick);
 
     let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
     questionEnCours.score = 0;
