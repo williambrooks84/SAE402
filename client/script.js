@@ -19,12 +19,13 @@ let timer = 0;
 let timermin = 0;
 let timersec = 0;
 let gamefinished = false;
-let timer = 0;
-    let timermax = 3;
+    
 
 
 // Fait toute la longueur du document
-export function startGame(muted){
+export function startGame(muted,timechoose, difficultychoose) {
+    let timermax = timechoose;
+
 
    gamefinished = false;
     //Liste des questions déjà utilisées
@@ -47,69 +48,33 @@ export function startGame(muted){
     }
 
     let questionEnCours;
-<<<<<<< HEAD
-    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-=======
-    if (timer < 60){
-        questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
+    switch (difficultychoose) {
+        case 1 :
+        case "all":
+           
             questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-        }
-    }
-    else if (timer >= 60 && timer < 120){
-        questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+            }
+            break;
+        
+        case 2 :
+           
             questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-        }
-    }
-    else if (timer >= 120){
-        questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-        while (questionsUtilisees.includes(questionEnCours)) {
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+            }
+            break;
+
+        case 3 :
+           
             questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-        }
+            
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+            }
+            break;
     }
-    questionEnCours.bonus = false;
-
-    let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
-    questionEnCours.score = 0;
-    if (questionEnCours.niveau_question == 1){
-        if (nbMauvaisesReponses == 1){
-            questionEnCours.score = 5;
-        }
-        else if (nbMauvaisesReponses == 2){
-            questionEnCours.score = 10;
-        }
-        else if (nbMauvaisesReponses == 3){
-            questionEnCours.score = 15;
-        }
-    }
-    else if (questionEnCours.niveau_question == 2){
-        if (nbMauvaisesReponses == 1){
-            questionEnCours.score = 10;
-        }
-        else if (nbMauvaisesReponses == 2){
-            questionEnCours.score = 15;
-        }
-        else if (nbMauvaisesReponses == 3){
-            questionEnCours.score = 20;
-        }
-    }
-    else if (questionEnCours.niveau_question == 3){
-        if (nbMauvaisesReponses == 1){
-            questionEnCours.score = 15;
-        }
-        else if (nbMauvaisesReponses == 2){
-            questionEnCours.score = 20;
-        }
-        else if (nbMauvaisesReponses == 3){
-            questionEnCours.score = 25;
-        }
-    }
-    if (questionEnCours.bonus){
-        questionEnCours.score *= 2;
-    }
-
->>>>>>> 8a74ac6c3205b04172787ff4aa28936f2787bc4a
     questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
@@ -552,11 +517,7 @@ export function startGame(muted){
     let maxquestions = 100;
     let questioncounter = 0;
 
-<<<<<<< HEAD
     
-=======
-    let timermax = 2.5;
->>>>>>> 8a74ac6c3205b04172787ff4aa28936f2787bc4a
 
     let timerInterval = setInterval(() => {
         timer++;
@@ -587,24 +548,58 @@ export function startGame(muted){
         resetUFO();
 
         // Choose a new question
-        if (timer < 60){
+        
+        let questionEnCours;
+        if (difficultychoose == "All") {
+            
+            if (timer < 60) {
             questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
             while (questionsUtilisees.includes(questionEnCours)) {
                 questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
             }
-        }
-        else if (timer >= 60 && timer < 120){
+            } else if (timer >= 60 && timer < 120) {
             questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
             while (questionsUtilisees.includes(questionEnCours)) {
                 questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
             }
-        }
-        else if (timer >= 120){
+            } else if (timer >= 120) {
             questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
             while (questionsUtilisees.includes(questionEnCours)) {
                 questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
             }
+            }
+        } else{
+           
+            switch (difficultychoose) {
+                case 1 :
+                    
+                    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+                    while (questionsUtilisees.includes(questionEnCours)) {
+                        questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+                    }
+                    break;
+                
+                case 2 :
+                    
+                    questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+                    while (questionsUtilisees.includes(questionEnCours)) {
+                        questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+                    }
+                    break;
+
+                case 3 :
+                    
+                    questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+                    
+                    while (questionsUtilisees.includes(questionEnCours)) {
+                        questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+                    }
+                    break;
+            }
         }
+
+        ///Bonus && score
+
         if (Math.random() < 0.1) {
             questionEnCours.bonus = true;
         }
@@ -680,11 +675,8 @@ export function startGame(muted){
 
         // After 3 seconds
         setTimeout(async () => {
-<<<<<<< HEAD
             // Filter unused questions
            
-=======
->>>>>>> 8a74ac6c3205b04172787ff4aa28936f2787bc4a
 
             // If there are no more unused questions, you can either:
             // 1. Reset the questionsUtilisees list (optional)
@@ -706,31 +698,6 @@ export function startGame(muted){
                 
             }
 
-<<<<<<< HEAD
-            let questionEnCours;
-            if (timer < 60){
-                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                }
-            }
-            else if (timer >= 60 && timer < 120){
-                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                }
-            }
-            else if (timer >= 120){
-                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                }
-            }
-            
-            questionsUtilisees.push(questionEnCours);
-
-=======
->>>>>>> 8a74ac6c3205b04172787ff4aa28936f2787bc4a
             // Render the new question
             renderQuestion(questionEnCours);
 

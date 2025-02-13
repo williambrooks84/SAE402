@@ -4,11 +4,8 @@
  */
 
 
-<<<<<<< HEAD
+
 let API_URL = "https://www.tellapart.lightprince.fr/api/";
-=======
-let API_URL = "https://www.tellapart.lightprince.fr/api/"; // URL de base de l'API
->>>>>>> 8a74ac6c3205b04172787ff4aa28936f2787bc4a
 
 
 /**
