@@ -10,7 +10,10 @@ import { createPNJsForQuestion } from "./index.js";
 import { endgame } from "./endgame.js";
 
 let scoregame = 0;
+let totalscore = 0;
+
 let ligne = 0;
+let timer = 0;
 let timermin = 0;
 let timersec = 0;
 let gamefinished = false;
@@ -59,6 +62,47 @@ export function startGame(muted){
             questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
         }
     }
+    questionEnCours.bonus = false;
+
+    let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+    questionEnCours.score = 0;
+    if (questionEnCours.niveau_question == 1){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 5;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 15;
+        }
+    }
+    else if (questionEnCours.niveau_question == 2){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 20;
+        }
+    }
+    else if (questionEnCours.niveau_question == 3){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 20;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 25;
+        }
+    }
+    if (questionEnCours.bonus){
+        questionEnCours.score *= 2;
+    }
+
     questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
@@ -131,7 +175,7 @@ export function startGame(muted){
             // Optionally store the PNJ in the data.pnjs array for future use
             data.pnjs.push(PNJ);
 
-            if (PNJ.reponse.est_correcte) {
+            if (PNJ.reponse.est_correcte) { // Bonne réponse
 
                
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
@@ -163,6 +207,7 @@ export function startGame(muted){
 
                         
                         scoregame++;
+                        totalscore += questionEnCours.score;
 
                         
                         setTimeout(() => {
@@ -189,7 +234,7 @@ export function startGame(muted){
                         }, 2500);
                     }
                 });
-            } else {
+            } else { // Mauvaise réponse
                 aBox.setAttribute("sound", "src: #fail; on: click");
 
                 // Add event listeners for the PNJ boxes if needed (e.g., for animations or clicks)
@@ -500,7 +545,6 @@ export function startGame(muted){
     let maxquestions = 100;
     let questioncounter = 0;
 
-    let timer = 0;
     let timermax = 2.5;
 
     let timerInterval = setInterval(() => {
@@ -531,11 +575,82 @@ export function startGame(muted){
         // Optionally, reset the drone's position or any other objects
         resetUFO();
 
+        // Choose a new question
+        if (timer < 60){
+            questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
+            }
+        }
+        else if (timer >= 60 && timer < 120){
+            questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
+            }
+        }
+        else if (timer >= 120){
+            questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+            while (questionsUtilisees.includes(questionEnCours)) {
+                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
+            }
+        }
+        if (Math.random() < 0.1) {
+            questionEnCours.bonus = true;
+        }
+        let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+        questionEnCours.score = 0;
+        if (questionEnCours.niveau_question == 1){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 5;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 10;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 15;
+            }
+        }
+        else if (questionEnCours.niveau_question == 2){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 10;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 15;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 20;
+            }
+        }
+        else if (questionEnCours.niveau_question == 3){
+            if (nbMauvaisesReponses == 1){
+                questionEnCours.score = 15;
+            }
+            else if (nbMauvaisesReponses == 2){
+                questionEnCours.score = 20;
+            }
+            else if (nbMauvaisesReponses == 3){
+                questionEnCours.score = 25;
+            }
+        }
+        if (questionEnCours.bonus){
+            questionEnCours.score *= 2;
+        }
+
+        let texteBonus = ''; // On ajoute du texte si c'est une question bonus
+        if (questionEnCours.bonus) {
+            texteBonus = '(Bonus !) ';
+        }
+        else {
+            texteBonus = '';
+        }
+
+        questionsUtilisees.push(questionEnCours);
+
         // After half a second
         setTimeout(() => {
             let aScene = document.querySelector("a-scene");
             let text = document.createElement("a-text");
-            text.setAttribute("text", "value: Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
+            text.setAttribute("text", "value: " + texteBonus + "Next question...; font: asset/Audiowide-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             questioncounter++;
             text.setAttribute("position", "0 2 -6");
             text.setAttribute("color", "white");
@@ -554,8 +669,6 @@ export function startGame(muted){
 
         // After 3 seconds
         setTimeout(async () => {
-            // Filter unused questions
-            let unusedQuestions = data.questions.filter(q => !questionsUtilisees.includes(q));
 
             // If there are no more unused questions, you can either:
             // 1. Reset the questionsUtilisees list (optional)
@@ -566,44 +679,22 @@ export function startGame(muted){
             gamefinished = true;
             timer = 0;
                     
-                    endgame(scoregame, questioncounter);
+                    endgame(scoregame, questioncounter, totalscore);
                     scoregame = 0;
+                    totalscore = 0;
                     questioncounter = 0;
                     ligne = 0;
                     timermin = 0;
                     timersec = 0;
-                    
-
                     return;
                 
             }
 
-            let questionEnCours;
-            if (timer < 60){
-                questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
-                }
-            }
-            else if (timer >= 60 && timer < 120){
-                questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau2[Math.floor(Math.random() * data.questions.niveau2.length)];
-                }
-            }
-            else if (timer >= 120){
-                questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                while (questionsUtilisees.includes(questionEnCours)) {
-                    questionEnCours = data.questions.niveau3[Math.floor(Math.random() * data.questions.niveau3.length)];
-                }
-            }
-            questionsUtilisees.push(questionEnCours);
-
             // Render the new question
-            renderQuestion(nextQuestion);
+            renderQuestion(questionEnCours);
 
             // Render PNJs for the new question
-            renderPNJsForQuestion(nextQuestion);
+            renderPNJsForQuestion(questionEnCours);
         }, 3000);
     };
 
@@ -699,7 +790,7 @@ export function startGame(muted){
             scoreDisplay.setAttribute("width", "10");
             aScene.appendChild(scoreDisplay);
         }
-        scoreDisplay.setAttribute("value", `Score: ${scoregame}`);
+        scoreDisplay.setAttribute("value", `Score: ${totalscore}`);
     }
 
 
