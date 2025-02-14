@@ -179,7 +179,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
             }
             break;
     }
-    
+  
     let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
     questionEnCours.score = 0;
     if (questionEnCours.niveau_question == 1){
