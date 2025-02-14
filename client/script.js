@@ -19,11 +19,116 @@ let timer = 0;
 let timermin = 0;
 let timersec = 0;
 let gamefinished = false;
-    
+
+let npcPositionSlots = [
+    {
+        name: "didNotHide",
+        position: "0 -1 -4",
+        occupied: false,
+        npcId: null,
+        textsize: 10,
+        textoffset: 4.5,
+        rotation: "0 0 0",
+    },
+
+    {
+        name: "topOfHouse",
+        position: "-19 13 7",
+        occupied: false,
+        npcId: null,
+        textsize: 30,
+        textoffset: 4.5,
+        rotation: "0 90 0",
+    },
+
+    {
+        name: "nearCar",
+        position: "-13 4 -15.5",
+        occupied: false,
+        npcId: null,
+        textsize: 15,
+        textoffset: 4.5,
+        rotation: "0 45 0",
+    },
+
+    {
+        name: "underLamp",
+        position: "8 -1 12",
+        occupied: false,
+        npcId: null,
+        textsize: 10,
+        textoffset: 4.5,
+        rotation: "0 225 0",
+    },
+
+    {
+        name: "topOfBoxes",
+        position: "-7 2 14",
+        occupied: false,
+        npcId: null,
+        textsize: 10,
+        textoffset: 4.5,
+        rotation: "0 145 0",
+    },
+    {
+        name: "betweenHouses",
+        position: "17 -1 6",
+        occupied: false,
+        npcId: null,
+        textsize: 15,
+        textoffset: 4.5,
+        rotation: "0 -90 0",
+    },
+    {
+        name: "topOfBigHouse_right",
+        position: "24 22 8",
+        occupied: false,
+        npcId: null,
+        textsize: 120,
+        textoffset: 6,
+        rotation: "15 -115 0",
+    },
+    {
+        name: "topOfBigHouse_left",
+        position: "-9 22 -20",
+        occupied: false,
+        npcId: null,
+        textsize: 120,
+        textoffset: 6,
+        rotation: "15 15 0",
+    },
+    // faire le reste :)
+]
+
 
 
 // Fait toute la longueur du document
-export function startGame(muted,timechoose, difficultychoose) {
+export function startGame(muted,timechoose, difficultychoose, hideSeek) {
+
+    /* For testing purposes
+    for (let position of npcPositionSlots) {
+        let aBox = document.createElement("a-box");
+        aBox.setAttribute("position", position.position);
+        aBox.setAttribute("color", "red");
+        aBox.setAttribute("depth", "1");
+        aBox.setAttribute("height", "1");
+        aBox.setAttribute("width", "1");
+        aBox.setAttribute("rotation", position.rotation);
+        aBox.setAttribute("side", "double");
+        document.querySelector("a-scene").appendChild(aBox);
+    
+        let aText = document.createElement("a-text");
+        aText.setAttribute("value", position.name);
+        aText.setAttribute("color", "white");
+        aText.setAttribute("align", "center");
+        aText.setAttribute("width", position.textsize);
+        aText.setAttribute("rotation", position.rotation);
+        aText.setAttribute("side", "double");
+        aText.setAttribute("position", `${position.position.split(' ')[0]} ${parseFloat(position.position.split(' ')[1]) + 2} ${position.position.split(' ')[2]}`);
+        document.querySelector("a-scene").appendChild(aText);
+    }
+    */
+
     let timermax = timechoose;
 
 
@@ -49,9 +154,9 @@ export function startGame(muted,timechoose, difficultychoose) {
 
     let questionEnCours;
     switch (difficultychoose) {
+        case "All" :
         case 1 :
-        case "all":
-           
+
             questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
             while (questionsUtilisees.includes(questionEnCours)) {
                 questionEnCours = data.questions.niveau1[Math.floor(Math.random() * data.questions.niveau1.length)];
@@ -75,6 +180,43 @@ export function startGame(muted,timechoose, difficultychoose) {
             }
             break;
     }
+    
+    let nbMauvaisesReponses = questionEnCours.reponses.filter(reponse => !reponse.est_correcte).length;
+    questionEnCours.score = 0;
+    if (questionEnCours.niveau_question == 1){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 5;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 15;
+        }
+    }
+    else if (questionEnCours.niveau_question == 2){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 10;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 20;
+        }
+    }
+    else if (questionEnCours.niveau_question == 3){
+        if (nbMauvaisesReponses == 1){
+            questionEnCours.score = 15;
+        }
+        else if (nbMauvaisesReponses == 2){
+            questionEnCours.score = 20;
+        }
+        else if (nbMauvaisesReponses == 3){
+            questionEnCours.score = 25;
+        }
+    }
+
     questionsUtilisees.push(questionEnCours);
 
     /* renderPNJsForQuestion
@@ -86,7 +228,7 @@ export function startGame(muted,timechoose, difficultychoose) {
 
     */
 
-    let renderPNJsForQuestion = function(question) {
+    let renderPNJsForQuestion = function(question, hideSeek) {
         let PNJsForQuestion = createPNJsForQuestion(question);
         let aScene = document.querySelector("a-scene");
         let distance = 4; // Distance between the boxes
@@ -98,9 +240,6 @@ export function startGame(muted,timechoose, difficultychoose) {
         for (let i = 0; i < PNJsForQuestion.length; i++) {
             let PNJ = PNJsForQuestion[i];
 
-            // Calculate the position of each PNJ relative to the center
-            let position = centerPosition + (i * distance);
-
             // Create the a-box element for each PNJ (the PNJ box itself)
             let models = ["#astro", "#astro1", "#astro2"];
             let randomModel = models[Math.floor(Math.random() * models.length)];
@@ -109,8 +248,27 @@ export function startGame(muted,timechoose, difficultychoose) {
             aBox.setAttribute("id", `pnj`);
             aBox.setAttribute("data-id", PNJ.id);
             aBox.setAttribute("gltf-model", randomModel);
-            aBox.setAttribute("position", `${position} -1 -8`);
+            aBox.setAttribute("side", "double");
+            let position;
+            let chosenSlot;
+            if (!hideSeek) {
+                // Calculate the position of each PNJ relative to the center
+                position = centerPosition + (i * distance);
+                aBox.setAttribute("position", `${position} -1 -8`);
+            } else {
+                let randomPosition = Math.floor(Math.random() * npcPositionSlots.length);
+                while (npcPositionSlots[randomPosition].occupied) {
+                    randomPosition = Math.floor(Math.random() * npcPositionSlots.length);
+                }
+                chosenSlot = npcPositionSlots[randomPosition];
+                chosenSlot.occupied = true;
+                chosenSlot.npcId = PNJ.id;
+                position = chosenSlot.position;
+                aBox.setAttribute("rotation", chosenSlot.rotation);
+                aBox.setAttribute("position", position);
+            }
             aBox.setAttribute("transparent", "true");
+            aBox.setAttribute("opacity", "1");
             aBox.setAttribute("visible", "true");
             aBox.setAttribute("scale", "1.3 1.3 1.3");
             aBox.setAttribute("class", "clickable");
@@ -131,14 +289,18 @@ export function startGame(muted,timechoose, difficultychoose) {
             aText.setAttribute("width", "20");
             aText.setAttribute("align", "center");
 
-            if (ligne % 2 == 0) {
-                aText.setAttribute("position", `${position} 3 -8`);
-                ligne++;
+            if (!hideSeek) {
+                if (ligne % 2 == 0) {
+                    aText.setAttribute("position", `${position} 3 -8`);
+                    ligne++;
+                } else {
+                    aText.setAttribute("position", `${position} 4 -8`);
+                    ligne++;
+                }
             } else {
-                aText.setAttribute("position", `${position} 4 -8`);
-                ligne++;
+                aText.setAttribute("position", `${position.split(' ')[0]} ${parseFloat(position.split(' ')[1]) + chosenSlot.textoffset} ${position.split(' ')[2]}`);
+                aText.setAttribute("rotation", chosenSlot.rotation);
             }
-            
 
             // Append the created elements to the a-scene
             aScene.appendChild(aBox);
@@ -181,29 +343,46 @@ export function startGame(muted,timechoose, difficultychoose) {
                         scoregame++;
                         totalscore += questionEnCours.score;
 
-                        
-                        setTimeout(() => {
-                            aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
-                            aBox.setAttribute('animation__position', {
-                                property: 'position',
-                                to: `${randomposition} -1 -1.5`,
-                                dur: 2000,
-                                easing: 'easeInSine'
-                            });
-                            aBox.setAttribute('animation__rotation', {
-                                property: 'rotation',
-                                to: `0 ${rotationposition} 0`,
-                                dur: 200,
-                                easing: 'easeInSine'
-                            });
-                        
+                        if (!hideSeek) {
                             setTimeout(() => {
-                                removePNJ(PNJ.id);
-                                resetUFO();
-                                renderNextQuestion();
-                                checkclick = false;
-                            }, 2000);
-                        }, 2500);
+                                aBox.setAttribute("animation-mixer", "clip: CharacterArmature|Walk; loop: repeat; timeScale: 1");
+                                aBox.setAttribute('animation__position', {
+                                    property: 'position',
+                                    to: `${randomposition} -1 -1.5`,
+                                    dur: 2000,
+                                    easing: 'easeInSine'
+                                });
+                                aBox.setAttribute('animation__rotation', {
+                                    property: 'rotation',
+                                    to: `0 ${rotationposition} 0`,
+                                    dur: 200,
+                                    easing: 'easeInSine'
+                                });
+                            
+                                setTimeout(() => {
+                                    removePNJ(PNJ.id);
+                                    resetUFO();
+                                    renderNextQuestion(hideSeek);
+                                    checkclick = false;
+                                }, 2000);
+                            }, 2500);
+                        } else {
+                            setTimeout(() => {
+                                aBox.setAttribute('animation__position', {
+                                    property: 'opacity',
+                                    to: 0,
+                                    dur: 2000,
+                                    easing: 'linear'
+                                });
+
+                                setTimeout(() => {
+                                    removePNJ(PNJ.id);
+                                    resetUFO();
+                                    renderNextQuestion(hideSeek);
+                                    checkclick = false;
+                                }, 2000);
+                            }, 2500);
+                        }
                     }
                 });
             } else { // Mauvaise réponse
@@ -234,8 +413,10 @@ export function startGame(muted,timechoose, difficultychoose) {
                             }, 2000);
                         }
                     
-
-                        moveUFO(aBox.getAttribute('position').x);
+                        let npcX = aBox.getAttribute('position').x;
+                        let npcY = aBox.getAttribute('position').y;
+                        let npcZ = aBox.getAttribute('position').z;
+                        moveUFO(npcX, npcY, npcZ, hideSeek);
 
                         revealAliens(2);
                         
@@ -254,7 +435,7 @@ export function startGame(muted,timechoose, difficultychoose) {
                             setTimeout(() => {
                                 removePNJ(PNJ.id);
                                 resetUFO();
-                                renderNextQuestion();
+                                renderNextQuestion(hideSeek);
                                 checkclick = false;
                             }, 2000);
                         }, 2000);
@@ -264,7 +445,7 @@ export function startGame(muted,timechoose, difficultychoose) {
         }
     }
 
-    renderPNJsForQuestion(questionEnCours);
+    renderPNJsForQuestion(questionEnCours, hideSeek);
 
     /* renderQuestion
 
@@ -273,15 +454,15 @@ export function startGame(muted,timechoose, difficultychoose) {
 
     */
 
-    let renderQuestion = function(question) {
+    let renderQuestion = function(question, hideSeek) {
         let aScene = document.querySelector("a-scene");
         let questionEntity = document.createElement("a-entity");
-        let position = '0 5 -6';
+        let position = '0 6 -6';
         questionEntity.setAttribute("text", {
             value: question.texte_question,
             align: "center",
             color: "white",
-            width: 32,
+            width: 24,
             font: "asset/Audiowide-Regular-msdf.json",
             color: "#FFFFFF", 
             negate: false,
@@ -290,9 +471,28 @@ export function startGame(muted,timechoose, difficultychoose) {
         });
         questionEntity.setAttribute("position", position);
         aScene.appendChild(questionEntity);
+
+        if (hideSeek){
+            let adviceEntity = document.createElement("a-entity");
+            let position = '0 5 -6';
+            adviceEntity.setAttribute("id", "advice-text");
+            adviceEntity.setAttribute("text", {
+                value: "(Look around you !)",
+                align: "center",
+                color: "white",
+                width: 12,
+                font: "asset/Audiowide-Regular-msdf.json",
+                color: "#FFFFFF", 
+                negate: false,
+                opacity: 1,
+                alphaTest: 0.5
+            });
+            adviceEntity.setAttribute("position", position);
+            aScene.appendChild(adviceEntity);
+        }
     }
 
-    renderQuestion(questionEnCours);
+    renderQuestion(questionEnCours, hideSeek);
 
     /* removeAllPNJs
 
@@ -320,6 +520,10 @@ export function startGame(muted,timechoose, difficultychoose) {
             aScene.removeChild(dynamicText);
         }
        
+        for (let position of npcPositionSlots) {
+            position.occupied = false;
+            position.npcId = null;
+        }
 
         // Clear the array of PNJs
         data.pnjs = [];
@@ -366,7 +570,7 @@ export function startGame(muted,timechoose, difficultychoose) {
 
     */
 
-    let moveUFO = function(posX) {
+    let moveUFO = function(posX, posY, posZ, hideSeek) {
 
         let drone = document.querySelector("#drone");
         let beam = document.createElement("a-entity");
@@ -376,13 +580,18 @@ export function startGame(muted,timechoose, difficultychoose) {
             radius: 2,
             height: 50,
         });
-        beam.setAttribute("rotation", "-5 0 0");
+        if (!hideSeek) {
+            beam.setAttribute("rotation", "-5 0 0");
+            beam.setAttribute("position", `${posX} -1 -8`);
+        } else {
+            beam.setAttribute("rotation", "0 0 0");
+            beam.setAttribute("position", `${posX} ${posY} ${posZ}`);
+        }
         beam.setAttribute("material", {
             color: "#00FFFF",
             transparent: true,
             opacity: 0
         });
-        beam.setAttribute("position", `${posX} -1 -8`);
         setTimeout(() => {
             beam.setAttribute("animation", {
                 property: 'material.opacity',
@@ -408,45 +617,89 @@ export function startGame(muted,timechoose, difficultychoose) {
         
         drone = document.querySelector("#drone");
 
-        drone.setAttribute('animation', {
-            property: 'position',
-            to: `${posX} 25 -10`,
-            dur: 1000,
-            easing: 'easeInSine'
-        });
-
-        let lights1 = document.querySelectorAll("#light-left");
-        lights1.forEach(light => {
-            light.setAttribute('animation', {
+        if (!hideSeek) {
+            drone.setAttribute('animation', {
                 property: 'position',
-                to: `${posX - 2} 21 -10`,
+                to: `${posX} 25 -10`,
                 dur: 1000,
                 easing: 'easeInSine'
             });
-        });
 
-        let lights2 = document.querySelectorAll("#light-right");
-        lights2.forEach(light => {
-            light.setAttribute('animation', {
-                property: 'position',
-                to: `${posX + 2} 21 -10`,
-                dur: 1000,
-                easing: 'easeInSine'
+            let lights1 = document.querySelectorAll("#light-left");
+            lights1.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX - 2} 21 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
             });
-        });
 
-        let lights = document.querySelectorAll("#drone-light");
-        for (let light of lights) {
-            let adjustedPosition = posX;
-            if (light.getAttribute('rotation').x != 0) {
-                adjustedPosition = -posX;
+            let lights2 = document.querySelectorAll("#light-right");
+            lights2.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX + 2} 21 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            });
+
+            let lights = document.querySelectorAll("#drone-light");
+            for (let light of lights) {
+                let adjustedPosition = posX;
+                if (light.getAttribute('rotation').x != 0) {
+                    adjustedPosition = -posX;
+                }
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${adjustedPosition} 22 -10`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
             }
-            light.setAttribute('animation', {
+        } else {
+            drone.setAttribute('animation', {
                 property: 'position',
-                to: `${adjustedPosition} 22 -10`,
+                to: `${posX} ${posY + 26} ${posZ}`,
                 dur: 1000,
                 easing: 'easeInSine'
             });
+
+            let lights1 = document.querySelectorAll("#light-left");
+            lights1.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX - 2} ${posY + 22} ${posZ}`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            });
+
+            let lights2 = document.querySelectorAll("#light-right");
+            lights2.forEach(light => {
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${posX + 2} ${posY + 22} ${posZ}`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            });
+
+            let lights = document.querySelectorAll("#drone-light");
+            for (let light of lights) {
+                let adjustedPosition = posX;
+                if (light.getAttribute('rotation').x != 0) {
+                    adjustedPosition = -posX;
+                }
+                light.setAttribute('animation', {
+                    property: 'position',
+                    to: `${adjustedPosition} ${posY + 23} ${posZ}`,
+                    dur: 1000,
+                    easing: 'easeInSine'
+                });
+            }
+
         }
     }
 
@@ -524,7 +777,7 @@ export function startGame(muted,timechoose, difficultychoose) {
     }, 1000);
 
 
-    let renderNextQuestion = function() {
+    let renderNextQuestion = function(hideSeek) {
         // Clear everything before rendering the new question
         removeAllPNJs();
         let timerDisplay = document.querySelector("#timerDisplay");
@@ -540,8 +793,12 @@ export function startGame(muted,timechoose, difficultychoose) {
         // Remove the previous question from the scene (if needed)
         let aScene = document.querySelector("a-scene");
         let previousQuestion = document.querySelector("[text]"); // The text element displaying the question
+        let adviceText = document.querySelector("#advice-text");
         if (previousQuestion) {
             aScene.removeChild(previousQuestion);
+        }
+        if (adviceText) {
+            aScene.removeChild(adviceText);
         }
 
         // Optionally, reset the drone's position or any other objects
@@ -677,32 +934,31 @@ export function startGame(muted,timechoose, difficultychoose) {
         setTimeout(async () => {
             // Filter unused questions
            
-
             // If there are no more unused questions, you can either:
             // 1. Reset the questionsUtilisees list (optional)
             // 2. Display a message that the game is over (recommended)
             if (questioncounter >= maxquestions || timer >= timermax*60) {
                 
-            clearInterval(timerInterval);
-            gamefinished = true;
-            timer = 0;
-                    
-                    endgame(scoregame, questioncounter, totalscore);
-                    scoregame = 0;
-                    totalscore = 0;
-                    questioncounter = 0;
-                    ligne = 0;
-                    timermin = 0;
-                    timersec = 0;
-                    return;
+                clearInterval(timerInterval);
+                gamefinished = true;
+                timer = 0;
                 
+                endgame(scoregame, questioncounter, totalscore);
+                scoregame = 0;
+                totalscore = 0;
+                questioncounter = 0;
+                ligne = 0;
+                timermin = 0;
+                timersec = 0;
+                return;
+                    
             }
 
             // Render the new question
-            renderQuestion(questionEnCours);
+            renderQuestion(questionEnCours, hideSeek);
 
             // Render PNJs for the new question
-            renderPNJsForQuestion(questionEnCours);
+            renderPNJsForQuestion(questionEnCours, hideSeek);
         }, 3000);
     };
 

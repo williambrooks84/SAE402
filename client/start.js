@@ -60,6 +60,32 @@ export function startmenu() {
 
     aScene.appendChild(soundCheckbox);
 
+    let hideSeekText = document.createElement("a-text");
+    hideSeekText.setAttribute("value", "Hide & Seek");
+    hideSeekText.setAttribute("position", `-6 0.5 -1`);
+    hideSeekText.setAttribute("rotation", "0 45 0");
+    hideSeekText.setAttribute("text", "align: center; width: 14; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    aScene.appendChild(hideSeekText);
+
+    let hideSeekCheckbox = document.createElement("a-entity");
+    hideSeekCheckbox.setAttribute("geometry", "primitive: plane; width: 1; height: 1;");
+    hideSeekCheckbox.setAttribute("material", "src: url(asset/checkbox-true.svg); transparent: true");
+    hideSeekCheckbox.setAttribute("position", "-4.5 0.5 -2.5");
+    hideSeekCheckbox.setAttribute("rotation", "0 45 0");
+    hideSeekCheckbox.setAttribute("class", "clickable");
+
+    let isHideSeek = true;
+
+    hideSeekCheckbox.addEventListener("click", function () {
+        isHideSeek = !isHideSeek;
+        hideSeekCheckbox.setAttribute("material", `src: url(asset/checkbox-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
+        console.log(isHideSeek);
+    });
+
+    aScene.appendChild(hideSeekCheckbox);
+
+
+
     startButton.addEventListener("click", async function () {
 
         title.parentNode.removeChild(title);
@@ -68,8 +94,10 @@ export function startmenu() {
         startButton.parentNode.removeChild(startButton);
         soundCheckbox.parentNode.removeChild(soundCheckbox);
         soundtext.parentNode.removeChild(soundtext);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
-        startGame(isMuted, 3, "All");
+        startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
 
@@ -89,6 +117,8 @@ export function startmenu() {
         soundtext.parentNode.removeChild(soundtext);
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         chooseGame();
     });
