@@ -218,6 +218,33 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
 
     questionsUtilisees.push(questionEnCours);
 
+    let quitButton = document.createElement("a-entity");
+    quitButton.setAttribute("id", "quitButton");
+    quitButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.9;");
+    quitButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    quitButton.setAttribute("text", "value: QUIT; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    quitButton.setAttribute("position", "0 0.1 1");
+    quitButton.setAttribute("rotation", "85 0 0");
+    quitButton.setAttribute("class", "clickable");
+
+    quitButton.addEventListener("click", function () {
+        clearInterval(timerInterval);
+        gamefinished = true;
+        timer = 0;
+        endgame(scoregame, questioncounter, totalscore);
+        scoregame = 0;
+        totalscore = 0;
+        questioncounter = 0;
+        ligne = 0;
+        timermin = 0;
+        timersec = 0;
+        return;
+    });
+
+    let aScene = document.querySelector("a-scene");
+    aScene.appendChild(quitButton);
+
+
     /* renderPNJsForQuestion
 
     Prend une question comme argument.

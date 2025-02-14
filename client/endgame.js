@@ -2,11 +2,15 @@
 import {startGame} from './script.js';
 import {startmenu} from './start.js';
 
-
 export function endgame(scoregames,questioncounter,totalscore) {
     let hintNpc = document.querySelector("#pnj-special");
     if (hintNpc) {
         hintNpc.removeEventListener("click", handleHintNpcClick);
+    }
+
+    let quitButton = document.querySelector("#quitButton");
+    if (quitButton) {
+        quitButton.parentNode.removeChild(quitButton);
     }
 
     let timerDisplay = document.querySelector("#timerDisplay");
