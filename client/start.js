@@ -1,5 +1,6 @@
 
 import { startGame } from "./script.js";
+import { chooseGame } from "./choosegame.js";
 
 
 export function startmenu() {
@@ -59,47 +60,106 @@ export function startmenu() {
     paragraph.setAttribute("text", "align: center; width: 13; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
 
     aScene.appendChild(paragraph);
-
     let startButton = document.createElement("a-entity");
-    
-    
 
     startButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.9;");
-    
     startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
-
     startButton.setAttribute("text", "value: START; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    startButton.setAttribute("position", "-1.2 0.5 -3");
+    startButton.setAttribute("position", "-2 0.5 -3");
     startButton.setAttribute("class", "clickable");
 
+    let soundtext = document.createElement("a-text"); 
+    
+    soundtext.setAttribute("value", "Sound Off");
+    soundtext.setAttribute("position", `5 0.5 -3.5`);
+    soundtext.setAttribute("rotation", "0 -45 0");
+    soundtext.setAttribute("text", "align: center; width: 14; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    aScene.appendChild(soundtext);
+
+
+    let soundCheckbox = document.createElement("a-entity");
+    soundCheckbox.setAttribute("geometry", "primitive: plane; width: 1; height: 1;");
+    soundCheckbox.setAttribute("material", "src: url(asset/checkbox-false.svg); transparent: true");
+    soundCheckbox.setAttribute("position", "5.5 0.5 -1.7");
+    soundCheckbox.setAttribute("rotation", "0 -45 0");
+    soundCheckbox.setAttribute("class", "clickable");
+
+    let isMuted = false;
+
+    soundCheckbox.addEventListener("click", function () {
+        isMuted = !isMuted;
+        soundCheckbox.setAttribute("material", `src: url(asset/checkbox-${isMuted ? 'true' : 'false'}.svg); transparent: true`);
+    });
+
+    aScene.appendChild(soundCheckbox);
+
+    let hideSeekText = document.createElement("a-text");
+    hideSeekText.setAttribute("value", "Hide & Seek");
+    hideSeekText.setAttribute("position", `-6 0.5 -1`);
+    hideSeekText.setAttribute("rotation", "0 45 0");
+    hideSeekText.setAttribute("text", "align: center; width: 14; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    aScene.appendChild(hideSeekText);
+
+    let hideSeekCheckbox = document.createElement("a-entity");
+    hideSeekCheckbox.setAttribute("geometry", "primitive: plane; width: 1; height: 1;");
+    hideSeekCheckbox.setAttribute("material", "src: url(asset/checkbox-true.svg); transparent: true");
+    hideSeekCheckbox.setAttribute("position", "-4.5 0.5 -2.5");
+    hideSeekCheckbox.setAttribute("rotation", "0 45 0");
+    hideSeekCheckbox.setAttribute("class", "clickable");
+
+    let isHideSeek = true;
+
+    hideSeekCheckbox.addEventListener("click", function () {
+        isHideSeek = !isHideSeek;
+        hideSeekCheckbox.setAttribute("material", `src: url(asset/checkbox-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
+        console.log(isHideSeek);
+    });
+
+    aScene.appendChild(hideSeekCheckbox);
+
+
+
     startButton.addEventListener("click", async function () {
+
         title.parentNode.removeChild(title);
         plane.parentNode.removeChild(plane);
-        
         paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
-        soundButton.parentNode.removeChild(soundButton);
-        hintNpc.removeEventListener("click", handleHintNpcClick);
-        startGame(false);
+        soundCheckbox.parentNode.removeChild(soundCheckbox);
+        soundtext.parentNode.removeChild(soundtext);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
+        choose.parentNode.removeChild(choose);
+        startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
 
-    let soundButton = document.createElement("a-entity");
-    soundButton.setAttribute("geometry", "primitive: plane; width: 3; height: 0.9;");
-    soundButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
-    soundButton.setAttribute("text", "value: START MUTED; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    soundButton.setAttribute("position", "1.2 0.5 -3");
-    soundButton.setAttribute("class", "clickable");
-    soundButton.addEventListener("click", async function () {
+    let choose = document.createElement("a-entity");
+
+    choose.setAttribute("geometry", "primitive: plane; width: 2.7; height: 0.9;");
+    choose.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    choose.setAttribute("text", "value: Choose game; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    choose.setAttribute("position", "1 0.5 -3");
+    choose.setAttribute("class", "clickable");
+
+
+    choose.addEventListener("click", function () {
         title.parentNode.removeChild(title);
-        paragraph.parentNode.removeChild(paragraph);
         plane.parentNode.removeChild(plane);
-        soundButton.parentNode.removeChild(soundButton);
+        soundCheckbox.parentNode.removeChild(soundCheckbox);
+        soundtext.parentNode.removeChild(soundtext);
+        paragraph.parentNode.removeChild(paragraph);
         startButton.parentNode.removeChild(startButton);
-        hintNpc.removeEventListener("click", handleClick);
-        startGame(true);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
+        choose.parentNode.removeChild(choose);
+        chooseGame();
     });
-    aScene.appendChild(soundButton);
+    
+    aScene.appendChild(choose);
+
+
+
 }
 
 

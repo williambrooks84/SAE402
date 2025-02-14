@@ -4,7 +4,8 @@
  */
 
 
-let API_URL = "https://www.tellapart.lightprince.fr/api/"; // URL de base de l'API
+
+let API_URL = "https://www.tellapart.lightprince.fr/api/";
 
 
 /**
