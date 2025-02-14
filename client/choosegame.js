@@ -61,7 +61,7 @@ export function chooseGame() {
             selectedDifficulty = parseInt(difficulty.replace("niv ", ""));
             button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 100; ");
             button.setAttribute("outline", "width: 2rem; color: #FFFFFF;");
-            console.log(selectedDifficulty);
+           
         });
 
         difficultyButtonElements.push(button);
@@ -133,7 +133,7 @@ export function chooseGame() {
             gameButtonElements.forEach(button => button.parentNode.removeChild(button));
             difficultyButtonElements.forEach(button => button.parentNode.removeChild(button));
 
-            console.log(isMuted, selectedGame, selectedDifficulty);
+            
 
             startGame(isMuted, selectedGame, selectedDifficulty, isHideSeek);
         }

@@ -79,7 +79,7 @@ export function startmenu() {
     hideSeekCheckbox.addEventListener("click", function () {
         isHideSeek = !isHideSeek;
         hideSeekCheckbox.setAttribute("material", `src: url(asset/checkbox-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
-        console.log(isHideSeek);
+        
     });
 
     aScene.appendChild(hideSeekCheckbox);
