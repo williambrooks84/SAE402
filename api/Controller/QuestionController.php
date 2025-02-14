@@ -21,6 +21,7 @@ class QuestionController extends Controller
     {
         $id = $request->getId("id");
         $niveau = $request->getParam("niveau");
+        
 
         if ($id) {
             // On donne les détails de la question
