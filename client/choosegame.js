@@ -39,7 +39,7 @@ export function chooseGame() {
         aScene.appendChild(button);
     });
 
-    const difficultyButtons = ["niv 3", "niv 2", "niv 1"];
+    const difficultyButtons = ["Lvl 3", "Lvl 2", "Lvl 1"];
     let selecteddifficult = null;
     let selectedDifficulty = null;
     let difficultyButtonElements = [];
