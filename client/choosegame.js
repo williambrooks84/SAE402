@@ -58,7 +58,7 @@ export function chooseGame() {
                 selecteddifficult.setAttribute("outline", "width: 0px;");
             }
             selecteddifficult = button;
-            selectedDifficulty = parseInt(difficulty.replace("niv ", ""));
+            selectedDifficulty = parseInt(difficulty.replace("Lvl ", ""));
             button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 100; ");
             button.setAttribute("outline", "width: 2rem; color: #FFFFFF;");
            

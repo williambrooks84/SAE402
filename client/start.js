@@ -105,6 +105,7 @@ export function startmenu() {
         hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
+        Tuto.parentNode.removeChild(Tuto);
         startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
@@ -128,6 +129,7 @@ export function startmenu() {
         hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
+        Tuto.parentNode.removeChild(Tuto);
         chooseGame();
     });
     
@@ -154,6 +156,7 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         Tuto.parentNode.removeChild(Tuto);
         choose.parentNode.removeChild(choose);
+
         starttuto();
         
     });
