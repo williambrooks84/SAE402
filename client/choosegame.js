@@ -39,7 +39,7 @@ export function chooseGame() {
         aScene.appendChild(button);
     });
 
-    const difficultyButtons = ["niv 3", "niv 2", "niv 1"];
+    const difficultyButtons = ["Lvl 3", "Lvl 2", "Lvl 1"];
     let selecteddifficult = null;
     let selectedDifficulty = null;
     let difficultyButtonElements = [];
@@ -58,10 +58,10 @@ export function chooseGame() {
                 selecteddifficult.setAttribute("outline", "width: 0px;");
             }
             selecteddifficult = button;
-            selectedDifficulty = parseInt(difficulty.replace("niv ", ""));
+            selectedDifficulty = parseInt(difficulty.replace("Lvl ", ""));
             button.setAttribute("material", "src: url(asset/Rectangle 4.png); opacity: 100; ");
             button.setAttribute("outline", "width: 2rem; color: #FFFFFF;");
-            console.log(selectedDifficulty);
+           
         });
 
         difficultyButtonElements.push(button);
@@ -133,7 +133,7 @@ export function chooseGame() {
             gameButtonElements.forEach(button => button.parentNode.removeChild(button));
             difficultyButtonElements.forEach(button => button.parentNode.removeChild(button));
 
-            console.log(isMuted, selectedGame, selectedDifficulty);
+            
 
             startGame(isMuted, selectedGame, selectedDifficulty, isHideSeek);
         }

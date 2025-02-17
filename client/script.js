@@ -283,20 +283,40 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
             
             // Create the a-text element for displaying the PNJ response (the text)
             let aText = document.createElement("a-text");
-            aText.setAttribute("text", "value: " + PNJ.reponse.texte_reponse + "; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
+            let nvlle_rep;
+            console.log(PNJ.reponse.texte_reponse);
+            if (PNJ.reponse.texte_reponse.length > 15) {
+                for (let i = 14; i < PNJ.reponse.texte_reponse.length; i++) {
+                    if (PNJ.reponse.texte_reponse[i] == " ") {
+                        nvlle_rep = PNJ.reponse.texte_reponse.substring(0, i) + "\n" + PNJ.reponse.texte_reponse.substring(i);
+                        break;
+                    }
+                    if (i == PNJ.reponse.texte_reponse.length - 1) {
+                        nvlle_rep = PNJ.reponse.texte_reponse;
+                    }
+                }
+            } else {
+                nvlle_rep = PNJ.reponse.texte_reponse;
+            }
+            aText.setAttribute("text", "value: " + nvlle_rep + "; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
             
             aText.setAttribute("color", "white");
             aText.setAttribute("width", "20");
             aText.setAttribute("align", "center");
 
             if (!hideSeek) {
+                if (PNJ.reponse.texte_reponse.length > 20) {
                 if (ligne % 2 == 0) {
-                    aText.setAttribute("position", `${position} 3 -8`);
-                    ligne++;
-                } else {
                     aText.setAttribute("position", `${position} 4 -8`);
                     ligne++;
+                } else {
+                    aText.setAttribute("position", `${position} 5.5 -8`);
+                    ligne++;
                 }
+            }
+            else {
+                aText.setAttribute("position", `${position} 4 -8`);
+            }
             } else {
                 aText.setAttribute("position", `${position.split(' ')[0]} ${parseFloat(position.split(' ')[1]) + chosenSlot.textoffset} ${position.split(' ')[2]}`);
                 aText.setAttribute("rotation", chosenSlot.rotation);

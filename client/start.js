@@ -1,11 +1,19 @@
 
 import { startGame } from "./script.js";
+import { starttuto } from "./Tuto.js";
 import { chooseGame } from "./choosegame.js";
+
 
 
 export function startmenu() {
 
+    
+
     let aScene = document.querySelector("a-scene");
+
+    let sky = document.createElement("a-sky");
+    sky.setAttribute("src", "#ciel");
+    aScene.appendChild(sky);
 
     let title = document.createElement("a-text");
     title.setAttribute("text", "value: Welcome to TellApart!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
@@ -32,7 +40,7 @@ export function startmenu() {
     startButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.9;");
     startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
     startButton.setAttribute("text", "value: START; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    startButton.setAttribute("position", "-2 0.5 -3");
+    startButton.setAttribute("position", "-2.6 0.5 -3");
     startButton.setAttribute("class", "clickable");
 
     let soundtext = document.createElement("a-text"); 
@@ -79,7 +87,7 @@ export function startmenu() {
     hideSeekCheckbox.addEventListener("click", function () {
         isHideSeek = !isHideSeek;
         hideSeekCheckbox.setAttribute("material", `src: url(asset/checkbox-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
-        console.log(isHideSeek);
+        
     });
 
     aScene.appendChild(hideSeekCheckbox);
@@ -97,6 +105,7 @@ export function startmenu() {
         hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
+        Tuto.parentNode.removeChild(Tuto);
         startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
@@ -106,7 +115,7 @@ export function startmenu() {
     choose.setAttribute("geometry", "primitive: plane; width: 2.7; height: 0.9;");
     choose.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
     choose.setAttribute("text", "value: Choose game; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    choose.setAttribute("position", "1 0.5 -3");
+    choose.setAttribute("position", "-0.3 0.5 -3");
     choose.setAttribute("class", "clickable");
 
 
@@ -120,15 +129,41 @@ export function startmenu() {
         hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
+        Tuto.parentNode.removeChild(Tuto);
         chooseGame();
     });
     
     aScene.appendChild(choose);
 
 
+    let Tuto = document.createElement("a-entity");
+
+    Tuto.setAttribute("geometry", "primitive: plane; width: 1.2; height: 0.9;");
+    Tuto.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    Tuto.setAttribute("text", "value: Help; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    Tuto.setAttribute("position", "1.9 0.5 -3");
+    Tuto.setAttribute("class", "clickable");
+
+
+    Tuto.addEventListener("click", function () {
+        title.parentNode.removeChild(title);
+        plane.parentNode.removeChild(plane);
+        soundCheckbox.parentNode.removeChild(soundCheckbox);
+        soundtext.parentNode.removeChild(soundtext);
+        paragraph.parentNode.removeChild(paragraph);
+        startButton.parentNode.removeChild(startButton);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
+        Tuto.parentNode.removeChild(Tuto);
+        choose.parentNode.removeChild(choose);
+
+        starttuto();
+        
+    });
+    
+    aScene.appendChild(Tuto);
+
 
 }
 
-
-    startmenu();
-
+startmenu();
