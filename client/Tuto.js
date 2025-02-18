@@ -107,7 +107,7 @@ export function starttuto() {
 
         let title2 = document.createElement("a-text");
         title2.setAttribute("text", "value: Question; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
-        title2.setAttribute("position", ` 5 4 2`);
+        title2.setAttribute("position", ` 7 3 2`);
         title2.setAttribute("rotation", "0 -90 0");
         title2.setAttribute("side", "double");
         title2.setAttribute("color", "white");
@@ -116,10 +116,10 @@ export function starttuto() {
     aScene.append(title2);
 
         let positions = [
-            { x: 7, y: 0, z: -4 },
-            { x: 7, y: 0, z: 0 },
-            { x: 7, y: 0, z: 4 },
-            { x: 7, y: 0, z: 8 }
+            { x: 7, y: -1, z: -4 },
+            { x: 7, y: -1, z: 0 },
+            { x: 7, y: -1, z: 4 },
+            { x: 7, y: -1, z: 8 }
         ];
 
         let character=[];
@@ -141,7 +141,7 @@ export function starttuto() {
 
             let text = document.createElement("a-text");
             text.setAttribute("text", "value: Answer "+ number+"; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
-            text.setAttribute("position", `${pos.x} 3 ${pos.z}`);
+            text.setAttribute("position", `${pos.x} 2 ${pos.z}`);
             text.setAttribute("rotation", "0 -90 0");
             text.setAttribute("side", "double");
             text.setAttribute("color", "white");
