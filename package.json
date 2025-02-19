@@ -1,0 +1,16 @@
+{
+  "name": "sae402",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "tailwind_watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "tailwind": "tailwindcss -i ./src/input.css -o ./dist/output.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
