@@ -12,11 +12,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
 </head>
-<body class="bg-gray-500">
+<body class="bg-background">
+    <section class="navbar bg-gradient-to-b from-nav from-55% to-transparent absolute top-0 left-0 w-full z-10">
+        <ul class="navbar__list flex flex-row justify-center py-8 gap-16 text-white font-inter text-2xl font-black">
+            <li class="navbar__list-item"><a href="" class="navbar__list-link">Home</a></li>
+            <li class="navbar__list-item"><a href="" class="navbar__list-link">Presentation</a></li>
+            <li class="navbar__list-item"><a href="" class="navbar__list-link">Why</a></li>
+            <li class="navbar__list-item"><a href="" class="navbar__list-link">How</a></li>
+            <li class="navbar__list-item"><a href="" class="navbar__list-link">The game</a></li>
+        </ul>
+    </section>
+
     <section class="home__illustration h-fit relative">
         <img src="./assets/home-illustration.webp" alt="Illustration" class="home__illustration-img w-full h-auto">
         <h1 class="home__illustration-title font-jersey absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/4 text-white text-8xl md:text-[300px]">TellApart</h1>
     </section>
+
     <section class="why flex flex-col items-center gap-3 text-white">
         <h2 class="why__text-title text-center text-5xl md:text-9xl font-bold font-poppins">Why?</h2>
         <div class="why__container flex flex-col md:flex-row items-center gap-3 md:gap-12 px-8 md:px-14">
@@ -27,5 +38,20 @@
             <img class="why__container-img w-[155px] md:w-[500px] h-auto" src="./assets/learn-english.webp" alt="Learn English">
         </div>
     </section>
+
+    <section class="how flex flex-col items-center gap-3 text-white">
+        <h2 class="how__text-title text-center text-5xl md:text-9xl font-bold font-poppins text-white">How?</h2>
+        <div class="how__container flex flex-col md:flex-row-reverse items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="how__container-text flex flex-col font-inter gap-5">
+                <h3 class="how__container-text-subtitle text-2xl md:text-6xl font-black">A-Frame & HTML/JS</h3>
+                <p class = "how__container-text-description text-base md:text-4xl font-normal">TellApart is built with A-Frame, a web framework for immersive 3D experiences using HTML and JavaScript, making it easily accessible in a browser or in a VR headset. Set in a futuristic space environment, players interact with NPCs through simple point-and-click mechanics. A-Frame's entity-component system enables dynamic updates like character animations and teleportation effects, enhancing immersion. Its lightweight design ensures smooth performance, creating an engaging and educational experience for young learners. </p> 
+            </div>
+            <div class="how__container-images flex flex-row md:flex-col justify-center gap-4 md:gap-11 w-full"> 
+                <img class="how__container-img w-[85px] md:w-full h-auto" src="./assets/a-frame.webp" alt="A-Frame">
+                <img class="how__container-img w-[173px] md:w-full h-auto" src="./assets/html.webp" alt="HTML/JS">
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
