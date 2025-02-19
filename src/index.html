@@ -2,11 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0flex-shrink-0">
     <title>Document</title>
     <link rel="stylesheet" href="../dist/output.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+10&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
 </head>
-<body class="font-sans">
-    <h1 class="text-4xl text-center">Hello World</h1>
+<body class="font-sans bg-background w-screen h-screen">
+    <div id="presentation" class="flex flex-col gap-10 w-full items-center">
+        <p class="text-white text-8xl font-bold font-poppins text-center">Presentation</p>
+        <div id="presentation_carousel" class="relative flex flex-col justify-center items-center gap-10 self-stretch">
+            <img src="./assets/carouselbg.png" alt="" class="w-full">
+            <div id="carousel_container" class="absolute top-1/2 -translate-y-1/2 overflow-hidden h-[80%] aspect-video">
+                <div id="carousel_element" data-number="1" class="absolute flex items-end top-0 left-0 w-full h-full opacity-100">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 m-4">
+                        <p class="text-nav font-inter text-xl">
+                            An educational 3D game where players identify disguised aliens by spotting their English mistakes.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel1.jpg" alt="" class="absolute w-full h-full">
+                </div>
+                <div id="carousel_element" data-number="2" class="absolute flex items-end top-0 left-0 w-full h-full opacity-0">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 m-4">
+                        <p class="text-nav font-inter text-xl">
+                            Easy to learn gameplay that will let you start learning within seconds.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel2.jpg" alt="" class="absolute w-full h-full">
+                </div>
+                <div id="carousel_element" data-number="3" class="absolute flex items-end top-0 left-0 w-full h-full opacity-0">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 m-4">
+                        <p class="text-nav font-inter text-xl">
+                            A customisable experience to let you learn at your pace.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel3.jpg" alt="" class="absolute w-full h-full">
+                </div>
+                <div id="carousel_element" data-number="4" class="absolute flex items-end top-0 left-0 w-full h-full opacity-0">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 m-4">
+                        <p class="text-nav font-inter text-xl">
+                            An immersive experience and surroundings to discover.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel4.jpg" alt="" class="absolute w-full h-full">
+                </div>
+            </div>
+        </div>
+        <div id="carousel_controls" class="flex gap-5">
+            <div id="carousel_control" data-number="1" class="hover:cursor-pointer hover:scale-110 transition-all bg-[#04D2FF] rounded-full w-8 h-8"></div>
+            <div id="carousel_control" data-number="2" class="hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-8 h-8"></div>
+            <div id="carousel_control" data-number="3" class="hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-8 h-8"></div>
+            <div id="carousel_control" data-number="4" class="hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-8 h-8"></div>
+        </div>
+    </div>
+    <script>
+        let carousel_container = document.querySelector('#carousel_container');
+        let start = null;
+        let duration = 10000; // duration of the animation in milliseconds
+        let containerHeight = carousel_container.offsetHeight;
+
+        function animate(time) {
+            if (!start) start = time;
+            let progress = time - start;
+            let y = Math.sin(progress / duration * Math.PI * 2) * 10; // 10 is the amplitude of the oscillation
+            y = y * 100 / containerHeight; // convert the amplitude to percentage
+            y -= 50; // remove 50% of the container's height so it is centered
+            carousel_container.style.transform = `translateY(${y}%)`;
+
+            if (progress < duration) {
+            requestAnimationFrame(animate);
+            } else {
+            start = null; // reset start for the next animation cycle
+            requestAnimationFrame(animate); // loop the animation
+            }
+        }
+
+        requestAnimationFrame(animate);
+
+        let carousel_controls = document.querySelector('#carousel_controls');
+        carousel_controls.addEventListener("click", carouselControl_handler);
+
+        function carouselControl_handler(event){
+            if (event.target.id == "carousel_control"){
+
+                event.stopPropagation();
+                let number = event.target.dataset.number;
+                let carousel_control_list = document.querySelectorAll('#carousel_control');
+                for (let btn of carousel_control_list){
+                    if (btn.getAttribute("data-number") == number){
+                        btn.classList.remove("bg-white");
+                        btn.classList.add("bg-[#04D2FF]");
+                    } else {
+                    btn.classList.remove("bg-[#04D2FF]");
+                    btn.classList.add("bg-white");
+                    }
+                }
+
+                let carousel_elements = document.querySelectorAll('#carousel_element');
+                for (let elt of carousel_elements){
+                    if (elt.getAttribute("data-number") == number){
+                        elt.classList.remove("opacity-0");
+                        elt.classList.add("opacity-100");
+                    } else {
+                        elt.classList.remove("opacity-100");
+                        elt.classList.add("opacity-0");
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
