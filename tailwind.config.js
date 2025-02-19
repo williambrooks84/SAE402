@@ -5,7 +5,13 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx,html}' // All JS and HTML files in src folder
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        jersey: ['"Jersey 10"', 'cursive'],
+        poppins: ['Poppins', 'sans-serif'],
+        inter: ['inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
