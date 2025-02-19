@@ -230,7 +230,6 @@ let menuButton = document.createElement("a-entity");
         }
         
         startmenu();
-        setTimeout(resetRaycaster, 500);
 
     });
     aScene.appendChild(menuButton);

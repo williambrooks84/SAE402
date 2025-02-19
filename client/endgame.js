@@ -2,8 +2,6 @@
 import {startGame} from './script.js';
 import {startmenu} from './start.js';
 
-
-
 export function endgame(scoregames,questioncounter,totalscore) {
     let timerDisplay = document.querySelector("#timerDisplay");
     if (timerDisplay) {
@@ -89,8 +87,6 @@ export function endgame(scoregames,questioncounter,totalscore) {
     aScene.appendChild(startButton);
     
 }
-
-
 
 function resetRaycaster() {
     let rightController = document.querySelector("#rightController");
