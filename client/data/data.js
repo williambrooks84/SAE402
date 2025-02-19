@@ -34,7 +34,7 @@ ScoresData.fetchAll = async function(){
 }
 
 ScoresData.post = async function(nom, score){
-    let data = await postRequest('scores', {nom: nom, score: score});
+    let data = await postRequest('scores', JSON.stringify({nom: nom, score: score}));
     return data;
 }
 

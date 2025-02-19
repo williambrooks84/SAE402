@@ -1,11 +1,11 @@
 <?php
 
 class Record implements JsonSerializable {
-    private int $id_record;
+    private ?int $id_record = null; 
     private string $nom_record;
     private int $score_record;
     
-    public function __construct(int $id_record, string $nom_record = "", int $score_record = 0) {
+    public function __construct(?int $id_record = null, string $nom_record = "", int $score_record = 0) {
         $this->id_record = $id_record;
         $this->nom_record = $nom_record;
         $this->score_record = $score_record;
@@ -19,7 +19,7 @@ class Record implements JsonSerializable {
         ];
     }
 
-    public function getIdRecord(): int {
+    public function getIdRecord(): ?int {
         return $this->id_record;
     }
 

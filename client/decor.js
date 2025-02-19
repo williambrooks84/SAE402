@@ -7,6 +7,8 @@ let scene = document.querySelector('a-scene');
 <a-entity id="lamppost" gltf-model="#light" position="10 4 -17" scale="7 7 7" rotation="0 90 0"  auto-center></a-entity>
 */
 
+
+
 let createLamppost = (position) => {
     let lamppost = document.createElement('a-entity');
     lamppost.setAttribute('id', 'lamppost');

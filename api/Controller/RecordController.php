@@ -32,14 +32,30 @@ class RecordController extends Controller
 
     protected function processPostRequest(HttpRequest $request)
     {
-        $nom = $request->getParam("nom");
-        $score = $request->getParam("score");
+        $json = $request->getJson();
+        $json = json_decode($json);
 
-        if ($nom && $score) {
-            $this->records->save($nom, $score);
-            return "Record ajouté";
+        if (json_last_error() === JSON_ERROR_NONE && isset($json->nom) && isset($json->score)) {
+            $nom = $json->nom;
+            $score = $json->score;
+            
+            
+
+            if (!empty($nom) && $score !== null) {
+                $record = new Record();
+                $record->setNomRecord($nom);
+                $record->setScoreRecord($score);
+                
+                if ($this->records->save($record)) {
+                    return "Record ajouté";
+                } else {
+                    return "Erreur lors de l'ajout du record";
+                }
+            } else {
+                return "Erreur lors de l'ajout du record nom";
+            }
         } else {
-            return "Erreur lors de l'ajout du record";
+            return "Erreur lors du décodage du JSON ou données manquantes";
         }
     }
 }

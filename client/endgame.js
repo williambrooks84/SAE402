@@ -41,8 +41,99 @@ export async function endgame(scoregames,questioncounter,totalscore) {
 
 // Keyboard && mondial score
 
+let scoremondial = await ScoresData.fetchAll();
 
-let keyboard = document.createElement('a-entity');
+let newscore = scoremondial.map(entry => ({ name: entry.nom_record, score: entry.score_record }));
+
+
+
+
+let plane = document.createElement('a-entity');
+plane.setAttribute('geometry', {
+    primitive: 'plane',
+    width: 7,
+    height: 9,
+    side: 'double'
+});
+
+plane.setAttribute('material', {
+    color: '#000',
+    opacity: 0.8,
+    side: 'double'
+});
+
+plane.setAttribute('position', '0 1  7');
+plane.setAttribute('rotation', '0 180 0'); // Adding rotation
+
+let planeText = document.createElement('a-entity');
+planeText.setAttribute('text', {
+    value: 'Mondial Score',
+    align: 'center',
+    color: '#ffffff',
+    width: 15,
+    side: 'double',
+    font: "asset/Audiowide-Regular-msdf.json",
+    negate: false,
+});
+planeText.setAttribute('position', '0 4 0.01'); // Positioning text at the top of the plane
+
+plane.appendChild(planeText);
+
+newscore.forEach((entry, index) => {
+    let numberText = document.createElement('a-entity');
+    numberText.setAttribute('text', {
+        value: `${index + 1}.`,
+        align: 'left', // Align text to end
+        color: '#ffffff',
+        width: 10,
+        side: 'double',
+        font: "asset/Michroma-Regular-msdf.json",
+        negate: false,
+    });
+    numberText.setAttribute('position', `2 ${3 - index * 0.5} 0.01`); // Adjusting position for number
+
+    let nameText = document.createElement('a-entity');
+    nameText.setAttribute('text', {
+        value: `${entry.name}`,
+        align: 'center', // Align text to center
+        color: '#ffffff',
+        width: 10,
+        side: 'double',
+        font: "asset/Michroma-Regular-msdf.json",
+        negate: false,
+    });
+    nameText.setAttribute('position', `0 ${3 - index * 0.5} 0.01`); // Adjusting position for name
+
+    let scoreText = document.createElement('a-entity');
+    scoreText.setAttribute('text', {
+        value: `${entry.score}`,
+        align: 'right', // Align text to start
+        color: '#ffffff',
+        width: 10,
+        side: 'double',
+        font: "asset/Michroma-Regular-msdf.json",
+        negate: false,
+    });
+    scoreText.setAttribute('position', `-2 ${3 - index * 0.5} 0.01`); // Adjusting position for score
+
+    plane.appendChild(numberText);
+    plane.appendChild(nameText);
+    plane.appendChild(scoreText);
+});
+
+aScene.appendChild(plane);
+
+
+
+
+let keyboard = false;
+let displayText;
+let titletext;
+let subtext;
+
+if(totalscore>0){
+
+keyboard = document.createElement('a-entity');
 keyboard.setAttribute('geometry', {
     primitive: 'plane',
     width: 1.2,
@@ -124,7 +215,7 @@ keys.forEach((key, index) => {
 
 aScene.appendChild(keyboard);
 
-let displayText = document.createElement('a-entity');
+displayText = document.createElement('a-entity');
 displayText.setAttribute('text', {
     value: '',
     align: 'center',
@@ -136,7 +227,7 @@ displayText.setAttribute('position', '1 1.5 2');
 displayText.setAttribute('rotation', '0 -90 0'); // Adding rotation   
 aScene.appendChild(displayText);
 
-let titletext = document.createElement('a-entity');
+titletext = document.createElement('a-entity');
 titletext.setAttribute('text', {
     value: 'Save Your Score !',
     align: 'center',
@@ -151,7 +242,7 @@ titletext.setAttribute('rotation', '0 -90 0'); // Adding rotation
 aScene.appendChild(titletext);
 
 
-let subtext = document.createElement('a-entity');
+subtext = document.createElement('a-entity');
 subtext.setAttribute('text', {
     value: '(Enter 5 letters)',
     align: 'center',
@@ -165,7 +256,7 @@ subtext.setAttribute('position', '1 1.8 2');
 subtext.setAttribute('rotation', '0 -90 0'); // Adding rotation
 aScene.appendChild(subtext);
 
-keyboard.addEventListener('click', function (event) {
+keyboard.addEventListener('click', async function (event) {
     if (event.target && event.target.getAttribute('text')) {
         
         let key = event.target.getAttribute('text').value;
@@ -186,6 +277,71 @@ keyboard.addEventListener('click', function (event) {
             subtext.setAttribute('text', 'value', "score:"+totalscore);
             subtext.setAttribute('position', '1 1.7 2');
             subtext.setAttribute('text','width', 4);
+            
+
+            await ScoresData.post(name, totalscore);
+
+            let newscoremondial = await ScoresData.fetchAll();
+            newscore= newscoremondial.map(entry => ({ name: entry.nom_record, score: entry.score_record }));
+
+            
+            plane.innerHTML = ''; // Clear existing content
+
+            let planeText = document.createElement('a-entity');
+            planeText.setAttribute('text', {
+                value: 'Mondial Score',
+                align: 'center',
+                color: '#ffffff',
+                width: 15,
+                side: 'double',
+                font: "asset/Audiowide-Regular-msdf.json",
+                negate: false,
+            });
+            planeText.setAttribute('position', '0 4 0.01'); // Positioning text at the top of the plane
+
+            plane.appendChild(planeText);
+
+            newscore.forEach((entry, index) => {
+                let numberText = document.createElement('a-entity');
+                numberText.setAttribute('text', {
+                    value: `${index + 1}.`,
+                    align: 'left',
+                    color: '#ffffff',
+                    width: 10,
+                    side: 'double',
+                    font: "asset/Michroma-Regular-msdf.json",
+                    negate: false,
+                });
+                numberText.setAttribute('position', `2 ${3 - index * 0.5} 0.01`);
+
+                let nameText = document.createElement('a-entity');
+                nameText.setAttribute('text', {
+                    value: `${entry.name}`,
+                    align: 'center',
+                    color: '#ffffff',
+                    width: 10,
+                    side: 'double',
+                    font: "asset/Michroma-Regular-msdf.json",
+                    negate: false,
+                });
+                nameText.setAttribute('position', `0 ${3 - index * 0.5} 0.01`);
+
+                let scoreText = document.createElement('a-entity');
+                scoreText.setAttribute('text', {
+                    value: `${entry.score}`,
+                    align: 'right',
+                    color: '#ffffff',
+                    width: 10,
+                    side: 'double',
+                    font: "asset/Michroma-Regular-msdf.json",
+                    negate: false,
+                });
+                scoreText.setAttribute('position', `-2 ${3 - index * 0.5} 0.01`);
+
+                plane.appendChild(numberText);
+                plane.appendChild(nameText);
+                plane.appendChild(scoreText);
+            });
 
     
         }
@@ -194,91 +350,12 @@ keyboard.addEventListener('click', function (event) {
     
 });
 
-
-let scoremondial = await ScoresData.fetchAll();
-
-let newscore = scoremondial.map(entry => ({ name: entry.nom_record, score: entry.score_record }));
+}
 
 
 
 
 
-let plane = document.createElement('a-entity');
-plane.setAttribute('geometry', {
-    primitive: 'plane',
-    width: 7,
-    height: 9,
-    side: 'double'
-});
-
-plane.setAttribute('material', {
-    color: '#000',
-    opacity: 0.8,
-    side: 'double'
-});
-
-plane.setAttribute('position', '0 1  7');
-plane.setAttribute('rotation', '0 180 0'); // Adding rotation
-
-let planeText = document.createElement('a-entity');
-planeText.setAttribute('text', {
-    value: 'Mondial Score',
-    align: 'center',
-    color: '#ffffff',
-    width: 15,
-    side: 'double',
-    font: "asset/Audiowide-Regular-msdf.json",
-    negate: false,
-});
-planeText.setAttribute('position', '0 4 0.01'); // Positioning text at the top of the plane
-
-plane.appendChild(planeText);
-
-newscore.forEach((entry, index) => {
-    let numberText = document.createElement('a-entity');
-    numberText.setAttribute('text', {
-        value: `${index + 1}.`,
-        align: 'left', // Align text to end
-        color: '#ffffff',
-        width: 10,
-        side: 'double',
-        font: "asset/Michroma-Regular-msdf.json",
-        negate: false,
-    });
-    numberText.setAttribute('position', `2 ${3 - index * 0.5} 0.01`); // Adjusting position for number
-
-    let nameText = document.createElement('a-entity');
-    nameText.setAttribute('text', {
-        value: `${entry.name}`,
-        align: 'center', // Align text to center
-        color: '#ffffff',
-        width: 10,
-        side: 'double',
-        font: "asset/Michroma-Regular-msdf.json",
-        negate: false,
-    });
-    nameText.setAttribute('position', `0 ${3 - index * 0.5} 0.01`); // Adjusting position for name
-
-    let scoreText = document.createElement('a-entity');
-    scoreText.setAttribute('text', {
-        value: `${entry.score}`,
-        align: 'right', // Align text to start
-        color: '#ffffff',
-        width: 10,
-        side: 'double',
-        font: "asset/Michroma-Regular-msdf.json",
-        negate: false,
-    });
-    scoreText.setAttribute('position', `-2 ${3 - index * 0.5} 0.01`); // Adjusting position for score
-
-    plane.appendChild(numberText);
-    plane.appendChild(nameText);
-    plane.appendChild(scoreText);
-});
-
-
-
-aScene.appendChild(plane);
 
 
 
@@ -306,10 +383,17 @@ aScene.appendChild(plane);
         startButton.parentNode.removeChild(startButton);
         if (keyboard && keyboard.parentNode) {
             keyboard.parentNode.removeChild(keyboard);
+            if (displayText.parentNode) {
+                displayText.parentNode.removeChild(displayText);
+            }
+            if (titletext.parentNode) {
+                titletext.parentNode.removeChild(titletext);
+            }
+            if (subtext.parentNode) {
+                subtext.parentNode.removeChild(subtext);
+            }  
         } 
-            displayText.parentNode.removeChild(displayText);  
-            titletext.parentNode.removeChild(titletext); 
-            subtext.parentNode.removeChild(subtext);    
+        
             plane.parentNode.removeChild(plane);
         let ambientSound = document.querySelector("#ambient");
         if (ambientSound) {
@@ -346,10 +430,17 @@ aScene.appendChild(plane);
         startButton.parentNode.removeChild(startButton);
         if (keyboard && keyboard.parentNode) {
             keyboard.parentNode.removeChild(keyboard);
+            if ( displayText.parentNode) {
+                displayText.parentNode.removeChild(displayText);
+            }
+            if (titletext.parentNode) {
+                titletext.parentNode.removeChild(titletext);
+            }
+            if (subtext.parentNode) {
+                subtext.parentNode.removeChild(subtext);
+            }  
         }
-        displayText.parentNode.removeChild(displayText);  
-        titletext.parentNode.removeChild(titletext); 
-        subtext.parentNode.removeChild(subtext);    
+        
         plane.parentNode.removeChild(plane);
         
         startGame(false, 3, "All", true);

@@ -26,7 +26,7 @@ let npcPositionSlots = [
         position: "0 -1 -4",
         occupied: false,
         npcId: null,
-        textsize: 10,
+        textsize:25,
         textoffset: 4.5,
         rotation: "0 0 0",
     },
@@ -46,7 +46,7 @@ let npcPositionSlots = [
         position: "-13 4 -15.5",
         occupied: false,
         npcId: null,
-        textsize: 15,
+        textsize:25,
         textoffset: 4.5,
         rotation: "0 45 0",
     },
@@ -56,7 +56,7 @@ let npcPositionSlots = [
         position: "8 -1 12",
         occupied: false,
         npcId: null,
-        textsize: 10,
+        textsize:25,
         textoffset: 4.5,
         rotation: "0 225 0",
     },
@@ -66,7 +66,7 @@ let npcPositionSlots = [
         position: "-7 2 14",
         occupied: false,
         npcId: null,
-        textsize: 10,
+        textsize:25,
         textoffset: 4.5,
         rotation: "0 145 0",
     },
@@ -75,7 +75,7 @@ let npcPositionSlots = [
         position: "17 -1 6",
         occupied: false,
         npcId: null,
-        textsize: 15,
+        textsize:25,
         textoffset: 4.5,
         rotation: "0 -90 0",
     },
@@ -84,7 +84,7 @@ let npcPositionSlots = [
         position: "24 22 8",
         occupied: false,
         npcId: null,
-        textsize: 120,
+        textsize: 50,
         textoffset: 6,
         rotation: "15 -115 0",
     },
@@ -93,7 +93,7 @@ let npcPositionSlots = [
         position: "-9 22 -20",
         occupied: false,
         npcId: null,
-        textsize: 120,
+        textsize: 50,
         textoffset: 6,
         rotation: "15 15 0",
     },
@@ -284,7 +284,6 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
             // Create the a-text element for displaying the PNJ response (the text)
             let aText = document.createElement("a-text");
             let nvlle_rep;
-            console.log(PNJ.reponse.texte_reponse);
             if (PNJ.reponse.texte_reponse.length > 15) {
                 for (let i = 14; i < PNJ.reponse.texte_reponse.length; i++) {
                     if (PNJ.reponse.texte_reponse[i] == " ") {
@@ -320,6 +319,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
             } else {
                 aText.setAttribute("position", `${position.split(' ')[0]} ${parseFloat(position.split(' ')[1]) + chosenSlot.textoffset} ${position.split(' ')[2]}`);
                 aText.setAttribute("rotation", chosenSlot.rotation);
+                aText.setAttribute("width", chosenSlot.textsize);
             }
 
             // Append the created elements to the a-scene
@@ -915,8 +915,25 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
                 questionEnCours.score = 25;
             }
         }
+        let aBigbox=false;
         if (questionEnCours.bonus){
             questionEnCours.score *= 2;
+            ///////abigbox
+            aBigbox = document.createElement("a-entity");
+            aBigbox.setAttribute("id", `pnj`);
+            aBigbox.setAttribute("gltf-model", "#astro");
+            aBigbox.setAttribute("side", "double");
+            aBigbox.setAttribute("position", `50 1 200`);
+            aBigbox.setAttribute("rotation", "0 180 0");
+            aBigbox.setAttribute("scale", "30 30 30");
+            aBigbox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
+            scene.appendChild(aBigbox);
+            
+
+        }else{
+            if(aBigbox){
+                scene.removeChild(aBigbox);
+            }
         }
 
         let texteBonus = ''; // On ajoute du texte si c'est une question bonus
