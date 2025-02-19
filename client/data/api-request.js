@@ -4,9 +4,7 @@
  */
 
 
-
-let API_URL = "https://www.tellapart.lightprince.fr/api/";
-
+let API_URL = "https://mmi.unilim.fr/~brooks4/SAE402/api/"; // URL de base de l'API
 
 /**
  *  getRequest

@@ -126,6 +126,47 @@ export function startmenu() {
     aScene.appendChild(choose);
 
 
+    //test pour afficher clavier
+
+    // Create button background (a-plane)
+    let keyboardButton = document.createElement("a-plane");
+    keyboardButton.setAttribute("material", "shader: flat; side: double; color: #007BFF; opacity: 0.9");
+    keyboardButton.setAttribute("geometry", "primitive: plane; width: 3; height: 1");
+    keyboardButton.setAttribute("position", "0 1 -5.2");
+    keyboardButton.setAttribute("class", "clickable"); // Makes it interactable
+
+    // Create keyboard button text (a-text)
+    let keyboardButtonText = document.createElement("a-text");
+    keyboardButtonText.setAttribute("text", "value: Open Keyboard; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; align: center");
+    keyboardButtonText.setAttribute("position", "0 0 0.1"); // Slightly in front of keyboard button
+    keyboardButtonText.setAttribute("width", "4");
+
+    // Append keyboard button text to keyboard button
+    keyboardButton.appendChild(keyboardButtonText);
+
+    // Append keyboard button to scene
+    aScene.appendChild(keyboardButton);
+
+    // Create virtual keyboard (Initially hidden)
+    let keyboard = document.createElement("a-entity");
+    keyboard.setAttribute("keyboard", "");  // Ensure the keyboard component is active
+    keyboard.setAttribute("visible", "false");
+    keyboard.setAttribute("position", "0 0 -5");  // Position the keyboard in the scene
+    aScene.appendChild(keyboard);
+
+    // Add event listener to show/hide keyboard
+    keyboardButton.addEventListener("click", function () {
+        console.log("Button clicked");
+
+        // Toggle the visibility
+        let isVisible = keyboard.getAttribute("visible");
+        if (isVisible) {
+            keyboard.setAttribute("visible", false); // Hide the keyboard
+        } else {
+            keyboard.setAttribute("visible", true); // Show the keyboard
+        }
+    });
+
 
 }
 
