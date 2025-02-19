@@ -9,27 +9,110 @@
     <title>Document</title>
     <link rel="stylesheet" href="src/output.css">
 </head>
-<body class="bg-[#1E2431]">
+<body class="bg-[#1E2431] flex flex-col gap-[4rem]  md:gap-[20rem]">
 
-    <!--<div id="block-the-game" class="h-[288px] md:h-[1107px] w-full flex flex-col justify-center items-center relative">
-        <img src="assets/image bg play.png" alt="vaisseau" class="absolute top-0 left-0 w-full h-full object-cover z-0">
+
+    <section id="nav" class="navbar bg-gradient-to-b from-nav from-55% to-transparent fixed top-0 left-0 w-full z-50">
+        <ul class="navbar__list flex flex-row justify-between md:justify-center px-6 md:px-0 py-4 md:py-16 gap-16 text-white font-inter md:text-4xl text-2xl font-black">
+            <li class="navbar__list-item"><a href="#home__illustration" class="navbar__list-link hover:underline" style="scroll-behavior: smooth;">Home</a></li>
+            <button id="menu-button" class="block md:hidden focus:outline-none"><img src="./assets/burger.svg" alt="Burger"></button>
+            <li class="navbar__list-item hidden md:block"><a href="" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">Presentation</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#why" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">Why</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#how" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">How</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#block-the-game" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">The game</a></li>
+        </ul>
+
+        <div id="side-menu" class="menu fixed md:hidden top-0 right-0 w-2/3 bg-gradient-to-l from-nav from-30% to-transparent h-fit p-4 font-inter font-black text-right text-white text-2xl z-20 hidden">
+            <ul class="flex flex-col gap-14">
+                <li><a href="#home__illustration" class="hover:underline" style="scroll-behavior: smooth;">Home</a></li>
+                <li><a href="#why" class="hover:underline" style="scroll-behavior: smooth;">Why</a></li>
+                <li><a href="#how" class="hover:underline" style="scroll-behavior: smooth;">How</a></li>
+                <li><a href="#block-the-game" class="hover:underline" style="scroll-behavior: smooth;">The game</a></li>
+            </ul>
+            <button id="close-button" class="focus:outline-none absolute left-5 top-5 w-fit h-auto"><img src="./assets/cross.svg" alt="Close"></button>
+        </div>
+    </section>
+
+
+    <section id="home__illustration" class="home__illustration h-fit relative pt-6 ">
+        <img src="./assets/home-illustration.webp" alt="Illustration" class="home__illustration-img w-full h-auto">
+        <h1 class="home__illustration-title font-jersey absolute bottom-[-1rem] md:bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/4 text-white md:text-8xl text-7xl md:text-[300px]">TellApart</h1>
+    </section>
+
+    <section id="why" class="why flex flex-col items-center gap-3 text-white px-0 md:px-[20rem] scroll-my-[8rem]">
+        <h2 class="why__text-title text-center text-5xl md:text-9xl font-bold font-poppins">Why?</h2>
+        <div class="why__container flex flex-col md:flex-row items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="why__container-text flex flex-col font-inter gap-5">
+                <h3 class="why__container-text-subtitle text-2xl md:text-6xl font-black">Learn English</h3>
+                <p class = "why__container-text-description text-base md:text-4xl font-normal">TellApart is designed to let young audiences, mainly French pupils in primary or middle schools, learn basic English in a fun way. By integrating language learning into an engaging game, it encourages students to practice vocabulary, sentence structure, and comprehension skills in an interactive environment. </p> 
+            </div>
+            <img class="why__container-img w-[155px] md:w-[500px] h-auto" src="./assets/learn-english.webp" alt="Learn English">
+        </div>
+    </section>
+
+    <section id="how" class="how flex flex-col items-center gap-3 text-white px-0 md:px-[20rem] scroll-my-[8rem]">
+        <h2 class="how__text-title text-center text-5xl md:text-9xl font-bold font-poppins text-white">How?</h2>
+        <div class="how__container flex flex-col md:flex-row-reverse items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="how__container-text flex flex-col font-inter gap-5">
+                <h3 class="how__container-text-subtitle text-2xl md:text-6xl font-black">A-Frame & HTML/JS</h3>
+                <p class = "how__container-text-description text-base md:text-4xl font-normal">TellApart is built with A-Frame, a web framework for immersive 3D experiences using HTML and JavaScript, making it easily accessible in a browser or in a VR headset. Set in a futuristic space environment, players interact with NPCs through simple point-and-click mechanics. A-Frame's entity-component system enables dynamic updates like character animations and teleportation effects, enhancing immersion. Its lightweight design ensures smooth performance, creating an engaging and educational experience for young learners. </p> 
+            </div>
+            <div class="how__container-images flex flex-row md:flex-col justify-center gap-4 md:gap-11 w-full"> 
+                <img class="how__container-img w-[85px] md:w-full h-auto" src="./assets/a-frame.webp" alt="A-Frame">
+                <img class="how__container-img w-[173px] md:w-full h-auto" src="./assets/html.webp" alt="HTML/JS">
+            </div>
+        </div>
+    </section>
+
+
+   <div id="block-the-game" class="h-[288px] md:h-[1107px] w-full flex flex-col justify-center items-center relative">
+        <img src="assets/image bg play.png" alt="vaisseau" class="absolute top-0 left-0 w-full  object-cover -z-10">
         <div class="flex flex-col justify-center items-center z-10 gap-5 md:gap-20 ">
             <p class="text-white text-5xl md:text-9xl font-bold font-poppins">The game</p>
             <a class="w-[263] h-[45.5px] md:w-[653px] md:h-[113px] px-5 py-2.5 bg-[#955219] rounded-[31px] justify-center items-center gap-2.5 inline-flex hover:bg-[#804118]" href="/client/index.html">
-                <p class="text-white text-[25.78px] md:text-[64px] 
+                <p href="./client" class="text-white text-[25.78px] md:text-[64px] 
                 font-semibold md:font-black font-inter">Click here to play!</p>
             </a>
         </div>
-    </div>-->
+    </div>
 
-   <!-- <div id="footer" class="relative w-full h-fit flex justify-center items-center flex-col gap-10 md:gap-[200px]">
-        <div class="w-full h-fit text-center text-white text-2xl md:text-8xl font-bold font-poppins">Get ready, stay sharp, and have fun exploring!</div>
-        <img class="w-full h-full" src="assets/footer 1.png" />
-        <p class="font-jersey text-white absolute bottom-2 text-xl md:text-6xl  ">©Tell Apart, 2025. Tous droits réservés.</p>
-    </div>-->
+  
 
+    <div id="character" class="h-fit w-full py-[50px] flex-col justify-start items-center gap-[50px] inline-flex">
+        <div class="text-center text-white text-[40px] md:text-8xl font-bold font-poppins">The characters</div>
+        <div class=" h-fit flex-col justify-center items-center gap-[50px] md:gap-[100px] flex">
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Mouse</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-full">A clever and quick-thinking astronaut, always ready to solve problems.</div>
+                </div>
+                <img class="w-[215px] rounded-[20px]" src="assets/alien2.png" />
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
+                <img class="w-[215px] rounded-[20px]" src="assets/alien4.png" />
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Frog</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">A strong and steady team member, but a bit slow to react.</div>
+                </div>
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Flamingo</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">A wise and observant explorer, known for sharp attention to detail.</div>
+                </div>
+                <img class="w-[215px] rounded-[20px]" src="assets/alien1.png" />
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
+                <img class="w-[215px] rounded-[20px]" src="assets/alien3.png" />
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Aliens</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">Perfect mimics of the astronauts, but their poor English gives them away.</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-   <!-- <div id="how-play" class="h-fit w-full flex-col justify-start items-center gap-[50px] inline-flex">
+    <div id="how-play" class="h-fit w-full flex-col justify-start items-center gap-[50px] inline-flex px-0 md:px-[20rem]">
         <div class="text-center text-[#f0f2f4] md:text-8xl text-[40px] font-bold font-poppins">How to play ?</div>
         <div class="flex-col justify-start items-start gap-[50px] md:gap-[100px] flex w-full">
             <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] flex md:flex-row flex-col">
@@ -54,43 +137,15 @@
                 <img class="md:w-[528px] w-[300px]" src="assets/response.png" />
             </div>
         </div>
-    </div>-->
-
-
-
-    <div id="character" class="h-fit w-full py-[50px] flex-col justify-start items-center gap-[50px] inline-flex">
-    <div class="text-center text-white text-[40px] md:text-8xl font-bold font-poppins">The characters</div>
-    <div class="self-stretch h-fit flex-col justify-center items-center gap-[50px] md:gap-[100px] flex">
-        <div class="self-stretch px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
-            <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex">
-                <div class="self-stretch text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center">Space Mouse</div>
-                <div class="self-stretch text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center">A clever and quick-thinking astronaut, always ready to solve problems.</div>
-            </div>
-            <img class="w-[215px] rounded-[20px]" src="assets/alien2.png" />
-        </div>
-        <div class="self-stretch px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
-            <img class="w-[215px] rounded-[20px]" src="assets/alien4.png" />
-            <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex">
-                <div class="self-stretch text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center">Space Frog</div>
-                <div class="self-stretch text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center">A strong and steady team member, but a bit slow to react.</div>
-            </div>
-        </div>
-        <div class="self-stretch px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
-            <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex">
-                <div class="self-stretch text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center">Space Flamingo</div>
-                <div class="self-stretch text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center">A wise and observant explorer, known for sharp attention to detail.</div>
-            </div>
-            <img class="w-[215px] rounded-[20px]" src="assets/alien1.png" />
-        </div>
-        <div class="self-stretch px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
-            <img class="w-[215px] rounded-[20px]" src="assets/alien3.png" />
-            <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex">
-                <div class="self-stretch text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center">Aliens</div>
-                <div class="self-stretch text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center">Perfect mimics of the astronauts, but their poor English gives them away.</div>
-            </div>
-        </div>
     </div>
-</div>
+
+    <div id="footer" class="relative w-full h-fit flex justify-center items-center flex-col gap-10 md:gap-[200px]">
+        <div class="w-full h-fit text-center text-white text-2xl md:text-8xl font-bold font-poppins">Get ready, stay sharp, and have fun exploring!</div>
+        <img class="w-full h-full" src="assets/footer 1.png" />
+        <p class="font-jersey text-white absolute bottom-2 text-xl md:text-6xl  ">©Tell Apart, 2025. Tous droits réservés.</p>
+    </div>
+
+   
 
     
 </body>

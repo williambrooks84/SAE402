@@ -8,6 +8,10 @@
             poppins: ['Poppins', 'sans-serif'],
             inter: ['inter', 'sans-serif'],
           },
+          colors: {
+            nav: '#0A1418',
+            background: '#1E2431',
+          },
         },
       },
         plugins: [],
