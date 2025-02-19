@@ -1,10 +1,12 @@
 <?php
 require_once "Controller/QuestionController.php";
+require_once "Controller/RecordController.php";
 require_once "Class/HttpRequest.php";
 
 
 $router = [
     "questions" => new QuestionController(),
+    "scores" => new RecordController(),
 ];
 
 // objet HttpRequest qui contient toutes les infos utiles sur la requêtes (voir class/HttpRequest.php)

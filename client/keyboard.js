@@ -1,46 +1,8 @@
-
-import {startGame} from './script.js';
-import {startmenu} from './start.js';
-import { ScoresData } from './data/data.js';
-
 let name="";
 
-export async function endgame(scoregames,questioncounter,totalscore) {
-    let timerDisplay = document.querySelector("#timerDisplay");
-    if (timerDisplay) {
-        timerDisplay.parentNode.removeChild(timerDisplay);
-    }
-  
-    let scoreDisplay = document.querySelector("#scoreDisplay");
-    if (scoreDisplay) {
-        scoreDisplay.parentNode.removeChild(scoreDisplay);
-    }
+export function keyboard() {
 
     let aScene = document.querySelector("a-scene");
-    let aText = document.createElement("a-text");
-    aText.setAttribute("text", "value: Well done, you win the game!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    aText.setAttribute("position", "0 9 -8");
-    aText.setAttribute("width", "48");
-    aText.setAttribute("align", "center");
-    aScene.appendChild(aText);
-
-    let ascore = document.createElement("a-text");
-    ascore.setAttribute("text", "value: Questions: " + scoregames+"/"+questioncounter+" questions; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    ascore.setAttribute("position", "0 6 -8");
-    ascore.setAttribute("width", "48");
-    ascore.setAttribute("align", "center");
-    aScene.appendChild(ascore);
-
-    let atotalscore = document.createElement("a-text");
-    atotalscore.setAttribute("text", "value: Total Score: " + totalscore+" points; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    atotalscore.setAttribute("position", "0 3 -8");
-    atotalscore.setAttribute("width", "48");
-    atotalscore.setAttribute("align", "center");
-    aScene.appendChild(atotalscore);
-    
-
-// Keyboard && mondial score
-
 
 let keyboard = document.createElement('a-entity');
 keyboard.setAttribute('geometry', {
@@ -182,8 +144,8 @@ keyboard.addEventListener('click', function (event) {
             keyboard.parentNode.removeChild(keyboard);
             titletext.setAttribute('text', 'value', 'Your score is saved!');
 
-
-            subtext.setAttribute('text', 'value', "score:"+totalscore);
+let score=100;
+            subtext.setAttribute('text', 'value', "score:"+score);
             subtext.setAttribute('position', '1 1.7 2');
             subtext.setAttribute('text','width', 4);
 
@@ -195,13 +157,24 @@ keyboard.addEventListener('click', function (event) {
 });
 
 
-let scoremondial = await ScoresData.fetchAll();
-
-let newscore = scoremondial.map(entry => ({ name: entry.nom_record, score: entry.score_record }));
-
-
-
-
+let scoremondialt = [
+    { name: "AAAAA", score: 120 },
+    { name: "BBBBB", score: 110 },
+    { name: "CCCCC", score: 130 },
+    { name: "DDDDD", score: 140 },
+    { name: "EEEEE", score: 150 },
+    { name: "FFFFF", score: 160 },
+    { name: "GGGGG", score: 170 },
+    { name: "HHHHH", score: 180 },
+    { name: "IIIII", score: 190 },
+    { name: "JJJJJ", score: 200 },
+    { name: "KKKKK", score: 210 },
+    { name: "LLLLL", score: 220 },
+    { name: "MMMMM", score: 230 },
+    { name: "NNNNN", score: 240 },
+    { name: "OOOOO", score: 250 },
+    { name: "PPPPP", score: 260 }
+];
 
 let plane = document.createElement('a-entity');
 plane.setAttribute('geometry', {
@@ -234,7 +207,7 @@ planeText.setAttribute('position', '0 4 0.01'); // Positioning text at the top o
 
 plane.appendChild(planeText);
 
-newscore.forEach((entry, index) => {
+scoremondialt.sort((a, b) => b.score - a.score).slice(0, 10).forEach((entry, index) => {
     let numberText = document.createElement('a-entity');
     numberText.setAttribute('text', {
         value: `${index + 1}.`,
@@ -284,91 +257,8 @@ aScene.appendChild(plane);
 
 
 
-////script button
 
-    let menuButton = document.createElement("a-entity");
-    
-    
-    menuButton.setAttribute("geometry", "primitive: plane; width: 3.6; height: 0.8;");
-    
-    menuButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
-
-    menuButton.setAttribute("text", "value: Return to Menu; align: center; width: 10; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
-    menuButton.setAttribute("position", "-2 0.5 -3");
-    menuButton.setAttribute("class", "clickable");
-    menuButton.addEventListener("click", async function () {
-
-
-        aText.parentNode.removeChild(aText);
-        ascore.parentNode.removeChild(ascore);
-        atotalscore.parentNode.removeChild(atotalscore);
-        menuButton.parentNode.removeChild(menuButton);
-        startButton.parentNode.removeChild(startButton);
-        if (keyboard && keyboard.parentNode) {
-            keyboard.parentNode.removeChild(keyboard);
-        } 
-            displayText.parentNode.removeChild(displayText);  
-            titletext.parentNode.removeChild(titletext); 
-            subtext.parentNode.removeChild(subtext);    
-            plane.parentNode.removeChild(plane);
-        let ambientSound = document.querySelector("#ambient");
-        if (ambientSound) {
-            ambientSound.pause();
-            ambientSound.currentTime = 0;
-        }
-        
-        startmenu();
-        setTimeout(resetRaycaster, 500);
-
-    });
-    aScene.appendChild(menuButton);
-
-
-
-
-
-
-    let startButton = document.createElement("a-entity");
-    
-    
-    startButton.setAttribute("geometry", "primitive: plane; width: 2.4; height: 0.8;");
-    
-    startButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
-
-    startButton.setAttribute("text", "value: RESTART; align: center; width: 10; font: asset/Michroma-Regular-msdf.json; negate: false; opacity: 1; alphaTest: 0.5");
-    startButton.setAttribute("position", "2 0.5 -3");
-    startButton.setAttribute("class", "clickable");
-    startButton.addEventListener("click", async function () {
-        aText.parentNode.removeChild(aText);
-        ascore.parentNode.removeChild(ascore);
-        atotalscore.parentNode.removeChild(atotalscore);
-        menuButton.parentNode.removeChild(menuButton);
-        startButton.parentNode.removeChild(startButton);
-        if (keyboard && keyboard.parentNode) {
-            keyboard.parentNode.removeChild(keyboard);
-        }
-        displayText.parentNode.removeChild(displayText);  
-        titletext.parentNode.removeChild(titletext); 
-        subtext.parentNode.removeChild(subtext);    
-        plane.parentNode.removeChild(plane);
-        
-        startGame(false, 3, "All", true);
-        
-    });
-    aScene.appendChild(startButton);
-    
 }
 
 
-
-function resetRaycaster() {
-    let rightController = document.querySelector("#rightController");
-    let leftController = document.querySelector("#leftController");
-
-    if (rightController && rightController.components.raycaster) {
-        rightController.components.raycaster.refreshObjects();
-    }
-    if (leftController && leftController.components.raycaster) {
-        leftController.components.raycaster.refreshObjects();
-    }
-}
+keyboard();
