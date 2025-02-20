@@ -21,7 +21,7 @@
               let intersectedEl = evt.target.components.raycaster.intersectedEls[0];
               if (intersectedEl) {
                   
-                  intersectedEl.setAttribute("material", "color: red"); // Changement de couleur
+                 
               }
           }
 
@@ -36,7 +36,7 @@
     
     if (intersectedEl && intersectedEl.classList.contains("clickable")) {
         
-        intersectedEl.setAttribute("material", "color: red");
+        
         
         // Empêche toute propagation de l'événement pour éviter des déclenchements indésirables
         evt.stopPropagation();
