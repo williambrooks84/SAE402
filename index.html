@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+10&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>TellApart</title>
+    <link rel="icon" href="/client/favicon.png" type="image/png">
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="bg-[#1E2431] flex flex-col gap-[4rem]  md:gap-[20rem] overflow-x-hidden">
+
+
+    <section class="navbar bg-gradient-to-b from-nav from-55% to-transparent fixed top-0 left-0 w-full z-20">
+        <ul class="navbar__list flex flex-row justify-between md:justify-center px-6 md:px-0 py-8 gap-16 text-white font-inter text-4xl font-black">
+            <li class="navbar__list-item">
+                <a href="#home__illustration" class="navbar__list-link hover:underline">
+                    <img src="assets/home-icon-silhouette-svgrepo-com.svg" alt="home" class="w-10 block md:hidden">
+                    <span class="hidden md:inline">Home</span>
+                </a>
+            </li></a></li>
+            <button id="menu-button" class="block md:hidden focus:outline-none"><img src="./assets/burger.svg" alt="Burger"></button>
+            <li class="navbar__list-item hidden md:block"><a href="#presentation" class="navbar__list-link hover:underline">Presentation</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#why" class="navbar__list-link hover:underline">Why</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#how" class="navbar__list-link hover:underline">How</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#block-the-game" class="navbar__list-link hover:underline">The game</a></li>
+        </ul>
+
+        <div id="side-menu" class="menu fixed md:hidden top-0 right-0 w-2/3 bg-gradient-to-l from-nav from-30% to-transparent  p-4 font-inter font-black text-right text-white text-2xl z-20  h-full">
+            <ul class="flex flex-col gap-14 pt-10">
+                <li><a href="#presentation" class="hover:underline ">Presentation</a></li>
+                <li><a href="#why" class="hover:underline">Why</a></li>
+                <li><a href="#how" class="hover:underline">How</a></li>
+                <li><a href="#block-the-game" class="hover:underline">The game</a></li>
+            </ul>
+            <button id="close-button" class="focus:outline-none absolute left-5 top-5 w-fit h-auto"><img src="./assets/cross.svg" alt="Close"></button>
+        </div>
+    </section>
+
+
+    <section id="home__illustration" class="home__illustration h-fit relative pt-14 md:pt-6 ">
+        <img src="./assets/home-illustration.webp" alt="Illustration" class="home__illustration-img w-full h-auto">
+        <h1 class="home__illustration-title font-jersey absolute bottom-[-1rem] md:bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/4 text-white md:text-8xl text-7xl md:text-[300px]">TellApart</h1>
+    </section>
+
+    <div id="presentation" class="flex flex-col gap-1 w-full items-center relative scroll-my-[8rem]">
+        <p class="text-center text-white text-[40px] md:text-8xl font-bold font-poppins pb-5 md:pb-20">
+            Presentation
+        </p>
+
+        <div id="carousel-container" class="relative w-screen max-w-screen overflow-hidden">
+            <div id="carousel-content" class="flex transition-transform duration-500 ease-in-out w-screen">
+                
+                <!-- Slide 1 -->
+                <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-20 w-screen">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
+                        <p class="text-nav font-inter md:text-4xl text-[14px]">
+                            An educational 3D game where players identify disguised aliens by spotting their English mistakes.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel1.jpg" alt="carousel1" class="md:w-full w-[25rem] object-cover">
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-20 w-screen">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
+                        <p class="text-nav font-inter md:text-4xl text-[14px]">
+                            Easy to learn gameplay that will let you start learning within seconds.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel2.jpg" alt="carousel2" class="md:w-full w-[25rem]  object-cover">
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-20 w-screen">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
+                        <p class="text-nav font-inter md:text-4xl text-[14px]">
+                            A customizable experience to let you learn at your pace.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel3.jpg" alt="carousel3" class="md:w-full w-[25rem]  object-cover">
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-20 w-screen">
+                    <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
+                        <p class="text-nav font-inter md:text-4xl text-[14px]">
+                            An immersive experience and surroundings to discover.
+                        </p>
+                    </div>
+                    <img src="./assets/carousel4.jpg" alt="carousel4" class="md:w-full w-[25rem]  object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div id="carousel_controls" class="flex gap-5 mt-4">
+            <div data-number="1" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-[#04D2FF] rounded-full w-4 h-4 md:w-8 md:h-8"></div>
+            <div data-number="2" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-4 h-4 md:w-8 md:h-8"></div>
+            <div data-number="3" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-4 h-4 md:w-8 md:h-8"></div>
+            <div data-number="4" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-4 h-4 md:w-8 md:h-8"></div>
+        </div>
+    </div>
+
+
+    <section id="why" class="why flex flex-col items-center gap-3 text-white px-0 md:px-[20rem] scroll-my-[8rem]">
+        <h2 class="why__text-title text-center text-5xl md:text-9xl font-bold font-poppins">Why?</h2>
+        <div class="why__container flex flex-col md:flex-row items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="why__container-text flex flex-col font-inter gap-5">
+                <h3 class="why__container-text-subtitle text-2xl md:text-6xl font-black">Learn English</h3>
+                <p class = "why__container-text-description text-base md:text-4xl font-normal">TellApart is designed to let young audiences, mainly French pupils in primary or middle schools, learn basic English in a fun way. By integrating language learning into an engaging game, it encourages students to practice vocabulary, sentence structure, and comprehension skills in an interactive environment. </p> 
+            </div>
+            <img class="why__container-img w-[155px] md:w-[500px] h-auto" src="./assets/learn-english.webp" alt="Learn English">
+        </div>
+    </section>
+
+    <section id="how" class="how flex flex-col items-center gap-3 text-white px-0 md:px-[20rem] scroll-my-[8rem]">
+        <h2 class="how__text-title text-center text-5xl md:text-9xl font-bold font-poppins text-white">How?</h2>
+        <div class="how__container flex flex-col md:flex-row-reverse items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="how__container-text flex flex-col font-inter gap-5">
+                <h3 class="how__container-text-subtitle text-2xl md:text-6xl font-black">A-Frame & HTML/JS</h3>
+                <p class = "how__container-text-description text-base md:text-4xl font-normal">TellApart is built with A-Frame, a web framework for immersive 3D experiences using HTML and JavaScript, making it easily accessible in a browser or in a VR headset. Set in a futuristic space environment, players interact with NPCs through simple point-and-click mechanics. A-Frame's entity-component system enables dynamic updates like character animations and teleportation effects, enhancing immersion. Its lightweight design ensures smooth performance, creating an engaging and educational experience for young learners. </p> 
+            </div>
+            <div class="how__container-images flex flex-row md:flex-col justify-center gap-4 md:gap-11 w-full"> 
+                <img class="how__container-img w-[85px] md:w-full h-auto" src="./assets/a-frame.webp" alt="A-Frame">
+                <img class="how__container-img w-[173px] md:w-full h-auto" src="./assets/html.webp" alt="HTML/JS">
+            </div>
+        </div>
+    </section>
+
+
+   <div id="block-the-game" class="h-[288px] md:h-[1107px] w-full flex flex-col justify-center items-center relative">
+        <img src="assets/image bg play.png" alt="vaisseau" class="absolute top-0 left-0 w-full  object-cover -z-10">
+        <div class="flex flex-col justify-center items-center z-10 gap-5 md:gap-20 ">
+            <p class="text-white text-5xl md:text-9xl font-bold font-poppins">The game</p>
+            <a class="w-[263] h-[45.5px] md:w-[653px] md:h-[113px] px-5 py-2.5 bg-[#955219] rounded-[31px] justify-center items-center gap-2.5 inline-flex hover:bg-[#804118]" href="/client/index.html">
+                <p href="./client" class="text-white text-[25.78px] md:text-[64px] 
+                font-semibold md:font-black font-inter">Click here to play!</p>
+            </a>
+        </div>
+    </div>
+
+  
+
+    <div id="character" class="h-fit w-full py-[50px] flex-col justify-start items-center gap-[50px] inline-flex">
+        <div class="text-center text-white text-[40px] md:text-8xl font-bold font-poppins">The characters</div>
+        <div class=" h-fit flex-col justify-center items-center gap-[50px] md:gap-[100px] flex">
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-[14px]/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Mouse</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-full">A clever and quick-thinking astronaut, always ready to solve problems.</div>
+                </div>
+                <img class="w-[215px] rounded-[20px]" src="assets/alien2.png" />
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
+                <img class="w-[215px] rounded-[20px]" src="assets/alien4.png" />
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Frog</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">A strong and steady team member, but a bit slow to react.</div>
+                </div>
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Space Flamingo</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">A wise and observant explorer, known for sharp attention to detail.</div>
+                </div>
+                <img class="w-[215px] rounded-[20px]" src="assets/alien1.png" />
+            </div>
+            <div class=" px-[25px] md:px-[100px] justify-center items-center gap-[30px] md:gap-[60px] flex flex-col-reverse md:flex-row">
+                <img class="w-[215px] rounded-[20px]" src="assets/alien3.png" />
+                <div class="grow shrink basis-0 flex-col justify-center items-center gap-0 md:gap-5 inline-flex w-fit">
+                    <div class=" text-white text-xl/[50px] md:text-[64px] font-black font-inter  md:text-start text-center w-full">Aliens</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter  md:text-start text-center w-fit">Perfect mimics of the astronauts, but their poor English gives them away.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="how-play" class="h-fit w-full flex-col justify-start items-center gap-[50px] inline-flex px-0 md:px-[20rem]">
+        <div class="text-center text-[#f0f2f4] md:text-8xl text-[40px] font-bold font-poppins">How to play ?</div>
+        <div class="flex-col justify-start items-start gap-[50px] md:gap-[100px] flex w-full">
+            <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] flex md:flex-row flex-col">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex">
+                    <div class=" text-white text-2xl md:text-[64px] font-black font-inter md:text-start text-center">Choose the level</div>
+                    <div class=" text-justify md:text-start"><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">You get to choose! Want to play for </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">2 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">3 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or even </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">5</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">    Pick your challenge: </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">easy (level 1)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">medium (level 2)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or hard </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">(level 3)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">Want random questions? just click '</span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">Start</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">' on the first page!</span></div>
+                </div>
+                <img class=" w-[300px] md:w-[578px] " src="assets/choosegame.png" />
+            </div>
+            <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] grid ">
+                <img class=" w-[300px] md:w-[528px] col-start-1 col-end-2 md:row-start-1 row-start-2 row-end-3" src="assets/questions.png" />
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex md:col-start-2 md:col-end-3 col-start-1 col-end-2 row-start-1 row-end-2 md:row-end-3">
+                    <div class=" text-white text-2xl md:text-[64px]/[50px] font-black md:text-start font-inter text-center">Find the correct answer</div>
+                    <div class=""><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">In each group of astronauts, only </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">one</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or sometimes </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">more</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, answers are </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">correct</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">. Choose the right one so you </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">don’t lose points</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">!</span></div>
+                </div>
+            </div>
+            <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] flex md:flex-row flex-col">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex">
+                    <div class=" text-[#f0f2f4] text-2xl md:text-[64px] leading-none font-bold font-poppins md:text-start text-center ">Want more challenge? Try Hide & Seek!</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">This version is almost the same as the regular one, but the astronauts are spread all over the map! Look carefully to find them and choose the one with the right answer!</div>
+                </div>
+                <img class="md:w-[528px] w-[300px]" src="assets/response.png" />
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="relative w-full h-fit flex justify-center items-center flex-col gap-10 md:gap-[200px]">
+        <div class="w-full h-fit text-center text-white text-2xl md:text-8xl font-bold font-poppins">Get ready, stay sharp, and have fun exploring!</div>
+        <img class="w-full h-full" src="assets/footer 2.png" />
+        <p class="font-jersey text-white absolute bottom-2 text-xl md:text-6xl  ">©Tell Apart, 2025. Tous droits réservés.</p>
+    </div>
+
+   
+<script src="script.js"></script>
+    
+</body>
+</html>
