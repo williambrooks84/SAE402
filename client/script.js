@@ -979,6 +979,10 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
                 clearInterval(timerInterval);
                 gamefinished = true;
                 timer = 0;
+
+                if(aBigbox){
+                    scene.removeChild(aBigbox);
+                }
                 
                 endgame(scoregame, questioncounter, totalscore);
                 scoregame = 0;

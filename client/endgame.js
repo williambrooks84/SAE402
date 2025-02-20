@@ -201,8 +201,10 @@ keys.forEach((key, index) => {
         align: 'center',
         color: '#ffffff',
         width: 2,
-        side: 'double'
+        side: 'double',
+        
     });
+    keyEntity.setAttribute('class', 'clickable');
     if (key === 'Return') {
         keyEntity.setAttribute('position', `${(index % 10) * 0.11 - 0.32} ${-Math.floor(index / 10) * 0.11 + 0.1} 0.01`);
     } else if (key === 'Save') {
@@ -393,6 +395,15 @@ keyboard.addEventListener('click', async function (event) {
                 subtext.parentNode.removeChild(subtext);
             }  
         } 
+        if ( displayText.parentNode) {
+            displayText.parentNode.removeChild(displayText);
+        }
+        if (titletext.parentNode) {
+            titletext.parentNode.removeChild(titletext);
+        }
+        if (subtext.parentNode) {
+            subtext.parentNode.removeChild(subtext);
+        } 
         
             plane.parentNode.removeChild(plane);
         let ambientSound = document.querySelector("#ambient");
@@ -440,6 +451,16 @@ keyboard.addEventListener('click', async function (event) {
                 subtext.parentNode.removeChild(subtext);
             }  
         }
+
+        if ( displayText.parentNode) {
+            displayText.parentNode.removeChild(displayText);
+        }
+        if (titletext.parentNode) {
+            titletext.parentNode.removeChild(titletext);
+        }
+        if (subtext.parentNode) {
+            subtext.parentNode.removeChild(subtext);
+        } 
         
         plane.parentNode.removeChild(plane);
         
