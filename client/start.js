@@ -106,7 +106,7 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
-        startGame(isMuted, 0.01, "All", isHideSeek);
+        startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
 
