@@ -12,29 +12,29 @@
 <body class="bg-[#1E2431] flex flex-col gap-[4rem]  md:gap-[20rem]">
 
 
-    <section id="nav" class="navbar bg-gradient-to-b from-nav from-55% to-transparent fixed top-0 left-0 w-full z-50">
-        <ul class="navbar__list flex flex-row justify-between md:justify-center px-6 md:px-0 py-4 md:py-16 gap-16 text-white font-inter md:text-4xl text-2xl font-black">
-            <li class="navbar__list-item"><a href="#home__illustration" class="navbar__list-link hover:underline" style="scroll-behavior: smooth;">Home</a></li>
+    <section class="navbar bg-gradient-to-b from-nav from-55% to-transparent fixed top-0 left-0 w-full z-20">
+        <ul class="navbar__list flex flex-row justify-between md:justify-center px-6 md:px-0 py-8 gap-16 text-white font-inter text-4xl font-black">
+            <li class="navbar__list-item"><a href="#home__illustratio" class="navbar__list-link hover:underline">Home</a></li>
             <button id="menu-button" class="block md:hidden focus:outline-none"><img src="./assets/burger.svg" alt="Burger"></button>
-            <li class="navbar__list-item hidden md:block"><a href="" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">Presentation</a></li>
-            <li class="navbar__list-item hidden md:block"><a href="#why" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">Why</a></li>
-            <li class="navbar__list-item hidden md:block"><a href="#how" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">How</a></li>
-            <li class="navbar__list-item hidden md:block"><a href="#block-the-game" style="scroll-behavior: smooth;" class="navbar__list-link hover:underline">The game</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="" class="navbar__list-link hover:underline">Presentation</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#why" class="navbar__list-link hover:underline">Why</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#how" class="navbar__list-link hover:underline">How</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#block-the-game" class="navbar__list-link hover:underline">The game</a></li>
         </ul>
 
-        <div id="side-menu" class="menu fixed md:hidden top-0 right-0 w-2/3 bg-gradient-to-l from-nav from-30% to-transparent h-fit p-4 font-inter font-black text-right text-white text-2xl z-20 hidden">
+        <div id="side-menu" class="menu fixed md:hidden top-0 right-0 w-2/3 bg-gradient-to-l from-nav from-30% to-transparent  p-4 font-inter font-black text-right text-white text-2xl z-20  h-full">
             <ul class="flex flex-col gap-14">
-                <li><a href="#home__illustration" class="hover:underline" style="scroll-behavior: smooth;">Home</a></li>
-                <li><a href="#why" class="hover:underline" style="scroll-behavior: smooth;">Why</a></li>
-                <li><a href="#how" class="hover:underline" style="scroll-behavior: smooth;">How</a></li>
-                <li><a href="#block-the-game" class="hover:underline" style="scroll-behavior: smooth;">The game</a></li>
+                <li><a href="" class="hover:underline">Presentation</a></li>
+                <li><a href="#why" class="hover:underline">Why</a></li>
+                <li><a href="#how" class="hover:underline">How</a></li>
+                <li><a href="#block-the-game" class="hover:underline">The game</a></li>
             </ul>
             <button id="close-button" class="focus:outline-none absolute left-5 top-5 w-fit h-auto"><img src="./assets/cross.svg" alt="Close"></button>
         </div>
     </section>
 
 
-    <section id="home__illustration" class="home__illustration h-fit relative pt-6 ">
+    <section id="home__illustration" class="home__illustration h-fit relative pt-14 md:pt-6 ">
         <img src="./assets/home-illustration.webp" alt="Illustration" class="home__illustration-img w-full h-auto">
         <h1 class="home__illustration-title font-jersey absolute bottom-[-1rem] md:bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/4 text-white md:text-8xl text-7xl md:text-[300px]">TellApart</h1>
     </section>
@@ -117,22 +117,22 @@
         <div class="flex-col justify-start items-start gap-[50px] md:gap-[100px] flex w-full">
             <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] flex md:flex-row flex-col">
                 <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex">
-                    <div class="self-stretch text-white text-2xl md:text-[64px] font-black font-inter md:text-start text-center">Choose the level</div>
-                    <div class="self-stretch text-justify md:text-start"><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">You get to choose! Want to play for </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">2 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">3 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or even </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">5</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">    Pick your challenge: </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">easy (level 1)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">medium (level 2)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or hard </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">(level 3)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">Want random questions? just click '</span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">Start</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">' on the first page!</span></div>
+                    <div class=" text-white text-2xl md:text-[64px] font-black font-inter md:text-start text-center">Choose the level</div>
+                    <div class=" text-justify md:text-start"><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">You get to choose! Want to play for </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">2 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">3 minutes</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or even </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">5</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">    Pick your challenge: </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">easy (level 1)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">medium (level 2)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or hard </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">(level 3)</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">Want random questions? just click '</span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">Start</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">' on the first page!</span></div>
                 </div>
                 <img class=" w-[300px] md:w-[578px] " src="assets/choosegame.png" />
             </div>
             <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] grid ">
                 <img class=" w-[300px] md:w-[528px] col-start-1 col-end-2 md:row-start-1 row-start-2 row-end-3" src="assets/questions.png" />
                 <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex md:col-start-2 md:col-end-3 col-start-1 col-end-2 row-start-1 row-end-2 md:row-end-3">
-                    <div class="self-stretch text-white text-2xl md:text-[64px] font-black md:text-start font-inter text-center">Find the correct answer</div>
-                    <div class="self-stretch"><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">In each group of astronauts, only </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">one</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or sometimes </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">more</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, answers are </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">correct</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">. Choose the right one so you </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">don’t lose points</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">!</span></div>
+                    <div class=" text-white text-2xl md:text-[64px]/[50px] font-black md:text-start font-inter text-center">Find the correct answer</div>
+                    <div class=""><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">In each group of astronauts, only </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">one</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, or sometimes </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">more</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">, answers are </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">correct</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">. Choose the right one so you </span><span class="text-white text-base md:text-[40px] font-bold font-inter leading-none md:leading-[50.39px]">don’t lose points</span><span class="text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">!</span></div>
                 </div>
             </div>
             <div class="w-full px-[30px] md:px-[60px] justify-start items-center gap-[25px] md:gap-[50px] flex md:flex-row flex-col">
                 <div class="grow shrink basis-0 flex-col justify-start items-start gap-5 inline-flex">
-                    <div class="self-stretch text-[#f0f2f4] text-2xl md:text-[64px]/[50px] font-bold font-poppins md:text-start text-center ">Want more challenge? Try Hide & Seek!</div>
-                    <div class="self-stretch text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">This version is almost the same as the regular one, but the astronauts are spread all over the map! Look carefully to find them and choose the one with the right answer!</div>
+                    <div class=" text-[#f0f2f4] text-2xl md:text-[64px] leading-none font-bold font-poppins md:text-start text-center ">Want more challenge? Try Hide & Seek!</div>
+                    <div class=" text-white text-base md:text-[40px] font-normal font-inter leading-none md:leading-[50.39px]">This version is almost the same as the regular one, but the astronauts are spread all over the map! Look carefully to find them and choose the one with the right answer!</div>
                 </div>
                 <img class="md:w-[528px] w-[300px]" src="assets/response.png" />
             </div>
@@ -141,12 +141,12 @@
 
     <div id="footer" class="relative w-full h-fit flex justify-center items-center flex-col gap-10 md:gap-[200px]">
         <div class="w-full h-fit text-center text-white text-2xl md:text-8xl font-bold font-poppins">Get ready, stay sharp, and have fun exploring!</div>
-        <img class="w-full h-full" src="assets/footer 1.png" />
+        <img class="w-full h-full" src="assets/footer 2.png" />
         <p class="font-jersey text-white absolute bottom-2 text-xl md:text-6xl  ">©Tell Apart, 2025. Tous droits réservés.</p>
     </div>
 
    
-
+<script src="script.js"></script>
     
 </body>
 </html>

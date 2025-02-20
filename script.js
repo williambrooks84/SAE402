@@ -16,4 +16,3 @@ document.addEventListener("click", (event) => {
         sideMenu.classList.remove("active");
     }
 });
-
