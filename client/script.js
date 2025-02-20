@@ -926,7 +926,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
             aBigbox.setAttribute("position", `50 1 200`);
             aBigbox.setAttribute("rotation", "0 180 0");
             aBigbox.setAttribute("scale", "30 30 30");
-            aBigbox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 1");
+            aBigbox.setAttribute("animation-mixer", "clip: CharacterArmature|Wave; loop: repeat; timeScale: 2");
             scene.appendChild(aBigbox);
             
 
