@@ -181,7 +181,9 @@
       <a-plane position="0 -1 -4" rotation="-90 0 0" width="150" height="150" color="#b55e2e" material="metalness: 0.2; roughness: 0.2"></a-plane>
 
       <!-- Cargo -->
-      <a-entity gltf-model="#cargo" scale="3 3 3" position="-15 -1 -10" side="double"></a-entity>
+      <a-entity position="29 0 -7" rotation="0 -90 0">
+        <a-entity gltf-model="#cargo" scale="3 3 3" position="-37 -1 8" side="double"></a-entity>
+      </a-entity>
 
       <!-- Line of cargo + 2 cars -->
       <a-entity position="20 -1 8.5">
@@ -215,7 +217,7 @@
        </a-entity>
 
       <!-- 2 landers + light + car -->
-      <a-entity position="0 -1 -41">
+      <a-entity position="0 -1 -29">
         <a-entity gltf-model="#landerB" scale="6 6 6" position="-0.5 0 -5.5" side="double"></a-entity>
         <a-entity gltf-model="#landerA" scale="6 6 6" position="11 0 -9" side="double"></a-entity>
         <a-entity gltf-model="#light" scale="6 6 6" position="3.5 -0.2 10" side="double"></a-entity>
@@ -224,11 +226,24 @@
 
       <a-entity gltf-model="#pad" scale="6 6 6" position="32 -1 -45" side="double"></a-entity>
 
-      <a-entity position="20 0 -12.5">
-        <a-entity gltf-model="#cargotoit" target-part="roofmodule_solarpanels" scale="6 6 6" position="-262.7 0 -13.7" side="double"></a-entity>
+      <!-- Solar pannel -->
+      <a-entity position="1.65 -1 -52">
+        <a-entity gltf-model="#spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity>
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_solarpanels" scale="6 6 6" position="-262.7 12.5 -13.7" side="double"></a-entity>
       </a-entity>
 
-        <!-- <a-entity gltf-model="#spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity> -->
+      <a-entity position="16.5 -1 -52" rotation="0 90 0">
+         <a-entity gltf-model="#cargo" scale="3 3 3" position="-41 0 5.65" side="double"></a-entity>
+      </a-entity>
+
+      <!-- Tunnel -->
+      <a-entity position="0 -1 0">
+        <a-entity gltf-model="spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity>
+        <a-entity gltf-model="spacebase" scale="6 6 6" position="0 12.5 0" side="double"></a-entity>
+      </a-entity>
+
+
+
 
 
           <script src="decor2.js"></script>
