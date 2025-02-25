@@ -106,6 +106,7 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
+        changeMap.parentNode.removeChild(changeMap);
         startGame(isMuted, 3, "All", isHideSeek);
     });
     aScene.appendChild(startButton);
@@ -130,11 +131,11 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
+        changeMap.parentNode.removeChild(changeMap);
         chooseGame();
     });
     
     aScene.appendChild(choose);
-
 
     let Tuto = document.createElement("a-entity");
 
@@ -156,13 +157,30 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         Tuto.parentNode.removeChild(Tuto);
         choose.parentNode.removeChild(choose);
-
+        changeMap.parentNode.removeChild(changeMap);
         starttuto();
         
     });
     
     aScene.appendChild(Tuto);
 
+    let changeMap = document.createElement("a-entity");
+    changeMap.setAttribute("geometry", "primitive: plane; width: 2.7; height: 0.9;");
+    changeMap.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    changeMap.setAttribute("text", "value: Change map; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    changeMap.setAttribute("position", "-0.3 -0.5 -3");
+    changeMap.setAttribute("class", "clickable");
+
+    changeMap.addEventListener("click", function () {
+        if (aScene.dataset.map == "default"){
+            window.location.href = "index2.html";
+        }
+        else if (aScene.dataset.map == "large"){
+            window.location.href = "index.html";
+        }
+    });
+
+    aScene.appendChild(changeMap);
 
 }
 

@@ -1,4 +1,5 @@
 import { startGame } from "./script.js";
+import { startmenu } from "./start.js";
 
 export function chooseGame() {
     let aScene = document.querySelector("a-scene");
@@ -22,6 +23,7 @@ export function chooseGame() {
         button.setAttribute("text", `value: ${game}; align: center; width: 6; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5`);
         button.setAttribute("position", `-2 ${1.5 + index * 1} -3`);
         button.setAttribute("class", "clickable");
+        button.setAttribute("side", "double");
 
         button.addEventListener("click", function () {
             if (selectedButton) {
@@ -51,6 +53,7 @@ export function chooseGame() {
         button.setAttribute("text", `value: ${difficulty}; align: center; width: 6; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5`);
         button.setAttribute("position", `2 ${1.5 + index * 1} -3`);
         button.setAttribute("class", "clickable");
+        button.setAttribute("side", "double");
 
         button.addEventListener("click", function () {
             if (selecteddifficult) {
@@ -72,8 +75,17 @@ export function chooseGame() {
     startchooseButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.9;");
     startchooseButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
     startchooseButton.setAttribute("text", "value: START; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
-    startchooseButton.setAttribute("position", "0 0.5 -3");
+    startchooseButton.setAttribute("position", "1 0.5 -3");
     startchooseButton.setAttribute("class", "clickable");
+    startchooseButton.setAttribute("side", "double");
+
+    let backButton = document.createElement("a-entity");
+    backButton.setAttribute("geometry", "primitive: plane; width: 1.5; height: 0.9;");
+    backButton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    backButton.setAttribute("text", "value: BACK; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    backButton.setAttribute("position", "-1 0.5 -3");
+    backButton.setAttribute("class", "clickable");
+    backButton.setAttribute("side", "double");
 
     let soundtext = document.createElement("a-text");
     soundtext.setAttribute("value", "Sound Off");
@@ -125,6 +137,7 @@ export function chooseGame() {
         if (selectedGame !== null && selectedDifficulty !== null) {
             title.parentNode.removeChild(title);
             startchooseButton.parentNode.removeChild(startchooseButton);
+            backButton.parentNode.removeChild(backButton);
             soundCheckbox.parentNode.removeChild(soundCheckbox);
             soundtext.parentNode.removeChild(soundtext);
             hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
@@ -139,5 +152,21 @@ export function chooseGame() {
         }
     });
 
+    backButton.addEventListener("click", function () {
+        title.parentNode.removeChild(title);
+        startchooseButton.parentNode.removeChild(startchooseButton);
+        backButton.parentNode.removeChild(backButton);
+        soundCheckbox.parentNode.removeChild(soundCheckbox);
+        soundtext.parentNode.removeChild(soundtext);
+        hideSeekCheckbox.parentNode.removeChild(hideSeekCheckbox);
+        hideSeekText.parentNode.removeChild(hideSeekText);
+
+        gameButtonElements.forEach(button => button.parentNode.removeChild(button));
+        difficultyButtonElements.forEach(button => button.parentNode.removeChild(button));
+
+        startmenu();
+    });
+
     aScene.appendChild(startchooseButton);
+    aScene.appendChild(backButton);
 }
