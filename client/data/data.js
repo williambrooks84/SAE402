@@ -33,8 +33,8 @@ ScoresData.fetchAll = async function(){
     return data;
 }
 
-ScoresData.post = async function(nom, score){
-    let data = await postRequest('scores', JSON.stringify({nom: nom, score: score}));
+ScoresData.post = async function(nom, score, map){
+    let data = await postRequest('scores', JSON.stringify({nom: nom, score: score, map: map}));
     return data;
 }
 
