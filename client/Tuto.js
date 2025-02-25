@@ -250,6 +250,10 @@ let menuButton = document.createElement("a-entity");
         paragraph.remove();
         plane2.remove();
         paragraph2.remove();
+        plane3.remove();
+        paragraph3.remove();
+        plane4.remove();
+        paragraph4.remove();
         menuButton.remove();
         character.forEach((element) => {
             element.remove();
