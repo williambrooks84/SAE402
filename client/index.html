@@ -404,6 +404,154 @@
   
     </a-entity>
 
+    <!-- Cargo et lampadaire -->
+    <a-entity position="-65 -1 -50" rotation="0 -160 0">
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-45 0 -4" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="4 -0.65 -1" rotation="0 -150 0" side="double"></a-entity>
+      <a-entity gltf-model="#light" scale="6 6 6" position="-4 -0.2 4" side="double"></a-entity>
+    </a-entity>
+
+    <!-- Plateau d'aterrissage et maisons -->
+    <a-entity position="-26 -1 -53" rotation="0 170 0">
+      <a-entity gltf-model="#pad" scale="6 6 6" position="0 -1 0" rotation="0 20 0" side="double"></a-entity>
+      <a-entity gltf-model="#landerA" scale="6 6 6" position="15 0 15" rotation="0 -130 0" side="double"></a-entity>
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="-14 0 9" rotation="0 125 0" side="double"></a-entity>
+  
+      <a-entity position="-10 0 -13" rotation="0 36 0">
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_cargo_A" scale="6 6 6" position="-260.5 0.3 0" side="double"></a-entity>
+      </a-entity>
+  
+      <a-entity position="-3 0 20" rotation="0 -55 0">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+  
+    </a-entity>
+
+    <!-- Maisons reliées -->
+    <a-entity position="-30 -1 -110" rotation="0 -130 0">
+
+      <!-- Maisons -->
+      <a-entity position="0 0 -25">
+        <a-entity gltf-model="#spacebase" target-part="basemodule_B" scale="6 6 6" position="-32 0 0"></a-entity>
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_cargo_A" scale="6 6 6" position="-260.5 6.2 0"></a-entity>
+      </a-entity>
+      <a-entity position="50 0 12.5">
+        <a-entity gltf-model="#spacebase" target-part="basemodule_C" scale="6 6 6" position="-17 0 15"></a-entity>
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_cargo_B" scale="6 6 6" position="-268.7 6.2 -0.5"></a-entity>
+      </a-entity>
+      <a-entity position="-12.5 0 25">
+        <a-entity gltf-model="#spacebase" target-part="basemodule_A" scale="6 6 6" position="-18 0 0"></a-entity>
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_base" scale="6 6 6" position="-252 6.2 0"></a-entity>
+      </a-entity>
+      <a-entity position="0 0 0">
+        <a-entity gltf-model="#spacebase" target-part="basemodule_D" scale="6 6 6" position="-31.5 0 15"></a-entity>
+        <a-entity gltf-model="#cargotoit" target-part="roofmodule_solarpanels" scale="6 6 6" position="-262.7 6.2 -13.7"></a-entity>
+      </a-entity>
+      <a-entity position="25 0 0">
+        <a-entity gltf-model="#spacebase" target-part="basemodule_E" scale="6 6 6" position="-47.5 0 15"></a-entity>
+      </a-entity>
+    
+      <!-- Tunnels (Groupés pour pouvoir les tourner facilement) -->
+      <a-entity position="0 0.5 -12.5" rotation="0 -45 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+      <a-entity position="12.5 0.5 0" rotation="0 45 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+      <a-entity position="38 0.5 6" rotation="0 17.5 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+      <a-entity position="-6 0.5 12.5" rotation="0 -70 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+    
+      <a-entity gltf-model="#light" position="33 -0.2 21" scale="6 6 6"></a-entity>
+      
+      <a-entity position="-40 0 25">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+    
+    </a-entity>
+
+    <!-- Deux tours et cargo -->
+    <a-entity position="-115 -1 -105" rotation="0 105 0">
+
+      <a-entity position="-22 0 0" rotation="0 20 0">
+    
+        <a-entity position="0 16 0" rotation="0 90 0">
+          <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+        </a-entity>
+    
+        <a-entity position="-12 0 12" rotation="0 0 0"> 
+          <a-entity gltf-model="#spaceplateformA" scale="8 8 8" position="0 -0.2 0" rotation="0 45 0" side="double"></a-entity>
+          <a-entity position="0 15.5 0">
+            <a-entity gltf-model="#spacebase" target-part="basemodule_A" scale="6 6 6" position="-18 0 0"></a-entity>
+          </a-entity>
+        </a-entity>
+    
+        <a-entity position="12 0 -12" rotation="0 135 0">
+          <a-entity gltf-model="#spaceplateformA" scale="8 8 8" position="0 -0.2 0" rotation="0 45 0" side="double"></a-entity>
+          <a-entity position="0 15.5 0">
+            <a-entity gltf-model="#spacebase" target-part="basemodule_E" scale="6 6 6" position="-48.2 0 15.5"></a-entity>
+          </a-entity>
+        </a-entity>
+    
+      </a-entity>
+    
+      <a-entity gltf-model="#depot" scale="6 6 6" position="-1.5 -0.65 -3" rotation="0 -80 0" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="14 -0.65 -0.5" rotation="0 -110 0" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="1.5 -0.65 15" rotation="0 70 0" side="double"></a-entity>
+    
+      <a-entity position="18 0 19" rotation="0 30 0">
+        <a-entity gltf-model="#cargo" scale="3 3 3" position="-41 0 5.750" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="22 0 -7" rotation="0 -45 0">
+        <a-entity gltf-model="#cargo" scale="3 3 3" position="-41 0 5.750" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="10 0 33" rotation="0 160 0">
+        <a-entity gltf-model="#cargo" scale="3 3 3" position="-41 0 5.750" side="double"></a-entity>
+      </a-entity>
+    
+    </a-entity>
+
+    <!-- Tour et voiture -->
+    <a-entity position="-62 -1 -112" rotation="0 88 0">
+      <a-entity position="9 0 8" rotation="0 -120 0"> 
+        <a-entity gltf-model="#spaceplateformA" scale="8 8 8" position="0 -0.2 0" rotation="0 45 0" side="double"></a-entity>
+        <a-entity position="0 15.5 0.5">
+          <a-entity gltf-model="#spacebase" target-part="basemodule_C" scale="6 6 6" position="-17 0 15"></a-entity>
+          <a-entity gltf-model="#cargotoit" target-part="roofmodule_cargo_B" scale="6 6 6" position="-268.7 6.2 -0.5"></a-entity>
+        </a-entity>
+      </a-entity>
+  
+      <a-entity position="-2 0 -12" rotation="0 100 0">
+        <a-entity gltf-model="#car" scale="10 10 10" position="30 1 0" rotation="0 0 0" side="double"></a-entity>
+      </a-entity>
+  
+      <a-entity position="-10 0 6" rotation="0 135 0" scale="2 2 2">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- Cargo et lampadaire -->
+    <a-entity position="-74 -1 -137" rotation="0 335 0">
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-45 0 -4" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="4 -0.65 -1" rotation="0 -150 0" side="double"></a-entity>
+      <a-entity gltf-model="#light" scale="6 6 6" position="-4 -0.2 4" side="double"></a-entity>
+    </a-entity>
+
+    <!-- Plateau d'aterrissage et divers -->
+    <a-entity position="-114 -1 -42" rotation="0 -180 0">
+      <a-entity gltf-model="#rocks" scale="3 3 3" position="-100 0 -19.5" side="double"></a-entity>
+      <a-entity gltf-model="#cargotoit" target-part="roofmodule_cargo_B" scale="6 6 6" position="-234 0.3 -9.5" side="double"></a-entity>
+      <a-entity gltf-model="#pad" scale="6 6 6" position="20 0 -4.5" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="5.5 -0.65 -9.5" rotation="0 10 0" side="double"></a-entity>
+      <a-entity gltf-model="#landerA" scale="6 6 6" position="8.5 0 8.5" rotation="0 141 0" side="double"></a-entity>
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="29 0 15.5" rotation="0 -146 0" side="double"></a-entity>
+      <a-entity gltf-model="#light" scale="6 6 6" position="15 -0.2 20.5" side="double"></a-entity>
+      <a-entity gltf-model="#car" scale="10 10 10" position="0 1 5.5" rotation="0 140 0" side="double"></a-entity>
+    </a-entity>
+
     <!-- Cailloux divers -->
     <a-entity position="0 -1.5 0">
       <a-entity position="-14 0 62" rotation="0 80 0" scale="3 3 3">
@@ -424,6 +572,37 @@
       <a-entity position="-52 0 8" rotation="0 46 0" scale="4 4 4">
         <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
       </a-entity>      
+    </a-entity>
+
+    <!-- Terrain bordure -->
+    <a-entity position="0 10 0">
+
+      <!-- Pièces bien réglées
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_low" position="-339 0 0" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_low_curved" position="-354 0 0" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_mining" position="-368 0 0" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_slope" position="-383 0 0" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_slope_inner_corner" position="-339 0 18" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_slope_outer_corner" position="-354 0 18" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_tall" position="-368 0 18" scale="6 6 6"></a-entity>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-entity gltf-model="#decor" target-part="terrain_tall_curved" position="-383 0 18" scale="6 6 6"></a-entity>
+        </a-entity>
+      -->
     </a-entity>
 
     <script src="decor2.js"></script>
