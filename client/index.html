@@ -552,8 +552,107 @@
       <a-entity gltf-model="#car" scale="10 10 10" position="0 1 5.5" rotation="0 140 0" side="double"></a-entity>
     </a-entity>
 
+    <!-- Cargo -->
+    <a-entity position="33 0 -1.5" rotation="0 -90 0">
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-37 -1 8" side="double"></a-entity>
+    </a-entity>
+
+    <!-- Line of cargo + 2 cars -->
+    <a-entity position="92 -1 -97">
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-35 0 5" side="double"></a-entity>
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-35 0 8.5" side="double"></a-entity>
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-35 0 12" side="double"></a-entity>
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-35 0 15.5" side="double"></a-entity>
+      <a-entity gltf-model="#car" scale="10 10 10" position="-3.5 1 31.5" rotation="0 -90 0" side="double"></a-entity>
+      <a-entity gltf-model="#car" scale="10 10 10" position="-3.5 1 37.5" rotation="0 -90 0" side="double"></a-entity>
+    </a-entity>
+
+    <!-- Group of 3 landers -->
+    <a-entity position="95 -1 -33" rotation="0 -30 0">
+      <a-entity gltf-model="#landerA" scale="6 6 6" position="14 0 2.5" side="double"></a-entity>
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="0 0 10" side="double"></a-entity>
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="9.5 0 19" side="double"></a-entity>
+    </a-entity>
+
+    <!-- 3 Lights + car -->
+    <a-entity position="4 -1 -28" rotation="0 35 0">
+        <a-entity gltf-model="#light" scale="6 6 6" position="0 -0.2 0" side="double"></a-entity>
+        <a-entity gltf-model="#light" scale="6 6 6" position="10 -0.2 0" side="double"></a-entity>
+        <a-entity gltf-model="#light" scale="6 6 6" position="5 -0.2 5" side="double"></a-entity>
+        <a-entity gltf-model="#car" scale="10 10 10" position="-25 1 -8" rotation="0 180 0" side="double"></a-entity>
+    </a-entity>
+
+    <!-- 2 landers + light + car -->
+    <a-entity position="50 -1 -56">
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="-0.5 0 -5.5" side="double"></a-entity>
+      <a-entity gltf-model="#landerA" scale="6 6 6" position="11 0 -9" side="double"></a-entity>
+      <a-entity gltf-model="#light" scale="6 6 6" position="3.5 -0.2 10" side="double"></a-entity>
+      <a-entity gltf-model="#car" scale="10 10 10" position="45.5 1 10" side="double"></a-entity>  
+    </a-entity>
+
+    <!-- Launching pad -->
+    <a-entity gltf-model="#pad" scale="6 6 6" position="32 -1 -45" side="double"></a-entity>
+
+    <!-- Solar pannel -->
+    <a-entity position="15 -1 -66">
+      <a-entity gltf-model="#spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity>
+      <a-entity gltf-model="#cargotoit" target-part="roofmodule_solarpanels" scale="6 6 6" position="-262.7 12.5 -13.7" side="double"></a-entity>
+    </a-entity>
+
+    <a-entity position="36 -1 -85" rotation="0 90 0">
+       <a-entity gltf-model="#cargo" scale="3 3 3" position="-41 0 5.65" side="double"></a-entity>
+    </a-entity>
+
+    <!-- Tunnel -->
+    <a-entity position="55 -1 -90">
+      <a-entity position="0 -1 0">  
+        <a-entity gltf-model="#spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity>
+        <a-entity gltf-model="#spacebase" target-part="basemodule_C" scale="6 6 6" position="-17 12.5 15" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="9.1 11 10.6" rotation="0 180 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+      <a-entity position="23.5 11 24.8" rotation="0 180 0">
+        <a-entity gltf-model="#tunnel" target-part="tunnel_diagonal_long_A" scale="6 6 6" position="-438 0 0" rotation="0 0 0"></a-entity>
+      </a-entity>
+      <a-entity position="34.75 -1 37.2">  
+        <a-entity gltf-model="#spaceplateformA" scale="6 6 6" position="0 0 0" side="double"></a-entity>
+        <a-entity gltf-model="#spacebase" target-part="basemodule_C" scale="6 6 6" position="-17 12.5 15" side="double"></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- Cargo + car + Lander -->
+    <a-entity position="75 -1 -140">
+      <a-entity gltf-model="#cargo" scale="3 3 3" position="-37.5 0 7.5" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="-8.3 0 1.7" rotation="0 -90 0" side="double"></a-entity>
+      <a-entity gltf-model="#depot" scale="6 6 6" position="5.2 0 15" rotation="0 180 0"side="double"></a-entity>
+      <a-entity gltf-model="#landerB" scale="6 6 6" position="-21.8 0 11.5" side="double"></a-entity>
+      <a-entity position="-2.1 0 25.8" rotation="0 0 0">
+        <a-entity gltf-model="#car" scale="10 10 10" position="30.5 1 0.5" rotation="0 0 0" side="double"></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- Rocks + Lights + Lander -->
+    <a-entity position="20 -1 -120">
+      <a-entity gltf-model="#light" scale="6 6 6" position="13.5 -0.2 0" side="double"></a-entity>
+      <a-entity gltf-model="#light" scale="6 6 6" position="-13.5 -0.2 0" side="double"></a-entity>
+      <a-entity position="5.65 0 -5.5" rotation="0 0 0">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="-5.65 0 -5.5" rotation="0 90 0">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="-15.2 0 8.7" rotation="0 90 0">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="15.2 0 8.7" rotation="0 0 0">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity gltf-model="#landerA" scale="6 6 6" position="5 0 17" side="double"></a-entity>
+    </a-entity>
+
     <!-- Cailloux divers -->
-    <a-entity position="0 -1.5 0">
+    <a-entity position="0 -1.5 0">      
       <a-entity position="-14 0 62" rotation="0 80 0" scale="3 3 3">
         <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
       </a-entity>
@@ -571,7 +670,22 @@
       </a-entity>
       <a-entity position="-52 0 8" rotation="0 46 0" scale="4 4 4">
         <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
-      </a-entity>      
+      </a-entity>
+      <a-entity position="126 0 -50" rotation="0 -25 0" scale="6 6 6">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="105 0 -116" rotation="0 46 0" scale="3 3 3">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="133 0 -90" rotation="0 -116 0" scale="2.5 2.5 2.5">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="138 0 -120" rotation="0 160 0" scale="3 3 3">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
+      <a-entity position="39 0 -12" rotation="0 -7 0" scale="5 5 5">
+        <a-entity gltf-model="#rocks" position="-119 0 -1.5" scale="3 3 3" side="double"></a-entity>
+      </a-entity>
     </a-entity>
 
     <!-- Terrain bordure -->
