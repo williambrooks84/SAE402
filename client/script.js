@@ -29,8 +29,8 @@ let npcPositionSlots = [
         textsize:25,
         textoffset: 4.5,
         rotation: "0 0 0",
+        map: "default"
     },
-
     {
         name: "topOfHouse",
         position: "-19 13 7",
@@ -39,8 +39,8 @@ let npcPositionSlots = [
         textsize: 30,
         textoffset: 4.5,
         rotation: "0 90 0",
+        map: "default"
     },
-
     {
         name: "nearCar",
         position: "-13 4 -15.5",
@@ -49,8 +49,8 @@ let npcPositionSlots = [
         textsize:25,
         textoffset: 4.5,
         rotation: "0 45 0",
+        map: "default"
     },
-
     {
         name: "underLamp",
         position: "8 -1 12",
@@ -59,8 +59,8 @@ let npcPositionSlots = [
         textsize:25,
         textoffset: 4.5,
         rotation: "0 225 0",
+        map: "default"
     },
-
     {
         name: "topOfBoxes",
         position: "-7 2 14",
@@ -69,6 +69,7 @@ let npcPositionSlots = [
         textsize:25,
         textoffset: 4.5,
         rotation: "0 145 0",
+        map: "default"
     },
     {
         name: "betweenHouses",
@@ -78,6 +79,7 @@ let npcPositionSlots = [
         textsize:25,
         textoffset: 4.5,
         rotation: "0 -90 0",
+        map: "default"
     },
     {
         name: "topOfBigHouse_right",
@@ -87,6 +89,7 @@ let npcPositionSlots = [
         textsize: 50,
         textoffset: 6,
         rotation: "15 -115 0",
+        map: "default"
     },
     {
         name: "topOfBigHouse_left",
@@ -96,8 +99,172 @@ let npcPositionSlots = [
         textsize: 50,
         textoffset: 6,
         rotation: "15 15 0",
+        map: "default"
     },
-    // faire le reste :)
+    
+
+    // Map large
+    {
+        name: "behindTruck_nearSpawn",
+        position: "6 -1 -39",
+        occupied: false,
+        npcId: null,
+        textsize:25,
+        textoffset: 4.5,
+        rotation: "0 138 0",
+        map: "large"
+    },
+    {
+        name: "behindBoxes_nearSpawn",
+        position: "-10.5 -1 25",
+        occupied: false,
+        npcId: null,
+        textsize:25,
+        textoffset: 4.5,
+        rotation: "0 -45 0",
+        map: "large"
+    },
+    {
+        name: "inRocks_nearSpawn_left",
+        position: "-58.5 -1 0.5",
+        occupied: false,
+        npcId: null,
+        textsize:25,
+        textoffset: 4.5,
+        rotation: "0 -45 0",
+        map: "large"
+    },
+    {
+        name: "topOfDepot",
+        position: "-64.5 -1 46",
+        occupied: false,
+        npcId: null,
+        textsize:25,
+        textoffset: 4.5,
+        rotation: "0 -70 0",
+        map: "large"
+    },
+    {
+        name: "topOfSmallHouse",
+        position: "-88 5.7 2.5",
+        occupied: false,
+        npcId: null,
+        textsize: 35,
+        textoffset: 4.5,
+        rotation: "10 -15 0",
+        map: "large"
+    },
+    {
+        name: "onArmature",
+        position: "-80 8 66",
+        occupied: false,
+        npcId: null,
+        textsize: 35,
+        textoffset: 4.5,
+        rotation: "10 -15 0",
+        map: "large"
+    },
+    {
+        name: "onBoxes_nearPad",
+        position: "35 1 30",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 20 0",
+        map: "large"
+    },
+    {
+        name: "middleOfHouses_far",
+        position: "118 -1 107",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 20 0",
+        map: "large"
+    },
+    {
+        name: "underArmature",
+        position: "140 -1 51.5",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 30 0",
+        map: "large"
+    },
+    {
+        name: "topOfDepot2",
+        position: "119 2 35.5",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 40 0",
+        map: "large"
+    },
+    {
+        name: "nearLanders",
+        position: "94.3 -1 -24.3",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 40 0",
+        map: "large"
+    },
+    {
+        name: "middleOfBoxes",
+        position: "97 -1 -92.4",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 -90 0",
+        map: "large"
+    },
+    {
+        name: "nearRocks_far",
+        position: "124.5 -1 -122.5",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 -135 0",
+        map: "large"
+    },
+    {
+        name: "behindLander_far",
+        position: "51.5 -1 -132.5",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 -170 0",
+        map: "large"
+    },
+    {
+        name: "behindHouses_far",
+        position: "-51 -1 -96",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 -130 0",
+        map: "large"
+    },
+    {
+        name: "behindDepot_inHouses",
+        position: "-73 -1 -43",
+        occupied: false,
+        npcId: null,
+        textsize: 25,
+        textoffset: 4.5,
+        rotation: "0 -45 0",
+        map: "large"
+    },
+
 ]
 
 
@@ -130,9 +297,11 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
     */
 
     let timermax = timechoose;
+    let aSceneTemp = document.querySelector("a-scene");    
+    let mapGlobal = aSceneTemp.dataset.map;
 
 
-   gamefinished = false;
+    gamefinished = false;
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
@@ -257,7 +426,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
                 aBox.setAttribute("position", `${position} -1 -8`);
             } else {
                 let randomPosition = Math.floor(Math.random() * npcPositionSlots.length);
-                while (npcPositionSlots[randomPosition].occupied) {
+                while (npcPositionSlots[randomPosition].occupied || npcPositionSlots[randomPosition].map != mapGlobal) {
                     randomPosition = Math.floor(Math.random() * npcPositionSlots.length);
                 }
                 chosenSlot = npcPositionSlots[randomPosition];
@@ -478,6 +647,10 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
         let aScene = document.querySelector("a-scene");
         let questionEntity = document.createElement("a-entity");
         let position = '0 6 -6';
+        if (mapGlobal == "large") {
+            position = '0 80 -160';
+            questionEntity.setAttribute("scale", "16 16 16");
+        }
         questionEntity.setAttribute("text", {
             value: question.texte_question,
             align: "center",
@@ -492,7 +665,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
         questionEntity.setAttribute("position", position);
         aScene.appendChild(questionEntity);
 
-        if (hideSeek){
+        if (hideSeek && !(mapGlobal == "large")) {
             let adviceEntity = document.createElement("a-entity");
             let position = '0 5 -6';
             adviceEntity.setAttribute("id", "advice-text");
@@ -1072,7 +1245,13 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
         if (!timerDisplay) {
             timerDisplay = document.createElement("a-text");
             timerDisplay.setAttribute("id", "timerDisplay");
-            timerDisplay.setAttribute("position", "-3 1.5 3");
+            if (mapGlobal == "default") {
+                timerDisplay.setAttribute("position", "-3 1.5 1.5");
+            }
+            else if (mapGlobal == "large") {
+                timerDisplay.setAttribute("position", "-160 50 0");
+                timerDisplay.setAttribute("scale", "20 20 20");
+            }
             timerDisplay.setAttribute("rotation", "0 90 0");
             timerDisplay.setAttribute("font", "asset/Audiowide-Regular-msdf.json");
             timerDisplay.setAttribute("negate", "false");
@@ -1087,7 +1266,13 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
         if (!scoreDisplay) {
             scoreDisplay = document.createElement("a-text");
             scoreDisplay.setAttribute("id", "scoreDisplay");
-            scoreDisplay.setAttribute("position", "3 1.5 1.5");
+            if (mapGlobal == "default") {
+                scoreDisplay.setAttribute("position", "3 1.5 1.5");
+            }
+            else if (mapGlobal == "large") {
+                scoreDisplay.setAttribute("position", "160 50 0");
+                scoreDisplay.setAttribute("scale", "20 20 20");
+            }
             scoreDisplay.setAttribute("rotation", "0 -90 0");
             scoreDisplay.setAttribute("font", "asset/Audiowide-Regular-msdf.json");
             scoreDisplay.setAttribute("negate", "false");

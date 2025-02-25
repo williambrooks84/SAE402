@@ -60,9 +60,9 @@
   <a-scene data-map="large">
     
     <!-- Player -->
-    <a-entity id="player" position="0 0 2" movement-controls>
+    <a-entity id="rig" position="0 0 2" movement-controls="constrainToNavMesh: true; speed: 0.5">
 
-      <a-camera look-controls="pointerLockEnabled: true">
+      <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
         <a-cursor id="cursor" color="white" fuse="false" visible="false"></a-cursor>
         <script>
         if (AFRAME.utils.device.isMobileVR()) {
@@ -71,7 +71,7 @@
           document.querySelector("#cursor").setAttribute("visible", "true");
         }
         </script>
-      </a-camera>
+      </a-entity>
 
       <!-- Manette droite avec laser -->
       <a-entity id="rightController" laser-controls="hand: right" raycaster="objects: .clickable"
@@ -87,6 +87,8 @@
 
     <!-- Assets -->
     <a-assets>
+        <a-asset-item id="navmesh" src="asset/navmesh.glb"></a-asset-item>
+
       <a-asset-item id="astro" src="asset/Astronaut.glb"></a-asset-item>
       <a-asset-item id="astro1" src="asset/Astronaut1.glb"></a-asset-item>
       <a-asset-item id="astro2" src="asset/Astronaut2.glb"></a-asset-item>
@@ -115,6 +117,8 @@
       <img id = "ciel" src = "asset/sky.png" >
       <img id = "nuage" src = "asset/nuage.png" >
     </a-assets>
+
+    <a-entity nav-mesh gltf-model="#navmesh" position="0.02 0 -9.260" scale="7.35 7.35 7.35" visible="false" ></a-entity>
 
     <!-- Sol -->
     <a-plane position="0 -1 -4" rotation="-90 0 0" width="320" height="320" color="#b55e2e" material="metalness: 0.2; roughness: 0.2"></a-plane>

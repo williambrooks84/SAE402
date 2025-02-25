@@ -3,6 +3,7 @@ import { startmenu } from "./start.js";
 
 export function chooseGame() {
     let aScene = document.querySelector("a-scene");
+    let map = aScene.dataset.map;
 
     let title = document.createElement("a-text");
     title.setAttribute("text", "value: Choose your game !; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
@@ -11,7 +12,13 @@ export function chooseGame() {
     title.setAttribute("align", "center");
     aScene.append(title);
 
-    const gameButtons = ["5 min", "3 min", "2 min"];
+    let gameButtons;
+    if (map == "default" ){
+        gameButtons = ["5 min", "3 min", "2 min"];
+    }
+    else {
+        gameButtons = ["5 min", "8 min", "10 min"];
+    }
     let selectedButton = null;
     let selectedGame = null;
     let gameButtonElements = [];

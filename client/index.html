@@ -60,8 +60,8 @@
     <a-scene data-map="default">
       <!--wasd-controls="enabled: false"-->
               
-        <a-entity id="player" position="0 0 2" movement-controls>
-          <a-camera look-controls="pointerLockEnabled: true">
+        <a-entity id="player" position="0 0 2">
+          <a-camera look-controls="pointerLockEnabled: true" wasd-controls="enabled: false">
                 <a-cursor id="cursor" color="white" fuse="false" visible="false"></a-cursor>
                 <script>
                 if (AFRAME.utils.device.isMobileVR()) {

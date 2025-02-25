@@ -464,7 +464,12 @@ keyboard.addEventListener('click', async function (event) {
         
         plane.parentNode.removeChild(plane);
         
-        startGame(false, 3, "All", true);
+        if (map == "default"){
+            startGame(false, 3, "All", true);
+        }
+        else if (map == "large"){
+            startGame(false, 8, "All", true);
+        }
         
     });
     aScene.appendChild(startButton);

@@ -10,6 +10,7 @@ export function startmenu() {
     
 
     let aScene = document.querySelector("a-scene");
+    let map = aScene.dataset.map;
     
     let sky = document.createElement("a-sky");
     sky.setAttribute("src", "#ciel");
@@ -107,7 +108,12 @@ export function startmenu() {
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
         changeMap.parentNode.removeChild(changeMap);
-        startGame(isMuted, 3, "All", isHideSeek);
+        if (map == "default"){
+            startGame(isMuted, 3, "All", isHideSeek);
+        }
+        else if (map == "large"){
+            startGame(isMuted, 8, "All", isHideSeek);
+        }
     });
     aScene.appendChild(startButton);
 
