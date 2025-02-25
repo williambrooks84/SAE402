@@ -10,10 +10,10 @@ export function startmenu() {
     
 
     let aScene = document.querySelector("a-scene");
-
-    // let sky = document.createElement("a-sky");
-    // sky.setAttribute("src", "#ciel");
-    // aScene.appendChild(sky);
+    
+    let sky = document.createElement("a-sky");
+    sky.setAttribute("src", "#ciel");
+    aScene.appendChild(sky);
 
     let title = document.createElement("a-text");
     title.setAttribute("text", "value: Welcome to TellApart!; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");

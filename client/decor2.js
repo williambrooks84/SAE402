@@ -19,37 +19,37 @@ let spawnRandomRocks = function(amount, size){
 
 AFRAME.registerComponent('filter-part', {
     schema: {
-      targetPart: { type: 'string', default: '' },
-      autoCenter: { type: 'boolean', default: false }
+        targetPart: { type: 'string', default: '' },
+        autoCenter: { type: 'boolean', default: false }
     },
   
     init: function () {
-      this.el.addEventListener('model-loaded', () => this.filterModel());
+        this.el.addEventListener('model-loaded', () => this.filterModel());
     },
   
     filterModel: function () {
-      let model = this.el.getObject3D('mesh');
-      if (!model) return;
-  
-      let bbox = new THREE.Box3();
-      let targetMesh = null;
-  
-      model.traverse((node) => {
-      if (node.isMesh) {
-        if (node.name === this.data.targetPart) {
-        targetMesh = node;
-        } else {
-        node.visible = false;
+        let model = this.el.getObject3D('mesh');
+        if (!model) return;
+    
+        let bbox = new THREE.Box3();
+        let targetMesh = null;
+    
+        model.traverse((node) => {
+        if (node.isMesh) {
+            if (node.name === this.data.targetPart) {
+            targetMesh = node;
+            } else {
+            node.visible = false;
+            }
         }
-      }
-      });
-  
-      if (targetMesh && this.data.autoCenter) {
-      bbox.setFromObject(targetMesh);
-      let center = new THREE.Vector3();
-      bbox.getCenter(center);
-      targetMesh.position.sub(center); // Recentrer l'objet
-      }
+        });
+    
+        if (targetMesh && this.data.autoCenter) {
+        bbox.setFromObject(targetMesh);
+        let center = new THREE.Vector3();
+        bbox.getCenter(center);
+        targetMesh.position.sub(center); // Recentrer l'objet
+        }
     }
     });
   
