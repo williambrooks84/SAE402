@@ -173,13 +173,6 @@ scene.addEventListener('loaded', () => {
         { position: '8.5 16.8 -7.2', rotation: '0 -40 0', scale:'2.2 0.9 0.2'},
         { position: '3.7 16.8 -11', rotation: '0 -35 0', scale:'2.2 0.9 0.2'},
         { position: '-2.9 16.8 -15.6', rotation: '0 -35 0', scale:'2.2 0.9 0.2'},
-        
-        //spaceship
-        
-        
-        
-        
-
        
     ]);
 });
@@ -243,4 +236,85 @@ AFRAME.registerComponent('filter-part', {
     let part = el.getAttribute("target-part") || '';
     let autoCenter = el.hasAttribute("auto-center");
     el.setAttribute("filter-part", `targetPart: ${part}; autoCenter: ${autoCenter}`);
-    });
+});
+
+/*
+const entities = [
+    { gltfModel: '#car', position: '0 5.5 -35', scale: '11 11 11', rotation: '0 45 0' },
+    { gltfModel: '#car', position: '63 0 10', scale: '11 11 11', rotation: '0 0 0' },
+    { gltfModel: '#planet', position: '-80 80 -80', scale: '7 7 7', rotation: '0 0 0' },
+    { gltfModel: '#spaceship', position: '0 25 -10', scale: '2 2 2', rotation: '50 0 0', id: 'drone' },
+    { gltfModel: '#cargo', position: '-50 -1 20', scale: '3 3 3', rotation: '0 0 0' },
+    { gltfModel: '#landerA', position: '20 -1 -2', scale: '7 7 7', rotation: '0 -90 0' },
+    { gltfModel: '#landerB', position: '-20 -1 -2', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#rocks', position: '-20 -1 195', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#rocks', position: '20 -1 195', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#rocks', position: '10 3.5 100', scale: '3 3 3', rotation: '0 90 0' },
+    { gltfModel: '#rocks', position: '-125 3.5 -22', scale: '3 3 3', rotation: '0 0 0' },
+    { gltfModel: '#rocks', position: '0 -1 -100', scale: '3 3 3', rotation: '0 -90 0' },
+    { gltfModel: '#rocks', position: '10 -1 -100', scale: '3 3 3', rotation: '0 -90 0' },
+    { gltfModel: '#rocks', position: '-22 3.5 -137', scale: '3 3 3', rotation: '0 -90 0' },
+    { gltfModel: '#rocks', position: '-2000 0 200', scale: '50 50 50' },
+    { gltfModel: '#rocks', position: '-1950 0 190', scale: '50 50 50' },
+    { gltfModel: '#rocks', position: '-2050 15 190', scale: '50 50 50' },
+    { gltfModel: '#rocks', position: '-2000 0 -200', scale: '50 50 50' },
+    { gltfModel: '#rocks', position: '-1950 0 -190', scale: '50 50 50' },
+    { gltfModel: '#rocks', position: '-2050 15 -190', scale: '50 50 50' },
+    { gltfModel: '#depot', position: '20 4 -20', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#spacebase', position: '20 2 20', targetPart: 'basemodule_A', scale: '7 7 7', rotation: '0 -90 0' },
+    { gltfModel: '#spacebase', position: '20 11 20', targetPart: 'basemodule_E', scale: '7 7 7', rotation: '0 75 0' },
+    { gltfModel: '#spacebase', position: '-20 2 20', targetPart: 'basemodule_B', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#spacebase', position: '-25 2 10', targetPart: 'basemodule_C', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#spacebase', position: '-25 9 10', targetPart: 'basemodule_D', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#spacebase', position: '30 17 9', targetPart: 'basemodule_D', scale: '7 7 7', rotation: '0 0 0' },
+    { gltfModel: '#spacebase', position: '-10 6.5 -25', targetPart: 'basemodule_C', scale: '7 7 7', rotation: '0 0 0' },
+    { gltfModel: '#spacebase', position: '-10 18.5 -26', targetPart: 'basemodule_A', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#cargotoit', position: '-19 7 20', targetPart: 'roofmodule_solarpanels', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#tunnel', position: '0 2 20', targetPart: 'tunnel_diagonal_long_A', scale: '7 7 7', rotation: '0 45 0' },
+    { gltfModel: '#tunnel', position: '-1 17 -18', targetPart: 'tunnel_diagonal_long_A', scale: '7 7 7', rotation: '0 10 0' },
+    { gltfModel: '#tunnel', position: '16.5 17 -4.5', targetPart: 'tunnel_diagonal_long_A', scale: '7 7 7', rotation: '0 5 0' },
+    { gltfModel: '#tunnel', position: '-24 2 2', targetPart: 'tunnel_diagonal_short_A', scale: '7 7 7', rotation: '0 90 0' },
+    { gltfModel: '#spaceplateformA', position: '30 -1 9', scale: '7 7 7', rotation: '0 0 0' },
+    { gltfModel: '#spaceplateformB', position: '-10 9.5 -26', scale: '7 7 7', rotation: '0 0 0' },
+    { gltfModel: '#decor', targetPart: 'terrain_slope', position: '0 -1 -15', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#decor', targetPart: 'terrain_slope', position: '10 -1 -15', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#decor', targetPart: 'terrain_slope_inner_corner', position: '20 -1 -15', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#decor', targetPart: 'terrain_slope', position: '-10 -1 -15', scale: '5 5 5', rotation: '0 90 0' },
+    { gltfModel: '#decor', targetPart: 'terrain_slope_inner_corner', position: '-20 -1 -15', scale: '5 5 5', rotation: '0 90 0' },
+    { tag: 'a-plane', position: '0 -1 -4', rotation: '-90 0 0', width: '100', height: '100', color: '#b55e2e', material: 'metalness: 0.2; roughness: 0.2' },
+    { tag: 'a-cylinder', id: 'drone-light', position: '0 22 -10', rotation: '0 0 90', scale: '0.4 4 0.4', color: 'yellow', material: 'emissive: #ffdd00', light: 'type: point; intensity: 1; distance: 2' },
+    { tag: 'a-light', id: 'light-left', type: 'point', color: 'yellow', position: '-2 21 -10', light: 'type: point; intensity: 1; distance: 5' },
+    { tag: 'a-light', id: 'light-right', type: 'point', color: 'yellow', position: '2 21 -10', light: 'type: point; intensity: 1; distance: 5' },
+    { tag: 'a-light', type: 'ambient', color: '#77A' },
+    { tag: 'a-sky', src: '#ciel' },
+    { tag: 'a-light', type: 'spot', id: 'drone-light', color: 'yellow', position: '0 22 -10', intensity: '0.8', angle: '25', rotation: '-90 0 0', penumbra: '0.8' }
+];
+
+scene.addEventListener('loaded', () => {
+    for (let entity of entities) {
+        let el;
+        if (entity.tag){
+            el = document.createElement(entity.tag);
+        }
+        else {
+            el = document.createElement('a-entity');
+        }
+        for (let key in entity) {
+            if (key != 'tag') {
+                if (key == 'position'){
+                    let posArray = entity[key].split(' ');
+                    let x = parseFloat(posArray[0]);
+                    let y = parseFloat(posArray[1]);
+                    let z = parseFloat(posArray[2]);
+                    el.setAttribute('position', {x: x, y: y, z: z});
+                }
+                else {                    
+                    el.setAttribute(key, entity[key]);
+                }
+            }
+        }
+        console.log(el.getAttribute('position'));
+        scene.appendChild(el);
+    }
+});
+*/
