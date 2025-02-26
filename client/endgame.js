@@ -124,7 +124,7 @@ newscore.forEach((entry, index) => {
 aScene.appendChild(plane);
 
 
-
+let map = aScene.dataset.map;
 
 let keyboard = false;
 let displayText;
@@ -281,7 +281,7 @@ keyboard.addEventListener('click', async function (event) {
             subtext.setAttribute('text','width', 4);
             
 
-            await ScoresData.post(name, totalscore);
+            await ScoresData.post(name, totalscore, map);
 
             let newscoremondial = await ScoresData.fetchAll();
             newscore= newscoremondial.map(entry => ({ name: entry.nom_record, score: entry.score_record }));
@@ -464,7 +464,12 @@ keyboard.addEventListener('click', async function (event) {
         
         plane.parentNode.removeChild(plane);
         
-        startGame(false, 3, "All", true);
+        if (map == "default"){
+            startGame(false, 3, "All", true);
+        }
+        else if (map == "large"){
+            startGame(false, 8, "All", true);
+        }
         
     });
     aScene.appendChild(startButton);

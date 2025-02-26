@@ -10,6 +10,7 @@ export function startmenu() {
     
 
     let aScene = document.querySelector("a-scene");
+    let map = aScene.dataset.map;
 
     async function ambientSound() {
         let ambientSound = document.querySelector("#ambient");
@@ -17,7 +18,7 @@ export function startmenu() {
     }
 
     ambientSound();
-
+  
     let sky = document.createElement("a-sky");
     sky.setAttribute("src", "#ciel");
     aScene.appendChild(sky);
@@ -37,7 +38,13 @@ export function startmenu() {
 
     let paragraph = document.createElement("a-text");
     
-    paragraph.setAttribute("value", "Find the real astronaut! A question appears - spot the correct answer and click before time runs out. Stay quick and precise to win! \n Click START for a default play time of 3 minutes.");
+    let timetext = "3 minutes";
+    if (map == "large"){
+        timetext = "8 minutes";
+    }
+
+    paragraph.setAttribute("value", "Find the real astronaut! A question appears - spot the correct answer and click before time runs out. Stay quick and precise to win! A game lasts " + timetext + " by default.\n You can click 'Change map' (behind you) to switch to a larger map, or 'Help' to get to know how the game works.");
+
     paragraph.setAttribute("position", `0 2.2 -5`);
     paragraph.setAttribute("text", "align: center; width: 13; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
 
@@ -113,7 +120,13 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
-        startGame(isMuted, 3, "All", isHideSeek);
+        changeMap.parentNode.removeChild(changeMap);
+        if (map == "default"){
+            startGame(isMuted, 3, "All", isHideSeek);
+        }
+        else if (map == "large"){
+            startGame(isMuted, 8, "All", isHideSeek);
+        }
     });
     aScene.appendChild(startButton);
 
@@ -137,11 +150,11 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         choose.parentNode.removeChild(choose);
         Tuto.parentNode.removeChild(Tuto);
+        changeMap.parentNode.removeChild(changeMap);
         chooseGame();
     });
     
     aScene.appendChild(choose);
-
 
     let Tuto = document.createElement("a-entity");
 
@@ -163,13 +176,31 @@ export function startmenu() {
         hideSeekText.parentNode.removeChild(hideSeekText);
         Tuto.parentNode.removeChild(Tuto);
         choose.parentNode.removeChild(choose);
-
+        changeMap.parentNode.removeChild(changeMap);
         starttuto();
         
     });
     
     aScene.appendChild(Tuto);
 
+    let changeMap = document.createElement("a-entity");
+    changeMap.setAttribute("geometry", "primitive: plane; width: 2.7; height: 0.9;");
+    changeMap.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    changeMap.setAttribute("text", "value: Change map; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    changeMap.setAttribute("position", "0 0.5 6");
+    changeMap.setAttribute("rotation", "0 180 0");
+    changeMap.setAttribute("class", "clickable");
+
+    changeMap.addEventListener("click", function () {
+        if (aScene.dataset.map == "default"){
+            window.location.href = "index2.html";
+        }
+        else {
+            window.location.href = "index.html";
+        }
+    });
+
+    aScene.appendChild(changeMap);
 
 }
 

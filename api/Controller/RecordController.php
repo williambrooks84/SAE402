@@ -35,16 +35,17 @@ class RecordController extends Controller
         $json = $request->getJson();
         $json = json_decode($json);
 
-        if (json_last_error() === JSON_ERROR_NONE && isset($json->nom) && isset($json->score)) {
+        if (json_last_error() === JSON_ERROR_NONE && isset($json->nom) && isset($json->score) && isset($json->map)) {
             $nom = $json->nom;
             $score = $json->score;
-            
+            $map = $json->map;
             
 
             if (!empty($nom) && $score !== null) {
                 $record = new Record();
                 $record->setNomRecord($nom);
                 $record->setScoreRecord($score);
+                $record->setMap($map);
                 
                 if ($this->records->save($record)) {
                     return "Record ajouté";

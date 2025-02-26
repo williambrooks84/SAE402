@@ -30,6 +30,7 @@ class RecordRepository extends EntityRepository
             $record = new Record($result->id_record);
             $record->setNomRecord($result->nom_record);
             $record->setScoreRecord($result->score_record);
+            $record->setMap($result->map);
         }
 
         return $record;
@@ -50,6 +51,7 @@ class RecordRepository extends EntityRepository
             $record = new Record($result->id_record);
             $record->setNomRecord($result->nom_record);
             $record->setScoreRecord($result->score_record);
+            $record->setMap($result->map);
             $records[] = $record;
         }
         return $records;
@@ -59,11 +61,12 @@ class RecordRepository extends EntityRepository
     public function save($record): bool
     {
         $requete = $this->cnx->prepare("
-            INSERT INTO Scores (nom_record, score_record)
-            VALUES (:nom, :score)
+            INSERT INTO Scores (nom_record, score_record, map)
+            VALUES (:nom, :score, :map)
         ");
         $requete->bindParam(':nom', $record->getNomRecord());
         $requete->bindParam(':score', $record->getScoreRecord());
+        $requete->bindParam(':map', $record->getMap());
         return $requete->execute();
     }
 

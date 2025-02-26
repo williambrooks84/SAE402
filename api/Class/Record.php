@@ -4,11 +4,13 @@ class Record implements JsonSerializable {
     private ?int $id_record = null; 
     private string $nom_record;
     private int $score_record;
+    private ?string $map = "default";
     
-    public function __construct(?int $id_record = null, string $nom_record = "", int $score_record = 0) {
+    public function __construct(?int $id_record = null, string $nom_record = "", int $score_record = 0, ?string $map = "default") {
         $this->id_record = $id_record;
         $this->nom_record = $nom_record;
         $this->score_record = $score_record;
+        $this->map = $map;
     }
 
     public function jsonSerialize(): array {
@@ -16,6 +18,7 @@ class Record implements JsonSerializable {
             'id_record' => $this->id_record,
             'nom_record' => $this->nom_record,
             'score_record' => $this->score_record,
+            'map' => $this->map
         ];
     }
 
@@ -41,6 +44,14 @@ class Record implements JsonSerializable {
 
     public function setScoreRecord(int $score_record): void {
         $this->score_record = $score_record;
+    }
+
+    public function getMap(): ?string {
+        return $this->map;
+    }
+
+    public function setMap(string $map): void {
+        $this->map = $map;
     }
 
 }

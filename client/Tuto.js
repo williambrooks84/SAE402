@@ -189,6 +189,39 @@ export function starttuto() {
     
         aScene.appendChild(paragraph2);
 
+        let plane3 = document.createElement("a-plane");
+        plane3.setAttribute("material", "shader: flat; side: double; color: #000000; opacity: 0.4");
+        plane3.setAttribute("geometry", "primitive: plane; width: 2; height: 1");
+        plane3.setAttribute("position", `1.2 0.5 5`);
+        plane3.setAttribute("rotation", "-45 180 0");
+        plane3.setAttribute("side", "double");
+        aScene.appendChild(plane3);
+
+        let paragraph3 = document.createElement("a-text");
+        paragraph3.setAttribute("value", "If you are on the large map,\n you can use WASD/ZQSD\n to move around. Hold shift\n to move faster.");
+        paragraph3.setAttribute("position", `1.2 0.5 5`);
+        paragraph3.setAttribute("text", "align: center; width: 4; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+        paragraph3.setAttribute("side", "double");
+        paragraph3.setAttribute("rotation", "-45 180 0");
+        aScene.appendChild(paragraph3);
+
+        let plane4 = document.createElement("a-plane");
+        plane4.setAttribute("material", "shader: flat; side: double; color: #000000; opacity: 0.4");
+        plane4.setAttribute("geometry", "primitive: plane; width: 2; height: 1");
+        plane4.setAttribute("position", `-1.2 0.5 5`);
+        plane4.setAttribute("rotation", "-45 180 0");
+        plane4.setAttribute("side", "double");
+        aScene.appendChild(plane4);
+
+        let paragraph4 = document.createElement("a-text");
+        paragraph4.setAttribute("value", "In the menu, click 'Change map'\n to switch between default\n and large map. You can only\n move on the large map.");
+        paragraph4.setAttribute("position", `-1.2 0.5 5`);
+        paragraph4.setAttribute("text", "align: center; width: 4; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+        paragraph4.setAttribute("side", "double");
+        paragraph4.setAttribute("rotation", "-45 180 0");
+        aScene.appendChild(paragraph4);
+
+
 
 let menuButton = document.createElement("a-entity");
     
@@ -217,6 +250,10 @@ let menuButton = document.createElement("a-entity");
         paragraph.remove();
         plane2.remove();
         paragraph2.remove();
+        plane3.remove();
+        paragraph3.remove();
+        plane4.remove();
+        paragraph4.remove();
         menuButton.remove();
         character.forEach((element) => {
             element.remove();
