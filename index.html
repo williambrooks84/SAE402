@@ -27,6 +27,7 @@
             <li class="navbar__list-item hidden md:block"><a href="#why" class="navbar__list-link hover:underline">Why</a></li>
             <li class="navbar__list-item hidden md:block"><a href="#how" class="navbar__list-link hover:underline">How</a></li>
             <li class="navbar__list-item hidden md:block"><a href="#block-the-game" class="navbar__list-link hover:underline">The game</a></li>
+            <li class="navbar__list-item hidden md:block"><a href="#ourteam" class="navbar__list-link hover:underline">Our Team</a></li>
         </ul>
 
         <div id="side-menu" class="menu fixed md:hidden top-0 right-0 w-2/3 bg-gradient-to-l from-nav from-30% to-transparent  p-4 font-inter font-black text-right text-white text-2xl z-20  h-full">
@@ -35,6 +36,7 @@
                 <li><a href="#why" class="hover:underline">Why</a></li>
                 <li><a href="#how" class="hover:underline">How</a></li>
                 <li><a href="#block-the-game" class="hover:underline">The game</a></li>
+                <li><a href="#ourteam" class="hover:underline">Our Team</a></li>
             </ul>
             <button id="close-button" class="focus:outline-none absolute left-5 top-5 w-fit h-auto"><img src="./assets/cross.svg" alt="Close"></button>
         </div>
@@ -54,7 +56,7 @@
         <div id="carousel-container" class="relative w-wull max-w-full overflow-hidden">
             <div id="carousel-content" class="flex transition-transform duration-500 ease-in-out w-screen">
                 
-                <!-- Slide 1 -->
+                
                 <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-[0rem 40rem] w-screen">
                     <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
                         <p class="text-nav font-inter md:text-4xl text-[14px]">
@@ -64,7 +66,7 @@
                     <img src="./assets/carousel1.jpg" alt="carousel1" class="md:w-full w-[25rem] object-cover">
                 </div>
 
-                <!-- Slide 2 -->
+               
                 <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-[0rem 40rem] w-screen">
                     <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
                         <p class="text-nav font-inter md:text-4xl text-[14px]">
@@ -74,7 +76,7 @@
                     <img src="./assets/carousel2.jpg" alt="carousel2" class="md:w-full w-[25rem]  object-cover">
                 </div>
 
-                <!-- Slide 3 -->
+                
                 <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-[0rem 40rem] w-screen">
                     <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
                         <p class="text-nav font-inter md:text-4xl text-[14px]">
@@ -84,7 +86,7 @@
                     <img src="./assets/carousel3.jpg" alt="carousel3" class="md:w-full w-[25rem]  object-cover">
                 </div>
 
-                <!-- Slide 4 -->
+                
                 <div class="carousel-item flex-shrink-0 flex flex-col items-end relative px-4 md:px-[0rem 40rem] w-screen">
                     <div class="py-3 px-3 bg-white bg-opacity-50 z-50 md:absolute md:m-4 md:bottom-4 md:left-20 md:w-[60rem] w-full">
                         <p class="text-nav font-inter md:text-4xl text-[14px]">
@@ -96,7 +98,7 @@
             </div>
         </div>
 
-        <!-- Controls -->
+        
         <div id="carousel_controls" class="flex gap-5 mt-4">
             <div data-number="1" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-[#04D2FF] rounded-full w-4 h-4 md:w-8 md:h-8"></div>
             <div data-number="2" class="carousel-control hover:cursor-pointer hover:scale-110 transition-all bg-white rounded-full w-4 h-4 md:w-8 md:h-8"></div>
@@ -119,10 +121,13 @@
 
     <section id="how" class="how flex flex-col items-center gap-3 text-white px-0 md:px-[5rem] scroll-my-[8rem]">
         <h2 class="how__text-title text-center text-5xl md:text-9xl font-bold font-poppins text-white">How?</h2>
-        <div class="how__container flex flex-col md:flex-row-reverse items-center gap-3 md:gap-12 px-8 md:px-14">
-            <div class="how__container-text flex flex-col font-inter gap-5">
-                <h3 class="how__container-text-subtitle text-2xl md:text-6xl font-black">A-Frame & HTML/JS</h3>
-                <p class = "how__container-text-description text-base md:text-4xl font-normal">TellApart is built with A-Frame, a web framework for immersive 3D experiences using HTML and JavaScript, making it easily accessible in a browser or in a VR headset. Set in a futuristic space environment, players interact with NPCs through simple point-and-click mechanics. A-Frame's entity-component system enables dynamic updates like character animations and teleportation effects, enhancing immersion. Its lightweight design ensures smooth performance, creating an engaging and educational experience for young learners. </p> 
+        <div class="how__container flex flex-col  md:flex-row-reverse items-center gap-3 md:gap-12 px-8 md:px-14">
+            <div class="how__container-text flex flex-col font-inter gap-5 items-center">
+                <h3 class="how__container-text-subtitle text-2xl md:text-6xl font-black w-full text-center md:text-left">A-Frame & HTML/JS</h3>
+                <p class = "how__container-text-description text-base md:text-4xl font-normal">TellApart is built with A-Frame, a web framework for immersive 3D experiences using HTML and JavaScript, making it easily accessible in a browser or in a VR headset. Set in a futuristic space environment, players interact with NPCs through simple point-and-click mechanics. A-Frame's entity-component system enables dynamic updates like character animations and teleportation effects, enhancing immersion. Its lightweight design ensures smooth performance, creating an engaging and educational experience for young learners. </p>
+                <a class="w-[263] h-[45.5px] md:w-[400px] md:h-[80px] px-5 py-2.5 bg-[#955219] rounded-[31px] justify-center items-center gap-2.5 inline-flex hover:bg-[#804118]" href="https://github.com/williambrooks84/SAE402">
+                <p class="text-white text-[25.78px] md:text-[50px] 
+                font-semibold md:font-black font-inter">Our GitHub</p></a>
             </div>
             <div class="how__container-images flex flex-row md:flex-col justify-center gap-4 md:gap-11 w-full"> 
                 <img class="how__container-img w-[85px] md:w-full h-auto" src="./assets/a-frame.webp" alt="A-Frame">
@@ -206,12 +211,282 @@
         </div>
     </div>
 
+
+
+
+    <section id="ourteam" class="w-full h-fit flex-col justify-start items-center gap-[50px]  inline-flex">
+        <div class="text-center text-[#f0f2f4] md:text-8xl text-[40px] font-bold font-poppins">Our Team</div>
+
+        <div class="self-stretch px-8  md:px-[60px] flex-col justify-center items-center md:items-start gap-[50px] md:gap-[50px] flex ">
+            <div id="title_section" class="flex flex-col items-center justify-center w-full py-0 md:py-10 cursor-pointer" onclick="toggleSection()">
+                <div class="flex items-center justify-center w-full py-10">
+                    <p class="text-start md:text-center w-full text-white md:text-8xl text-[40px] font-bold font-poppins">Julian</p>
+                    <img id="arrow" src="assets/arrow.svg" alt="arrow" class="w-[60px] rotate-90 transition-transform duration-300" />
+                </div>
+                <hr class="w-full border-[1px] border-white" />
+            </div>
+            
+            <div id="content_section" class="hidden flex flex-col gap-[50px] md:gap-[150px] pb-20">
+                <div class="self-stretch justify-start items-center gap-[25px] md:gap-[50px] flex flex-col md:flex-row">
+                    <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                        <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Data formatting/handling</p>
+                        <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Julian was responsible for setting up and configuring an SQL database hosted on phpMyAdmin. To ensure seamless interaction between the database and other project components, he developed and implemented a dedicated API server. This API allows queries to be made to the database, ensuring secure and optimized access to the stored information.</p>
+                    </div>
+                    <img class="w-[500px]" src="assets/dataFormat.png" alt="dataforma" />
+                </div>
+                <div class="w-full justify-start items-center gap-[25px] md:gap-[50px] flex flex-col-reverse md:flex-row">
+                    <img class="w-[500px]" src="assets/servercode.png" alt="servercode" />
+                    <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                        <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Server-side code</p>
+                        <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Julian designed and implemented a large part of the game's features using JavaScript. He specifically focused on establishing the game's mechanics, such as the rules. At the same time, he paid close attention to optimizing performance to ensure a smooth and responsive experience, even when executing complex tasks. His work provided the game with a solid and cohesive structure while ensuring intuitive gameplay, making the experience enjoyable and easy for players to grasp.</p>
+                    </div>
+                </div>
+                <div class="w-full justify-start items-center gap-[50px] flex flex-col md:flex-row">
+                    <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                        <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Sounds</p>
+                        <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Julian also took responsibility for integrating and incrementing the various sound effects and ambiance in the game. This included adding sound effects for specific actions, such as movements, interactions, and special events, to make the experience more immersive. He also worked on the overall sound atmosphere, creating a soundtrack that aligns with the game’s universe, adding music and sound effects that evolve depending on the situation. This sound management helped enhance immersion and made the game feel more dynamic and alive.</p>
+                    </div>
+                    <img class="w-[500px]" src="assets/sound.png" alt="sound">
+                </div>
+            </div>
+        </div>
+
+        <!--william-->
+        
+        <div class="self-stretch px-8 md:px-[60px] flex-col justify-center items-center md:items-start gap-[50px] md:gap-[50px] flex ">
+            <div id="title_section_william" class="flex flex-col items-center justify-center w-full py-0 md:py-10 cursor-pointer" onclick="toggleSectionWilliam()">
+            <div class="flex items-center justify-center w-full py-10">
+            <p class="text-start md:text-center w-full text-white md:text-8xl text-[40px] font-bold font-poppins">William</p>
+            <img id="arrow_william" src="assets/arrow.svg" alt="arrow" class="w-[60px] rotate-90 transition-transform duration-300" />
+            </div>
+            <hr class="w-full border-[1px] border-white" />
+            </div>
+            
+            <div id="content_section_william" class="hidden flex flex-col gap-[50px] md:gap-[150px] pb-20">
+            <div class="self-stretch justify-start items-center gap-[25px] md:gap-[50px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Questions</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">William designed and created the various questions and their answers, ensuring that they covered three distinct difficulty levels. Each question was carefully crafted to ensure it was both relevant and well-balanced in terms of difficulty, to keep players engaged while providing a challenge. Once the questions and answers were validated, he integrated them into the database so they could be dynamically used in the game, depending on the player's level. This management of questions allows for a personalized gaming experience where the player faces challenges tailored to their progression level.</p>
+                </div>
+            </div>
+            <div class="w-full justify-center items-center gap-[25px] md:gap-[50px] flex flex-col-reverse md:flex-row">
+                <div class="px-5 flex-col justify-center items-center gap-5 inline-flex">
+                <img class="w-full " src="assets/font1.png" alt="font1" />
+                <img class="w-full " src="assets/font2.png" alt="font2" />
+                </div>
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Fonts</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">William took charge of choosing and implementing the fonts for the game, ensuring that they matched the overall aesthetic and atmosphere of the project. He selected fonts that were both legible and stylish, to ensure the text was easily readable while adding a visual element that enhanced immersion into the game’s universe. Additionally, he ensured consistency in typography across all screens and menus, while optimizing performance to avoid any slowdowns related to font loading.</p>
+                </div>
+            </div>
+            <div class="w-full justify-start items-center gap-[25px] md:gap-[50px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Interactions + Rendering</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">William took care of managing interactions within the game, defining the possible actions the player can take and ensuring they are smooth and intuitive. Each interaction was designed to be easily understood and provide an immediate response within the game, creating a coherent gameplay dynamic. He also worked on the consequences of the player's actions, ensuring that every choice had a visible and relevant impact on the environment or the storyline. As a result, the player feels fully involved in the game, and their decisions truly influence the gaming experience.</p>
+                </div>
+                <img class="w-[300px] " src="assets/interaction.png" alt="interact"/>
+            </div>
+            <div class="w-full justify-start items-center gap-[25px] md:gap-[50px] inline-flex">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Realisation WebSite</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">William was responsible for developing part of the website, handling the creation and implementation of certain pages and features. This included setting up the user interface, ensuring that navigation was intuitive and the design aligned with the project's visual identity. He also worked on integrating interactive elements, such as forms and buttons, to provide users with a smooth and functional experience. Thanks to his work, the website became a functional and aesthetically pleasing tool, making information easily accessible and offering a professional presentation of the project.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    
+
+
+        <!--Mael-->
+        <div class="self-stretch px-8 md:px-[60px] flex-col justify-center items-center md:items-start gap-[50px] md:gap-[50px] flex">
+            <div id="title_section_mael" class="flex flex-col items-center justify-center w-full py-0 md:py-10 cursor-pointer" onclick="toggleSectionMael()">
+            <div class="flex items-center justify-center w-full py-10">
+                <p class="text-start md:text-center w-full text-white md:text-8xl text-[40px] font-bold font-poppins">Mael</p>
+                <img id="arrow_mael" src="assets/arrow.svg" alt="arrow" class="w-[60px] rotate-90 transition-transform duration-300" />
+            </div>
+            <hr class="w-full border-[1px] border-white" />
+            </div>
+            
+            <div id="content_section_mael" class="hidden flex flex-col gap-[50px] md:gap-[150px] pb-20">
+            <div class="self-stretch justify-start items-center gap-[25px] md:gap-[50px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">3D Environment</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael was responsible for creating and managing the décor and the virtual reality (VR) environment for the project. This involved designing visual elements, arranging the virtual space, and setting the visual atmosphere to fully immerse users in the game or project’s universe. He also worked on optimizing graphic resources to ensure a smooth and realistic VR experience, while considering system performance to avoid issues such as latency or lag. Thanks to his work, the VR environment became a captivating and interactive space, allowing users to immerse themselves in a unique visual and sensory experience.</p>
+                </div>
+                <img class="w-[600px]" src="assets/3denvironnement.png" alt="3denvirennement" />
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col-reverse md:flex-row">
+                <img class="w-[300px]" src="assets/pulseberg.webp" alt="logo pulseberg" />
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Hosting</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael hosted the website and the game on his own personal hosting server via Pulseberg. This involved setting up the server, uploading the necessary files, and managing bandwidth and resources to ensure everything ran smoothly. By choosing to use his own hosting, he was able to maintain full control over performance management and data security. This also allowed him maximum flexibility in adjusting resources according to the project's needs while ensuring a stable experience for users.</p>
+                </div>
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Animation</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael animated the different characters by using predefined animations, such as the "idle" (resting) state and movements like walking. Each animation was carefully integrated and synchronized with the characters' actions in the game to ensure their movements were natural and consistent with the gameplay. He made sure that transitions between different animations, such as switching from walking to idle or another action, were smooth and realistic to enhance the player's immersion. Thanks to his work, the characters became more dynamic and believable, helping to make the gaming experience livelier and more engaging.</p>
+                </div>
+                <img class="w-[400px]" src="assets/animation.png" alt="animation" />
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col ">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">3D Features</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael ensured the game was compatible with a virtual reality (VR) headset by implementing specific features for VR interactions. This included setting up a click system and interactions through the headset's joysticks, allowing players to interact with elements of the game without needing an external device. He also took into account the unique aspects of VR controls, such as precision and responsiveness, to ensure a smooth and immersive experience. Thanks to his work, players can naturally interact with the game's environment using the joysticks, creating an immersive and intuitive VR experience.</p>
+                </div>
+                <img class="w-[700px]" src="assets/casque.png" alt="casque" />
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col ">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Interface</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael created all the game interfaces, including the start and end menus. For this, he designed clear and functional screens, allowing players to navigate easily between different options and start a game without difficulty. The start menu was designed to be welcoming and intuitive, presenting essential options such as starting a new game.</p>
+                </div>
+                <div class="self-stretch justify-start items-center gap-[25px] md:gap-[50px] flex flex-col md:flex-row">
+                <img class="grow shrink basis-0 w-[500px]" src="assets/start.png" alt="start" />
+                <img class="grow shrink basis-0 w-[500px]" src="assets/endgame.png" alt="end" />
+                </div>
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col ">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Help & Score</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael designed a specific area dedicated to the tutorial in the game, allowing new players to familiarize themselves with the game mechanics before diving into the main gameplay. This tutorial was seamlessly integrated and interactive, providing clear instructions while allowing players to practice essential actions. In addition, he implemented a keyboard system that lets players input their score at the end of the game, allowing it to be recorded and displayed in a high score table. This input system was designed to be simple and quick, offering a pleasant user experience while giving players the opportunity to compare their performance with others.</p>
+                </div>
+                <div class="self-stretch justify-center items-center gap-[15px] flex flex-col md:flex-row">
+                <img class="grow shrink basis-0 w-[300px]" src="assets/pad.png" alt="pad" />
+                <img class="grow shrink basis-0 w-[300px]" src="assets/score.png" alt="score" />
+                <img class="w-[600px]" src="assets/help.png" alt="help" />
+                </div>
+            </div>
+            <div class="w-full justify-start items-center gap-[50px] flex flex-col md:flex-row">
+                <div class="grow shrink basis-0 flex-col justify-start items-start gap-2 md:gap-5 inline-flex">
+                <p class="text-white text-[20px]/[50px] md:text-[64px] font-black font-inter md:text-start text-center w-full">Realisation WebSite</p>
+                <p class="text-white text-[1rem] md:text-[40px] font-normal font-inter md:text-start text-justify w-fit">Mael was responsible for developing part of the website, handling the creation and implementation of certain pages and features. This included setting up the user interface, ensuring that navigation was intuitive and the design aligned with the project's visual identity. He also worked on integrating interactive elements, such as forms and buttons, to provide users with a smooth and functional experience. Thanks to his work, the website became a functional and aesthetically pleasing tool, making information easily accessible and offering a professional presentation of the project.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        </section>
+
+
+
+
+
+    <section id="planning" class="w-full flex-col justify-start items-center md:gap-[82px] gap-[2rem] inline-flex px-8  md:px-[10rem]">
+        <p class="text-center text-white md:text-8xl text-[40px] font-bold font-poppins">Planning</p>
+        <div class="  flex-col justify-start items-start gap-5 flex">
+            <div class="  flex-col justify-start items-center md:items-start gap-5 flex">
+                <p class=" text-center text-white md:text-5xl text-[20px] font-bold font-poppins">Original Planning</p>
+                <p class=" text-white text-[1rem] md:text-[40px] font-normal font-inter  md:text-start text-justify w-fit">The initial phases of the project went smoothly and largely followed our initial predictions. Despite some necessary adjustments along the way, progress has been in line with our expectations, providing a solid foundation for the next stages of development.</p>
+            </div>
+            <img class="w-full" src="assets/planning1.png" alt="planning1" />
+        </div>
+        <div class="  flex-col justify-start items-start gap-5 flex">
+            <div class=" flex-col justify-start items-center md:items-start gap-5 flex">
+                <p class="text-center text-white md:text-5xl text-[20px] font-bold font-poppins">New Planning</p>
+                <p class=" text-white text-[1rem] md:text-[40px] font-normal font-inter  md:text-start text-justify w-fit">As progress was made, the schedule was regularly adjusted and optimized to adapt to the project's evolving needs. Initially, the third week was dedicated to the development of V2, but thanks to faster-than-expected progress, it was completed ahead of schedule. Seizing this opportunity, we immediately began working on V3 and initiated the development of the website, allowing us to maximize our time and maintain a productive momentum.<br/>During the fourth week, we brainstormed improvements and new features for a potential V4. At the same time, we started preparing the oral presentation by structuring our ideas and highlighting the key aspects of the project to ensure a clear and effective delivery of our work.</p>
+            </div>
+            <img class="w-full" src="assets/planning2.png" alt="planning2" />
+        </div>
+    </section>
+
+
+
+    <section id="totaltime" class="w-full  flex flex-col h-[200px] md:h-[350px] text-center text-white relative"><p class="w-full h-fit text-center text-2xl md:text-8xl font-normal font-poppins">Total Time Estimate: 
+        <p class="md:text-[25rem] text-[15rem] font-jersey font-bold h-fit md:-top-10 absolute -top-[4rem] left-[15%] md:left-[37%] ">80h</p></p>
+    </section>
+
+    <section id="map" class=" flex-col  items-center gap-5 inline-flex px-8 md:px-[10rem] justify-start ">
+        <p class="text-center text-white md:text-8xl text-[40px] font-bold font-poppins">Improvements</p>
+        <div class="text-white text-[1rem] md:text-[40px] font-normal font-inter  md:text-start text-justify w-fit"><p>We have envisioned a major improvement for version 4 of the game. Instead of being fixed in a static environment, the idea is to offer the player the ability to explore a vast and dynamic world. The player would be able to move freely through a gigantic world, where they would interact with different elements to find the correct answer. This would not only add an exploration dimension but also introduce a more immersive and engaging aspect, where finding the answer becomes a real adventure.</p>
+        <p>
+            The plan for the environment we envision is shown above. The central area should remain empty, as it corresponds to the area where the player will move. The three separations represent different parts of the world, which will be created by one of the three team members. Each section of the environment will offer unique experiences and challenges, allowing players to discover new areas as they explore. This approach would add a team dynamic, with each member contributing to shaping a part of the game world.</p>
+            </div>  
+        <img class="w-full" src="assets/map.png" alt="map" />
+        </section>
+
+
+
+
+        
+
+
     <div id="footer" class="relative w-full h-fit flex justify-center items-center flex-col gap-10 md:gap-[200px]">
         <div class="w-full h-fit text-center text-white text-2xl md:text-8xl font-bold font-poppins">Get ready, stay sharp, and have fun exploring!</div>
         <img class="w-full h-full" alt="footer" src="assets/footer 2.png" />
         <p class="font-jersey text-white absolute bottom-2 text-xl md:text-6xl  ">©Tell Apart, 2025. Tous droits réservés.</p>
     </div>
 
+    <script>function toggleSectionMael() {
+        const contentSectionMael = document.getElementById('content_section_mael');
+        const arrowMael = document.getElementById('arrow_mael');
+        const contentSectionWilliam = document.getElementById('content_section_william');
+        const arrowWilliam = document.getElementById('arrow_william');
+        const contentSection = document.getElementById('content_section');
+        const arrow = document.getElementById('arrow');
+
+        contentSectionMael.classList.toggle('hidden');
+        arrowMael.classList.toggle('-rotate-90');
+
+        if (!contentSectionMael.classList.contains('hidden')) {
+        contentSectionWilliam.classList.add('hidden');
+        arrowWilliam.classList.remove('-rotate-90');
+        contentSection.classList.add('hidden');
+        arrow.classList.remove('-rotate-90');
+        window.scrollTo({
+            top: contentSectionMael.offsetTop - 250, // 10rem is approximately 160px
+            behavior: 'smooth'
+        });
+        }
+    }
+
+    function toggleSectionWilliam() {
+        const contentSectionWilliam = document.getElementById('content_section_william');
+        const arrowWilliam = document.getElementById('arrow_william');
+        const contentSectionMael = document.getElementById('content_section_mael');
+        const arrowMael = document.getElementById('arrow_mael');
+        const contentSection = document.getElementById('content_section');
+        const arrow = document.getElementById('arrow');
+
+        contentSectionWilliam.classList.toggle('hidden');
+        arrowWilliam.classList.toggle('-rotate-90');
+
+        if (!contentSectionWilliam.classList.contains('hidden')) {
+        contentSectionMael.classList.add('hidden');
+        arrowMael.classList.remove('-rotate-90');
+        contentSection.classList.add('hidden');
+        arrow.classList.remove('-rotate-90');
+        window.scrollTo({
+            top: contentSectionWilliam.offsetTop - 250, // 10rem is approximately 160px
+            behavior: 'smooth'
+        });
+        }
+    }
+
+    function toggleSection() {
+        const contentSection = document.getElementById('content_section');
+        const arrow = document.getElementById('arrow');
+        const contentSectionMael = document.getElementById('content_section_mael');
+        const arrowMael = document.getElementById('arrow_mael');
+        const contentSectionWilliam = document.getElementById('content_section_william');
+        const arrowWilliam = document.getElementById('arrow_william');
+
+        contentSection.classList.toggle('hidden');
+        arrow.classList.toggle('-rotate-90');
+
+        if (!contentSection.classList.contains('hidden')) {
+        contentSectionMael.classList.add('hidden');
+        arrowMael.classList.remove('-rotate-90');
+        contentSectionWilliam.classList.add('hidden');
+        arrowWilliam.classList.remove('-rotate-90');
+        window.scrollTo({
+            top: contentSection.offsetTop - 250, // 10rem is approximately 160px
+            behavior: 'smooth'
+        });
+        }
+    }
+    </script>
    
 <script src="script.js"></script>
     

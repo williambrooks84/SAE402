@@ -8,6 +8,7 @@ Script principal de l'application. Il gère le fonctionnement constant du jeu
 import { data } from "./setup.js";
 import { createPNJsForQuestion } from "./index.js";
 import { endgame } from "./endgame.js";
+import { startmenu } from "./start.js";
 
 
 
@@ -271,7 +272,6 @@ let npcPositionSlots = [
 
 // Fait toute la longueur du document
 export function startGame(muted,timechoose, difficultychoose, hideSeek) {
-
     /* For testing purposes
     for (let position of npcPositionSlots) {
         let aBox = document.createElement("a-box");
@@ -305,6 +305,10 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
     //Liste des questions déjà utilisées
     let questionsUtilisees = [];
 
+    
+
+    
+
 
     /* ambientSound
 
@@ -317,8 +321,14 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
         ambientSound.play();
     }
 
-    if (!muted) {
+    if (muted) {
         ambientSound();
+        console.log("Notmuted");
+    }
+    else{
+        let ambientSound = document.querySelector("#ambient");
+        ambientSound.pause();
+        console.log("muted");
     }
 
     let questionEnCours;
@@ -514,7 +524,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
                     if (!aBox.clicked && !checkclick) {
                         checkclick = true;
 
-                        if (!muted) {
+                        if (muted) {
                             let successAudio = document.querySelector("#success");
                             successAudio.play();
                         }
@@ -586,7 +596,7 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
                         aBox.clicked = true;
                         // Example animation when the box is clicked
 
-                        if (!muted) {
+                        if (muted) {
                             let failAudio = document.querySelector("#fail");
                             failAudio.play();
                             // Play beam sound when the beam appears
@@ -1229,13 +1239,35 @@ export function startGame(muted,timechoose, difficultychoose, hideSeek) {
     Ne retourne rien.
 
     */
-
+let quitbutton= function(){
+    let aScene = document.querySelector("a-scene");
     
+    let quitbutton = document.createElement("a-entity");
 
+    quitbutton.setAttribute("geometry", "primitive: plane; width: 2; height: 0.9;");
+    quitbutton.setAttribute("material", "src: url(asset/Rectangle 4.png); transparent: true");
+    quitbutton.setAttribute("text", "value: Quit Game; align: center; width: 10; font: asset/Audiowide-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
+    quitbutton.setAttribute("position", "0 0.5 5");
+    quitbutton.setAttribute("rotation", "0 180 0");
+    quitbutton.setAttribute("side", "double");
+    quitbutton.setAttribute("class", "clickable");
+
+    aScene.appendChild(quitbutton);
+
+
+    quitbutton.addEventListener("click", async function () {
+
+        clearInterval(timerInterval);
+                
+                
+                location.reload();
+    });
+    
  
-
+}
     // Call updateHUD every second
    
+    quitbutton();
 
     let updateHUD = function() {
         let aScene = document.querySelector("a-scene");

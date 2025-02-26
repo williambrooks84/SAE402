@@ -11,7 +11,14 @@ export function startmenu() {
 
     let aScene = document.querySelector("a-scene");
     let map = aScene.dataset.map;
-    
+
+    async function ambientSound() {
+        let ambientSound = document.querySelector("#ambient");
+        ambientSound.play();
+    }
+
+    ambientSound();
+  
     let sky = document.createElement("a-sky");
     sky.setAttribute("src", "#ciel");
     aScene.appendChild(sky);
@@ -37,6 +44,7 @@ export function startmenu() {
     }
 
     paragraph.setAttribute("value", "Find the real astronaut! A question appears - spot the correct answer and click before time runs out. Stay quick and precise to win! A game lasts " + timetext + " by default.\n You can click 'Change map' (behind you) to switch to a larger map, or 'Help' to get to know how the game works.");
+
     paragraph.setAttribute("position", `0 2.2 -5`);
     paragraph.setAttribute("text", "align: center; width: 13; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
 
@@ -51,8 +59,8 @@ export function startmenu() {
 
     let soundtext = document.createElement("a-text"); 
     
-    soundtext.setAttribute("value", "Sound Off");
-    soundtext.setAttribute("position", `5 0.5 -3.5`);
+    soundtext.setAttribute("value", "Sound");
+    soundtext.setAttribute("position", `5.5 0.5 -3.5`);
     soundtext.setAttribute("rotation", "0 -45 0");
     soundtext.setAttribute("text", "align: center; width: 14; font: asset/Michroma-Regular-msdf.json; color: #FFFFFF; negate: false; opacity: 1; alphaTest: 0.5");
     aScene.appendChild(soundtext);
@@ -60,12 +68,12 @@ export function startmenu() {
 
     let soundCheckbox = document.createElement("a-entity");
     soundCheckbox.setAttribute("geometry", "primitive: plane; width: 1; height: 1;");
-    soundCheckbox.setAttribute("material", "src: url(asset/checkbox-false.svg); transparent: true");
+    soundCheckbox.setAttribute("material", "src: url(asset/checkbox-true.svg); transparent: true");
     soundCheckbox.setAttribute("position", "5.5 0.5 -1.7");
     soundCheckbox.setAttribute("rotation", "0 -45 0");
     soundCheckbox.setAttribute("class", "clickable");
 
-    let isMuted = false;
+    let isMuted = true;
 
     soundCheckbox.addEventListener("click", function () {
         isMuted = !isMuted;
@@ -83,7 +91,7 @@ export function startmenu() {
 
     let hideSeekCheckbox = document.createElement("a-entity");
     hideSeekCheckbox.setAttribute("geometry", "primitive: plane; width: 1; height: 1;");
-    hideSeekCheckbox.setAttribute("material", "src: url(asset/checkbox-true.svg); transparent: true");
+    hideSeekCheckbox.setAttribute("material", "src: url(asset/checkboxhide-true.svg); transparent: true");
     hideSeekCheckbox.setAttribute("position", "-4.5 0.5 -2.5");
     hideSeekCheckbox.setAttribute("rotation", "0 45 0");
     hideSeekCheckbox.setAttribute("class", "clickable");
@@ -92,7 +100,7 @@ export function startmenu() {
 
     hideSeekCheckbox.addEventListener("click", function () {
         isHideSeek = !isHideSeek;
-        hideSeekCheckbox.setAttribute("material", `src: url(asset/checkbox-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
+        hideSeekCheckbox.setAttribute("material", `src: url(asset/checkboxhide-${isHideSeek ? 'true' : 'false'}.svg); transparent: true`);
         
     });
 
